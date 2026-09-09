@@ -95,7 +95,7 @@ export default function EngineeringPlot({ plot }) {
         {normalized.currentX != null && (
           <g>
             <line className="plot-cursor" x1={x(normalized.currentX)} x2={x(normalized.currentX)} y1={MARGIN.top} y2={HEIGHT - MARGIN.bottom} />
-            <text className="plot-reference-label" x={x(normalized.currentX) + 6} y={MARGIN.top + 15}>{normalized.cursorLabel || "Current time"}</text>
+            <text className="plot-reference-label" x={x(normalized.currentX) + (normalized.currentX > (xMin + xMax) / 2 ? -6 : 6)} y={MARGIN.top - 12} textAnchor={normalized.currentX > (xMin + xMax) / 2 ? "end" : "start"}>{normalized.cursorLabel || "Current time"}</text>
           </g>
         )}
         {normalized.series.map((series) => (
