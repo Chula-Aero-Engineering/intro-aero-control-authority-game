@@ -3,7 +3,7 @@
   "number": 4,
   "version": "3.0.0",
   "title": "Separate trim, stability, and control",
-  "chapter": "§6.5, §6.11 — stable does not mean controllable",
+  "chapter": "\u00a76.5, \u00a76.11 \u2014 stable does not mean controllable",
   "brief": "Build a result display that cannot confuse trimmed, stable, and sufficiently controllable. This deliberately insufficient-authority condition is synthetic.",
   "missing": [
     3
@@ -16,7 +16,7 @@
     "Trim, stability, and control indicators answer different questions. The separate available-control increment is compared with the required-control increment.",
     "No dynamic stability or full-envelope control conclusion follows from these three static indicators.",
     "Trim and restoring tendency can coexist with a negative control margin.",
-    "Control margin=800−1350=−550 N m even though the other two indicators pass.",
+    "Control margin=800\u22121350=\u2212550 N m even though the other two indicators pass.",
     "At available=1350 N m the inclusive requirement is met exactly. At 800 it fails. A negative restoring slope cannot change that arithmetic.",
     "Display three separate statuses; use a signed control margin with units and an inclusive zero threshold.",
     "Sweep available control moment; compute available-required; compare with zero. Keep the trim and stability indicators unchanged.",
@@ -56,7 +56,7 @@
       "label": "Minimum acceptable margin (N m)",
       "type": "number",
       "section": 3,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "control",
@@ -134,8 +134,8 @@
     "seriesLabel": "Supplied control margin",
     "referenceLabel": "Minimum acceptable margin",
     "variableKey": {
-      "available": "Available control moment capacity (N·m)",
-      "required": "Required additional control moment (N·m)"
+      "available": "Available control moment capacity (N\u00b7m)",
+      "required": "Required additional control moment (N\u00b7m)"
     }
   },
   "investigation": {
@@ -181,7 +181,7 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?",
-        "evidenceIndex": 0,
+        "evidenceIndex": 4,
         "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       },
       {
@@ -225,7 +225,7 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?",
-        "evidenceIndex": 0,
+        "evidenceIndex": 4,
         "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       },
       {
@@ -269,7 +269,7 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?",
-        "evidenceIndex": 0,
+        "evidenceIndex": 4,
         "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       }
     ],
