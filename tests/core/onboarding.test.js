@@ -8,7 +8,7 @@ import {Store,encrypt,decrypt} from '../../scripts/instructor/store.mjs';
 import {validateClassroomUrl} from '../../scripts/classroom-client.mjs';
 const missions=Array.from({length:13},(_,i)=>JSON.parse(fs.readFileSync(new URL(`../../lessons/onboarding/mission${String(i+1).padStart(2,'0')}.json`,import.meta.url))));
 const reflection={observation:'Observed the comparison.',change:'Checked the units.',limit:'Only the supplied condition.',result:'supported'};
-function answer(m){const a=Object.fromEntries(m.fields.map(f=>[f.id,f.type==='number'?0:f.type==='select'?f.options[0]:'Written reasoning for instructor review.']));for(const c of m.checks)if(c.field)a[c.field]=c.expected;return a;}
+function answer(m){const a=Object.fromEntries(m.fields.map(f=>[f.id,f.type==='number'?0:f.type==='select'?f.options[0]:'Written reasoning for instructor review.']));for(const c of m.checks)if(c.field)a[c.field]=c.expected;if(m.number===2)a.rudderEquation='-deltaT*y';return a;}
 function completedWork(m,a,result=runMission(m,a)) {
  const id=m.id+'-test';
  if(m.codeCases)result.codeChecks=m.codeCases.map(c=>({actual:c.throws?'input rejection':c.expected,passed:true}));
@@ -56,3 +56,5 @@ describe('student investigation diagnostics',()=>{
  it('provides a variable key for every declared input',()=>{for(const m of missions)for(const k of Object.keys(m.variables))expect(m.experience.variableKey[k],m.id+':'+k).toBeTruthy();});
  it('locates JavaScript syntax errors before execution',async()=>{const {runStudentCode}=await import('../../src/core/onboarding/codeRunner.js');const checks=await runStudentCode('function calculate(input) {\n return } }',[]);expect(checks[0].passed).toBe(false);expect(checks[0].line).toBe(2);expect(checks[0].column).toBeGreaterThan(0);});
 });
+
+it('requires opposite signed rudder and shows capacity-limited net yaw',()=>{const m=missions[1],a={...answer(m),equation:'deltaT*y'};expect(runMission(m,a).passed).toBe(true);a.rudderEquation='deltaT*y';expect(runMission(m,a).passed).toBe(false);a.rudderEquation='-deltaT*y';const r=runMission(m,a);const nominal=caseResult(m,a,r,m.investigation.cases[1]);expect(nominal.readouts[3].value).toBe(-7440);expect(nominal.readouts[4].value).toBe(-7440);expect(nominal.readouts[5].value).toBe(0);const overloaded=caseResult(m,a,r,m.investigation.cases[2]);expect(overloaded.readouts[4].value).toBe(-8600);expect(overloaded.readouts[5].value).toBe(6280);});

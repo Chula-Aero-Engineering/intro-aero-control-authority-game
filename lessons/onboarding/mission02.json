@@ -1,9 +1,9 @@
 {
   "id": "mission02",
   "number": 2,
-  "version": "3.0.0",
+  "version": "3.1.0",
   "title": "Choose the yaw-moment model",
-  "chapter": "§6.1, §6.2, §6.6, §6.9 Transfer B",
+  "chapter": "\u00a76.1, \u00a76.2, \u00a76.6, \u00a76.9 Transfer B",
   "brief": "Model an asymmetric-thrust disturbance and connect it to the correct effector. Read the supplied effector map and distinguish yaw from pitch and roll.",
   "missing": [
     1
@@ -11,15 +11,15 @@
   "supplied": [
     "For a separate twin-engine utility aircraft, can 8.6 kN m of usable opposing rudder/vertical-tail moment balance the yaw disturbance after losing 2.4 kN thrust at a 3.1 m lateral offset?",
     null,
-    "deltaT=2400 N of lost thrust magnitude; y=3.1 m perpendicular lateral arm about the CG; available=8600 N m opposing yaw-moment magnitude. This is not the trainer aircraft.",
-    "Required yaw-moment magnitude (N m), available-minus-required margin (N m), and the appropriate primary effector.",
+    "Positive yaw turns the nose to the right, viewed from above. The right engine loses thrust; the left engine keeps pushing, creating a positive (nose-right) disturbance. deltaT is the positive thrust loss in N and y is the positive 3.1 m distance from the centreline. The rudder must create a negative (nose-left) moment to balance it. If the left engine fails instead, both moment signs reverse. Maximum usable opposing rudder capacity is 8600 N m.",
+    "Signed disturbance, required signed rudder moment, applied signed rudder moment, net yaw moment (all N m), and remaining capacity magnitude.",
     "Offset thrust creates yaw demand. Rudder primarily controls yaw but may couple to roll; ailerons primarily roll and can cause adverse yaw. Elevator primarily pitches. Flaps change lift/drag and pitching moment; spoilers change lift/drag and may roll; propulsion contributes forces and moments. These are dominant, not exclusive, responses.",
     "Static yaw balance only. No proof of engine-out controllability, bank limits, transient response, or minimum control speed.",
     "Doubling lost thrust at fixed arm doubles yaw demand and reduces margin.",
-    "2400×3.1=7440 N m required; 8600−7440=1160 N m nominal margin.",
-    "Zero loss → zero demand; 2400 N loss →7440 N m; 4800 N loss →14880 N m.",
+    "Right-engine loss: disturbance +7440 N m; balancing rudder -7440 N m; net 0 N m. Capacity remaining: 8600-7440=1160 N m. Full -8600 N m would overcorrect to -1160 N m net.",
+    "Zero loss \u2192 zero demand; 2400 N loss \u21927440 N m; 4800 N loss \u219214880 N m.",
     "Plot yaw demand against lost thrust and compare with 8600 N m capacity; identify the yaw effector and the sign/magnitude convention.",
-    "For each deltaT, evaluate your expression using y=3.1; compare its result with deltaT*y. The capacity line remains 8600 N m.",
+    "Evaluate both student expressions. For illustration, apply only the opposing moment needed for balance, capped at -8600 N m. This ideal static command assumes immediate response; it is not an actuator or flight-control model.",
     "Retain only the nominal static yaw screen; investigate coupling, actuator limits, and uncertainty before an operational claim."
   ],
   "variables": {
@@ -30,14 +30,21 @@
   "fields": [
     {
       "id": "equation",
-      "label": "Required yaw-moment magnitude = (use deltaT, y)",
+      "label": "Signed engine-out yaw moment (N m; use deltaT, y)",
       "type": "equation",
       "section": 1,
-      "help": "Enter only an expression, not an equals sign. Use the named variables; ×, *, ÷, /, +, −, ^ and parentheses are accepted."
+      "help": "Enter only an expression, not an equals sign. Use the named variables; \u00d7, *, \u00f7, /, +, \u2212, ^ and parentheses are accepted."
+    },
+    {
+      "id": "rudderEquation",
+      "label": "Signed rudder moment needed for balance (N m; use deltaT, y)",
+      "type": "equation",
+      "section": 1,
+      "help": "Use the same variables. The rudder must oppose the disturbance: their signed moments must add to zero. Enter an expression, without an equals sign."
     },
     {
       "id": "effector",
-      "label": "Primary opposing yaw effector",
+      "label": "Which control surface opposes this yaw?",
       "type": "select",
       "options": [
         "Rudder / vertical tail",
@@ -45,14 +52,14 @@
         "Symmetric flaps"
       ],
       "section": 1,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Choose the control surface that turns the nose left or right."
     },
     {
       "id": "explanation1",
       "label": "Explain the reasoning for physics model",
       "type": "text",
       "section": 1,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain the direction of the engine-out moment, why the rudder moment has the opposite sign, and why available capacity differs from the moment actually applied."
     }
   ],
   "checks": [
@@ -62,7 +69,7 @@
         "deltaT": 0
       },
       "expected": 0.0,
-      "message": "Lost thrust 0 N at 3.1 m must give 0 N m yaw demand.",
+      "message": "Lost thrust 0 N at 3.1 m must give 0 N m signed nose-right disturbance.",
       "tolerance": 0.0001
     },
     {
@@ -71,7 +78,7 @@
         "deltaT": 2400
       },
       "expected": 7440.0,
-      "message": "Lost thrust 2400 N at 3.1 m must give 7440 N m yaw demand.",
+      "message": "Lost thrust 2400 N at 3.1 m must give 7440 N m signed nose-right disturbance.",
       "tolerance": 0.01
     },
     {
@@ -80,14 +87,41 @@
         "deltaT": 4800
       },
       "expected": 14880.0,
-      "message": "Lost thrust 4800 N at 3.1 m must give 14880 N m yaw demand.",
+      "message": "Lost thrust 4800 N at 3.1 m must give 14880 N m signed nose-right disturbance.",
       "tolerance": 0.01
     },
     {
       "field": "effector",
       "expected": "Rudder / vertical tail",
-      "message": "Select the yaw effector; identify roll coupling in your explanation.",
+      "message": "Check which control surface primarily controls yaw. This check does not assess your written explanation.",
       "tolerance": 1e-06
+    },
+    {
+      "studentExpression": "rudderEquation",
+      "variables": {
+        "deltaT": 0
+      },
+      "expected": 0.0,
+      "tolerance": 0.01,
+      "message": "For 0 N loss, the rudder must oppose the nose-right disturbance. Its signed balance moment must be 0 N m."
+    },
+    {
+      "studentExpression": "rudderEquation",
+      "variables": {
+        "deltaT": 2400
+      },
+      "expected": -7440.0,
+      "tolerance": 0.01,
+      "message": "For 2400 N loss, the rudder must oppose the nose-right disturbance. Its signed balance moment must be -7440 N m."
+    },
+    {
+      "studentExpression": "rudderEquation",
+      "variables": {
+        "deltaT": 4800
+      },
+      "expected": -14880.0,
+      "tolerance": 0.01,
+      "message": "For 4800 N loss, the rudder must oppose the nose-right disturbance. Its signed balance moment must be -14880 N m."
     }
   ],
   "hints": [
@@ -112,19 +146,19 @@
   "codeCases": null,
   "codeContract": null,
   "experience": {
-    "scenario": "A separate twin-engine aircraft loses thrust on one side. The lost force acts 3.1 m away from the centreline and creates a yaw disturbance. Available opposing rudder moment is 8600 N m.",
-    "task": "Enter an expression using deltaT and y, choose the primary opposing effector, and explain the relationship.",
-    "method": "deltaT is lost thrust in newtons; y is perpendicular lateral distance in metres. Moment has units N m: a force times its perpendicular arm. Zero lost thrust must give zero disturbance. Rudder primarily controls yaw; elevator primarily pitches.",
-    "investigate": "Inspect zero, 2400 N and 4800 N lost thrust. Record the moment demand and whether the rudder capacity covers it.",
+    "scenario": "Positive yaw turns the nose to the right, viewed from above. The right engine loses thrust; the left engine keeps pushing, creating a positive (nose-right) disturbance. deltaT is the positive thrust loss in N and y is the positive 3.1 m distance from the centreline. The rudder must create a negative (nose-left) moment to balance it. If the left engine fails instead, both moment signs reverse. This is a separate twin-engine aircraft, not the trainer.",
+    "task": "Write two expressions: the signed engine-out disturbance and the signed rudder moment needed to balance it. Then choose the control surface and explain why the moments must oppose each other.",
+    "method": "Moment equals force times perpendicular distance. Use deltaT and y. For this right-engine failure, the disturbance is positive. Balance requires disturbance + rudder moment = 0. The available 8600 N m is the maximum opposing capacity, not a command to apply full rudder.",
+    "investigate": "Compare zero, 2400 N and 4800 N thrust loss. Record the signed rudder moment needed, then decide whether its magnitude fits within the 8600 N m opposing capacity. Read the applied moment and remaining net moment: a balanced case should have zero net moment.",
     "tools": "Only this app and its calculation pad are needed.",
     "xLabel": "Lost thrust (N)",
     "yLabel": "Yaw moment (N m)",
-    "seriesLabel": "Your equation: yaw demand",
-    "referenceLabel": "Available rudder capacity",
+    "seriesLabel": "Your signed nose-right disturbance",
+    "referenceLabel": "Maximum opposing capacity (magnitude only)",
     "variableKey": {
       "deltaT": "Lost thrust magnitude (N)",
       "y": "Perpendicular lateral engine arm (m)",
-      "available": "Available control moment capacity (N·m)"
+      "available": "Available control moment capacity (N\u00b7m)"
     }
   },
   "investigation": {
@@ -137,12 +171,12 @@
         },
         "readouts": [
           {
-            "label": "Your equation: yaw demand",
+            "label": "Your signed engine-out disturbance (positive = nose right)",
             "studentField": "equation",
             "unit": "N m"
           },
           {
-            "label": "Available rudder capacity",
+            "label": "Maximum opposing rudder capacity (magnitude, not command)",
             "expression": "available",
             "unit": "N m"
           },
@@ -150,6 +184,21 @@
             "label": "Margin against your equation",
             "studentMargin": "equation",
             "capacity": "available",
+            "unit": "N m"
+          },
+          {
+            "label": "Your signed rudder moment needed for balance",
+            "studentField": "rudderEquation",
+            "unit": "N m"
+          },
+          {
+            "label": "Ideal applied rudder moment (negative = nose left; capacity limited)",
+            "expression": "-0.0",
+            "unit": "N m"
+          },
+          {
+            "label": "Net moment with ideal capacity-limited command",
+            "expression": "student + (-0.0)",
             "unit": "N m"
           }
         ],
@@ -160,9 +209,10 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain how the perpendicular arm and selected effector affect the yaw claim.",
-        "evidenceIndex": 0,
-        "interpretationHint": "Compare lost-thrust moment with available rudder capacity; both must use N m."
+        "prompt": "Explain the signs of the disturbance and rudder moments. Can the rudder balance the disturbance within its capacity? Use the remaining net moment to explain.",
+        "evidenceIndex": 3,
+        "interpretationHint": "The disturbance and balancing rudder must have opposite signs. Compare the magnitude needed with 8600 N m; zero net moment means balance.",
+        "evidenceNote": "Applied rudder is an ideal teaching command: only enough to balance the stated disturbance, capped at the opposing capacity. It assumes your checked model and immediate actuation. The graph compares disturbance with capacity magnitude, not signed applied rudder."
       },
       {
         "id": "2400",
@@ -172,12 +222,12 @@
         },
         "readouts": [
           {
-            "label": "Your equation: yaw demand",
+            "label": "Your signed engine-out disturbance (positive = nose right)",
             "studentField": "equation",
             "unit": "N m"
           },
           {
-            "label": "Available rudder capacity",
+            "label": "Maximum opposing rudder capacity (magnitude, not command)",
             "expression": "available",
             "unit": "N m"
           },
@@ -185,6 +235,21 @@
             "label": "Margin against your equation",
             "studentMargin": "equation",
             "capacity": "available",
+            "unit": "N m"
+          },
+          {
+            "label": "Your signed rudder moment needed for balance",
+            "studentField": "rudderEquation",
+            "unit": "N m"
+          },
+          {
+            "label": "Ideal applied rudder moment (negative = nose left; capacity limited)",
+            "expression": "-7440.0",
+            "unit": "N m"
+          },
+          {
+            "label": "Net moment with ideal capacity-limited command",
+            "expression": "student + (-7440.0)",
             "unit": "N m"
           }
         ],
@@ -195,9 +260,10 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain how the perpendicular arm and selected effector affect the yaw claim.",
-        "evidenceIndex": 0,
-        "interpretationHint": "Compare lost-thrust moment with available rudder capacity; both must use N m."
+        "prompt": "Explain the signs of the disturbance and rudder moments. Can the rudder balance the disturbance within its capacity? Use the remaining net moment to explain.",
+        "evidenceIndex": 3,
+        "interpretationHint": "The disturbance and balancing rudder must have opposite signs. Compare the magnitude needed with 8600 N m; zero net moment means balance.",
+        "evidenceNote": "Applied rudder is an ideal teaching command: only enough to balance the stated disturbance, capped at the opposing capacity. It assumes your checked model and immediate actuation. The graph compares disturbance with capacity magnitude, not signed applied rudder."
       },
       {
         "id": "4800",
@@ -207,12 +273,12 @@
         },
         "readouts": [
           {
-            "label": "Your equation: yaw demand",
+            "label": "Your signed engine-out disturbance (positive = nose right)",
             "studentField": "equation",
             "unit": "N m"
           },
           {
-            "label": "Available rudder capacity",
+            "label": "Maximum opposing rudder capacity (magnitude, not command)",
             "expression": "available",
             "unit": "N m"
           },
@@ -220,6 +286,21 @@
             "label": "Margin against your equation",
             "studentMargin": "equation",
             "capacity": "available",
+            "unit": "N m"
+          },
+          {
+            "label": "Your signed rudder moment needed for balance",
+            "studentField": "rudderEquation",
+            "unit": "N m"
+          },
+          {
+            "label": "Ideal applied rudder moment (negative = nose left; capacity limited)",
+            "expression": "-8600",
+            "unit": "N m"
+          },
+          {
+            "label": "Net moment with ideal capacity-limited command",
+            "expression": "student + (-8600)",
             "unit": "N m"
           }
         ],
@@ -230,9 +311,10 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain how the perpendicular arm and selected effector affect the yaw claim.",
-        "evidenceIndex": 0,
-        "interpretationHint": "Compare lost-thrust moment with available rudder capacity; both must use N m."
+        "prompt": "Explain the signs of the disturbance and rudder moments. Can the rudder balance the disturbance within its capacity? Use the remaining net moment to explain.",
+        "evidenceIndex": 3,
+        "interpretationHint": "The disturbance and balancing rudder must have opposite signs. Compare the magnitude needed with 8600 N m; zero net moment means balance.",
+        "evidenceNote": "Applied rudder is an ideal teaching command: only enough to balance the stated disturbance, capped at the opposing capacity. It assumes your checked model and immediate actuation. The graph compares disturbance with capacity magnitude, not signed applied rudder."
       }
     ],
     "required": [
