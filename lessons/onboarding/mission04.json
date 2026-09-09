@@ -180,7 +180,7 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?",
+        "prompt": "Compare the available control moment with the required 1,350 N m. Can this case meet the requirement? Explain using the control margin. Does starting in balance tell you how much extra moment the elevator can produce?",
         "evidenceIndex": 4,
         "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       },
@@ -224,7 +224,7 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?",
+        "prompt": "Compare the available control moment with the required 1,350 N m. Can this case meet the requirement? Explain using the control margin. Does starting in balance tell you how much extra moment the elevator can produce?",
         "evidenceIndex": 4,
         "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       },
@@ -268,7 +268,7 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?",
+        "prompt": "Compare the available control moment with the required 1,350 N m. Can this case meet the requirement? Explain using the control margin. Does starting in balance tell you how much extra moment the elevator can produce?",
         "evidenceIndex": 4,
         "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       }
