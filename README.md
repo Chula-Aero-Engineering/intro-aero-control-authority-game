@@ -20,6 +20,6 @@ The investigations teach initial control authority, signed moment budgets, deriv
 
 ## Instructor review
 
-Run `npm run instructor` in your instructor Codespace or prepared checkout. The dashboard reads public forks of this test repository with the existing GitHub login; no GitHub App or paid AI service is required. Keep instructor port 5180 private. Public-fork mode stores private instructor notes; it does not send messages to students.
+Run `npm run instructor` in your instructor Codespace or prepared checkout. The dashboard reads public forks of this classroom repository with the existing GitHub login; no GitHub App or paid AI service is required. Keep instructor port 5180 private. Public-fork mode stores private instructor notes; it does not send messages to students.
 
 This repository contains supplied teaching examples and blank student work, with no private Week 5 trim solution or private Week 6 reference implementation. It is a standalone Week 06 classroom repository.
