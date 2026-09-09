@@ -3,15 +3,15 @@
   "number": 5,
   "version": "3.0.0",
   "title": "Challenge the local-flow assumption",
-  "chapter": "\u00a76.4, \u00a76.6, \u00a76.9 \u2014 local flow and compatible conditions",
+  "chapter": "§6.4, §6.6, §6.9 — local flow and compatible conditions",
   "brief": "Audit the freestream-equals-local-flow assumption. Use explicit teaching factors to see how a favorable baseline can lose margin.",
   "missing": [
     4
   ],
   "supplied": [
-    "Can the freestream-based trainer authority estimate be reused when the control effector sees slower local flow?",
-    "M_baseline=0.5*rho*V\u00b2*S*c*dCm; M_local=0.5*rho*(flowFactor*V)\u00b2*S*c*dCm. Required control moment remains 1350 N m.",
-    "900 kg trainer; rho=1.20 kg/m\u00b3; V=20 m/s; S=27.25 m\u00b2; c=4 m; usable dCm=0.153; Iy=5000 kg m\u00b2; other=-750 N m; target=0.12 rad/s\u00b2. Nose-up moment is positive about the declared CG. Teaching sensitivity parameter flowFactor=0.7; it is not a measured tail-flow value.",
+    "Can the freestream-based trainer authority estimate be reused when the elevator sees slower local flow?",
+    "M_baseline=0.5*rho*V²*S*c*dCm; M_local=0.5*rho*(flowFactor*V)²*S*c*dCm. Required control moment remains 1350 N m.",
+    "900 kg trainer; rho=1.20 kg/m³; V=20 m/s; S=27.25 m²; c=4 m; usable dCm=0.153; Iy=5000 kg m²; other=-750 N m; target=0.12 rad/s². Nose-up moment is positive about the declared CG. Teaching sensitivity parameter flowFactor=0.7; it is not a measured tail-flow value.",
     "Freestream-based capacity, local-flow sensitivity capacity, and whether each exceeds 1350 N m.",
     null,
     "This factor study isolates speed sensitivity; real local flow may also change the usable coefficient. It does not independently validate tail aerodynamics.",
@@ -48,7 +48,7 @@
     },
     {
       "id": "consequence",
-      "label": "If local flow is slower, unchanged estimate\u2026",
+      "label": "With slower air at the elevator, is the original estimate too high or too low?",
       "type": "select",
       "options": [
         "Overestimates available authority",
@@ -56,21 +56,26 @@
         "Proves the tail is valid"
       ],
       "section": 4,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "If the air at the elevator is slower than assumed, does the original calculation predict too much or too little available moment? Hold the coefficient fixed.",
+      "optionLabels": {
+        "Overestimates available authority": "Predicts more available moment than this model gives",
+        "Underestimates available authority": "Predicts less available moment than this model gives",
+        "Proves the tail is valid": "Proves the elevator model is accurate"
+      }
     },
     {
       "id": "ratio",
-      "label": "Capacity ratio for local speed factor 0.7",
+      "label": "Adjusted capacity ÷ original capacity at 70% local speed",
       "type": "number",
       "section": 4,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter adjusted capacity divided by original capacity when local speed is 0.7 times flight speed. Enter a fraction such as 0.25, not a percentage. Enter a number only."
     },
     {
       "id": "explanation4",
-      "label": "Explain the reasoning for assumptions",
+      "label": "Explain your answer",
       "type": "text",
       "section": 4,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain which airflow assumption the original estimate makes and how a lower local speed changes the estimate when the coefficient stays fixed."
     }
   ],
   "checks": [
@@ -94,9 +99,9 @@
     }
   ],
   "hints": [
-    "The speed entering the coefficient model must match the effector evidence.",
+    "The speed entering the coefficient model must match the airflow and control-surface data.",
     "Moment scales with speed squared only while the other terms remain fixed.",
-    "0.7\u00b2=0.49. Propwash may help and wake/separation may hurt; neither is validated by this factor study."
+    "0.7²=0.49. Propwash may help and wake/separation may hurt; neither is validated by this factor study."
   ],
   "sweep": {
     "variable": "flowFactor",
@@ -113,8 +118,8 @@
   "codeCases": null,
   "codeContract": null,
   "experience": {
-    "scenario": "The trainer may encounter local airflow at its control effector slower than the freestream used in the original estimate. This is a teaching sensitivity study, not measured tail-flow data.",
-    "task": "Identify the assumption, choose the direction of bias, and enter the capacity ratio as a fraction, not a percentage.",
+    "scenario": "The trainer may encounter local airflow at its elevator slower than the freestream used in the original estimate. This is a teaching sensitivity study, not measured tail-flow data.",
+    "task": "Identify the original airflow assumption. Predict whether slower air at the elevator makes the original estimate too high or too low. Calculate adjusted capacity divided by original capacity for a local-speed factor of 0.7.",
     "method": "flowFactor = local speed / freestream speed. A factor of 0.7 means 70% speed. With all other quantities held fixed, capacity scales with the square of that fraction. Your assumption answers are checked against the supplied sensitivity model; they do not alter that model.",
     "investigate": "Compare factors 1, 0.7 and 0.5 with demand held fixed. When does the original sufficient-authority claim fail?",
     "tools": "Only this app and its calculation pad are needed.",
@@ -123,14 +128,14 @@
     "seriesLabel": "Supplied local-flow capacity",
     "referenceLabel": "Required control moment",
     "variableKey": {
-      "rho": "Air density (kg/m\u00b3)",
+      "rho": "Air density (kg/m³)",
       "V": "Freestream speed (m/s)",
-      "S": "Reference wing area (m\u00b2)",
+      "S": "Reference wing area (m²)",
       "c": "Reference chord (m)",
       "dCm": "Usable pitching coefficient increment (dimensionless)",
-      "Iy": "Pitch moment of inertia (kg\u00b7m\u00b2)",
-      "other": "Other pitching moment, nose-up positive (N\u00b7m)",
-      "target": "Minimum initial pitch acceleration (rad/s\u00b2)",
+      "Iy": "Pitch moment of inertia (kg·m²)",
+      "other": "Other pitching moment, nose-up positive (N·m)",
+      "target": "Minimum initial pitch acceleration (rad/s²)",
       "flowFactor": "Local speed / freestream speed (dimensionless)"
     },
     "reflection": {
@@ -138,7 +143,8 @@
       "omitted": "It does not model how disturbed flow might also change control effectiveness.",
       "question": "If disturbed flow changes both local speed and control effectiveness, what additional evidence would you need to revise the available-moment estimate?",
       "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
-    }
+    },
+    "terms": "Freestream means airflow away from the aircraft disturbances. Local flow is the air reaching the elevator. The local-speed factor is local speed divided by freestream speed. In this exercise the coefficient stays fixed while speed changes."
   },
   "investigation": {
     "cases": [
@@ -150,12 +156,12 @@
         },
         "readouts": [
           {
-            "label": "Freestream baseline capacity",
+            "label": "Original capacity using flight speed",
             "expression": "0.5*rho*V^2*S*c*dCm",
             "unit": "N m"
           },
           {
-            "label": "Adjusted local-flow capacity",
+            "label": "Capacity using local elevator airspeed",
             "expression": "0.5*rho*(flowFactor*V)^2*S*c*dCm",
             "unit": "N m"
           },
@@ -177,8 +183,8 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain the square of the speed ratio and what evidence would replace this teaching assumption.",
-        "evidenceIndex": 0,
+        "prompt": "Use the adjusted margin to explain whether this local airspeed leaves enough moment. Compare the adjusted capacity with the original capacity.",
+        "evidenceIndex": 3,
         "interpretationHint": "Compare adjusted capacity with demand at this local-flow factor."
       },
       {
@@ -189,12 +195,12 @@
         },
         "readouts": [
           {
-            "label": "Freestream baseline capacity",
+            "label": "Original capacity using flight speed",
             "expression": "0.5*rho*V^2*S*c*dCm",
             "unit": "N m"
           },
           {
-            "label": "Adjusted local-flow capacity",
+            "label": "Capacity using local elevator airspeed",
             "expression": "0.5*rho*(flowFactor*V)^2*S*c*dCm",
             "unit": "N m"
           },
@@ -216,8 +222,8 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain the square of the speed ratio and what evidence would replace this teaching assumption.",
-        "evidenceIndex": 0,
+        "prompt": "Use the adjusted margin to explain whether this local airspeed leaves enough moment. Compare the adjusted capacity with the original capacity.",
+        "evidenceIndex": 3,
         "interpretationHint": "Compare adjusted capacity with demand at this local-flow factor."
       },
       {
@@ -228,12 +234,12 @@
         },
         "readouts": [
           {
-            "label": "Freestream baseline capacity",
+            "label": "Original capacity using flight speed",
             "expression": "0.5*rho*V^2*S*c*dCm",
             "unit": "N m"
           },
           {
-            "label": "Adjusted local-flow capacity",
+            "label": "Capacity using local elevator airspeed",
             "expression": "0.5*rho*(flowFactor*V)^2*S*c*dCm",
             "unit": "N m"
           },
@@ -255,8 +261,8 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain the square of the speed ratio and what evidence would replace this teaching assumption.",
-        "evidenceIndex": 0,
+        "prompt": "Use the adjusted margin to explain whether this local airspeed leaves enough moment. Compare the adjusted capacity with the original capacity.",
+        "evidenceIndex": 3,
         "interpretationHint": "Compare adjusted capacity with demand at this local-flow factor."
       }
     ],

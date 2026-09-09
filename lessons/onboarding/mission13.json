@@ -3,7 +3,7 @@
   "number": 13,
   "version": "3.0.0",
   "title": "Homework: reopen the crosswind claim",
-  "chapter": "\u00a76.10, \u00a76.12 \u2014 changed requirement and complete review",
+  "chapter": "§6.10, §6.12 — changed requirement and complete review",
   "brief": "Review a changed crosswind requirement through twelve connected sections. Start with the mission briefing below.",
   "missing": [
     0,
@@ -46,68 +46,71 @@
       "label": "Changed crosswind engineering question",
       "type": "text",
       "section": 0,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Ask whether the aircraft can meet the changed crosswind requirement. State the 6 m/s crosswind and distinguish the local yaw calculation from a landing decision."
     },
     {
       "id": "equation",
       "label": "Local rudder balance: deltaR = (use CnBeta, beta, Cn0, CnRudder)",
       "type": "equation",
       "section": 1,
-      "help": "Enter only an expression, not an equals sign. Use the named variables; \u00d7, *, \u00f7, /, +, \u2212, ^ and parentheses are accepted."
+      "help": "Rearrange CnBeta*beta + CnRudder*deltaR + Cn0 = 0 for deltaR. Enter only the expression using the named variables."
     },
     {
       "id": "beta",
       "label": "Synthetic sideslip beta (rad)",
       "type": "number",
       "section": 2,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter the independently supplied sideslip angle in radians. Do not convert the crab heading into sideslip. Enter a number only."
     },
     {
       "id": "output",
-      "label": "Outputs required for the operational claim",
+      "label": "What else must be calculated to assess a crosswind landing?",
       "type": "select",
       "options": [
         "Coupled yaw, roll, lateral force and transient limits",
         "Pitch margin alone"
       ],
       "section": 3,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "What aircraft motions and forces would need to be checked to assess a crosswind landing?"
     },
     {
       "id": "assumption",
-      "label": "Nature of supplied derivative data",
+      "label": "Where did these coefficient values come from?",
       "type": "select",
       "options": [
         "Synthetic local held-condition coefficients",
         "Validated all-envelope aircraft data"
       ],
       "section": 4,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Are these example coefficients measured across the aircraft flight range, or supplied teaching values for one condition?",
+      "optionLabels": {
+        "Synthetic local held-condition coefficients": "Teaching coefficients for one fixed condition"
+      }
     },
     {
       "id": "validity",
-      "label": "What the local yaw balance can establish",
+      "label": "What can the steady yaw equation answer on its own?",
       "type": "select",
       "options": [
         "Local static yaw balance only",
         "Safe crosswind touchdown"
       ],
       "section": 5,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Choose the question the supplied steady yaw equation can answer by itself."
     },
     {
       "id": "prediction",
       "label": "Predicted rudder-deflection ratio if beta doubles",
       "type": "number",
       "section": 6,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Predict new rudder deflection divided by original deflection if sideslip doubles and Cn0 remains zero. Enter a number only."
     },
     {
       "id": "reference",
       "label": "Local rudder demand at beta=0.08 rad (rad)",
       "type": "number",
       "section": 7,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Calculate deltaR by hand for beta=0.08 rad. Enter radians with the correct sign and show the working below. Enter a number only."
     },
     {
       "id": "boundary",
@@ -118,7 +121,10 @@
         "Return zero rudder demand"
       ],
       "section": 8,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "If CnRudder=0, the rudder has no modeled effect on yaw. Choose how the calculation should handle this input.",
+      "optionLabels": {
+        "Reject ineffective local balance": "Reject the input: the model gives the rudder no yaw effect"
+      }
     },
     {
       "id": "requirement",
@@ -129,7 +135,7 @@
         "Operational pass"
       ],
       "section": 9,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Choose what the app should report about a crosswind landing when it has only a steady yaw equation."
     },
     {
       "id": "code",
@@ -140,117 +146,120 @@
     },
     {
       "id": "decision",
-      "label": "Crosswind operational decision",
+      "label": "Does this evidence justify a crosswind operating limit?",
       "type": "select",
       "options": [
         "Withhold crosswind claim pending coupled evidence",
         "Approve from the earlier pitch screen"
       ],
       "section": 11,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Decide whether the available evidence supports a crosswind operating limit. Explain your decision below.",
+      "optionLabels": {
+        "Withhold crosswind claim pending coupled evidence": "Do not approve a crosswind limit without the missing aircraft-response evidence"
+      }
     },
     {
       "id": "explanation0",
-      "label": "Explain the reasoning for engineering question",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 0,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain which crosswind question you want to answer and why a steady yaw calculation is only part of it."
     },
     {
       "id": "explanation1",
-      "label": "Explain the reasoning for physics model",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 1,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain how you rearranged the signed balance for rudder angle."
     },
     {
       "id": "explanation2",
-      "label": "Explain the reasoning for inputs",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 2,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain why you used the supplied sideslip in radians rather than the crab heading."
     },
     {
       "id": "explanation3",
-      "label": "Explain the reasoning for outputs",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 3,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain why a landing assessment needs more than a yaw moment result."
     },
     {
       "id": "explanation4",
-      "label": "Explain the reasoning for assumptions",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 4,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain what would be needed to replace the teaching coefficients with aircraft data."
     },
     {
       "id": "explanation5",
-      "label": "Explain the reasoning for validity",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 5,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "State which question the steady equation answers and which landing behavior it omits."
     },
     {
       "id": "explanation6",
-      "label": "Explain the reasoning for predictions",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 6,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain how doubling sideslip changes your predicted rudder angle when the offset is zero."
     },
     {
       "id": "explanation7",
-      "label": "Explain the reasoning for manual reference",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 7,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Show substituted numbers, signs and units for the manual calculation."
     },
     {
       "id": "explanation8",
-      "label": "Explain the reasoning for verification cases",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 8,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain why zero rudder effectiveness must be rejected."
     },
     {
       "id": "explanation9",
-      "label": "Explain the reasoning for feature requirements",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 9,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain what the app should tell a user when landing evidence is missing."
     },
     {
       "id": "explanation10",
-      "label": "Explain the reasoning for implementation",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 10,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain how the function implements your equation and rejects invalid inputs."
     },
     {
       "id": "explanation11",
-      "label": "Explain the reasoning for decision",
+      "label": "Explain this section of your plan",
       "type": "text",
       "section": 11,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain your decision using a result, a model limit and the next evidence you would request."
     },
     {
       "id": "decisionEvidence",
       "label": "Evidence supporting your decision",
-      "help": "Name the inspected case and its result with units; connect it to the claim.",
+      "help": "Use a signed rudder result and its travel limit as evidence. Explain what that comparison answers.",
       "type": "text",
       "section": 11
     },
     {
       "id": "nextEvidence",
       "label": "Specific missing evidence and next action",
-      "help": "Identify which missing model or measurement would change the decision, who needs it and why.",
+      "help": "Name the first missing landing test or model you would request and explain why.",
       "type": "text",
       "section": 11
     },
     {
       "id": "consequences",
       "label": "Who is affected if this claim is wrong?",
-      "help": "Explain a concrete consequence for pilot, passengers, ground crew or design review.",
+      "help": "Describe one concrete consequence of approving an unsupported crosswind limit for a pilot, passenger or ground crew.",
       "type": "text",
       "section": 11
     }
@@ -271,7 +280,7 @@
     {
       "field": "output",
       "expected": "Coupled yaw, roll, lateral force and transient limits",
-      "message": "A yaw-only screen cannot establish the operational claim.",
+      "message": "A yaw-only calculation cannot establish the operational claim.",
       "tolerance": 1e-06
     },
     {
@@ -313,14 +322,14 @@
     {
       "field": "decision",
       "expected": "Withhold crosswind claim pending coupled evidence",
-      "message": "The earlier pitch screen does not answer the changed roll/yaw requirement.",
+      "message": "The earlier pitch calculation does not answer the changed roll/yaw requirement.",
       "tolerance": 1e-06
     }
   ],
   "hints": [
-    "The 16.7\u00b0 crab angle is a wind-triangle heading offset, not rudder deflection or the synthetic beta.",
+    "The 16.7° crab angle is a wind-triangle heading offset, not rudder deflection or the synthetic beta.",
     "Solve the signed local yaw balance: deltaR=-(CnBeta*beta+Cn0)/CnRudder. Check both sides of the travel range.",
-    "Even a passing local yaw/travel case cannot establish coupled crosswind landing capability. Withhold that claim and identify the next evidence."
+    "Even a passing local yaw/travel case cannot establish the combined motions and forces of a crosswind landing. Withhold that claim and identify the next evidence."
   ],
   "sweep": {
     "variable": "beta",
@@ -392,10 +401,10 @@
     "description": "Implement calculate(input) returning -(CnBeta*beta+Cn0)/CnRudder in rad. Require finite numeric inputs and nonzero CnRudder. Throw Error for invalid inputs. This local yaw balance cannot establish crosswind controllability."
   },
   "experience": {
-    "scenario": "The trainer now faces a 6 m/s crosswind at 20 m/s runway-axis airspeed. Wind-triangle geometry gives a 16.7\u00b0 crab heading offset. This is not rudder deflection or sideslip.",
+    "scenario": "The trainer now faces a 6 m/s crosswind at 20 m/s runway-axis airspeed. Wind-triangle geometry gives a 16.7° crab heading offset. This is not rudder deflection or sideslip.",
     "task": "Complete all twelve sections using the scenario and synthetic local balance below. Keep the local calculation separate from the operational crosswind decision.",
-    "method": "For the local teaching exercise only: CnBeta=0.10/rad, beta=0.08 rad, Cn0=0, CnRudder=\u22120.08/rad, rudder limits \u00b10.12 rad. Balance CnBeta\u00d7beta + CnRudder\u00d7deltaR + Cn0 = 0. The beta value is an independent sideslip scenario, not converted crab angle. No roll, lateral force, gust, de-crab, tire, clearance or workload model is supplied.",
-    "investigate": "Inspect baseline, doubled and reversed sideslip using your actual code. Record signed travel sufficiency, then identify missing evidence and consequences before deciding the operational claim.",
+    "method": "For the local teaching exercise only: CnBeta=0.10/rad, beta=0.08 rad, Cn0=0, CnRudder=−0.08/rad, rudder limits ±0.12 rad. Balance CnBeta×beta + CnRudder×deltaR + Cn0 = 0. The beta value is an independent sideslip scenario, not converted crab angle. No roll, lateral force, gust, de-crab, tire, clearance or workload model is supplied.",
+    "investigate": "Inspect baseline, doubled and reversed sideslip using your actual code. Record signed travel sufficiency, then identify missing evidence and consequences before deciding the claim about aircraft operation.",
     "tools": "Use the built-in JavaScript editor. An existing coding assistant is optional.",
     "xLabel": "Synthetic sideslip (rad)",
     "yLabel": "Signed rudder demand (rad)",
@@ -407,15 +416,15 @@
         {
           "axis": "y",
           "value": -0.12,
-          "label": "Negative limit \u22120.12 rad"
+          "label": "Negative limit −0.12 rad"
         }
       ]
     },
     "variableKey": {
-      "CnBeta": "Yaw coefficient derivative with sideslip (rad\u207b\u00b9)",
+      "CnBeta": "Yaw coefficient derivative with sideslip (rad⁻¹)",
       "beta": "Independent sideslip angle (rad)",
       "Cn0": "Yaw coefficient offset (dimensionless)",
-      "CnRudder": "Yaw coefficient derivative with rudder (rad\u207b\u00b9)",
+      "CnRudder": "Yaw coefficient derivative with rudder (rad⁻¹)",
       "usableLimit": "Signed rudder limit magnitude (rad); applies in both directions"
     },
     "reflection": {
@@ -423,7 +432,8 @@
       "omitted": "It does not simulate a gust, the time taken to respond, coupled roll motion or a crosswind landing.",
       "question": "Before accepting a crosswind operating limit, which missing test or model would you investigate first, and why?",
       "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
-    }
+    },
+    "terms": "Crab is heading offset used to counter wind drift. Sideslip β is the angle between the aircraft’s forward axis and its air-relative motion. Rudder deflection δR is a control angle. They are different quantities. Synthetic means invented for this teaching exercise, not aircraft test data."
   },
   "investigation": {
     "cases": [
@@ -431,7 +441,7 @@
         "id": "0",
         "label": "Synthetic local yaw reference",
         "codeIndex": 0,
-        "prompt": "Record signed rudder demand and compare with BOTH \u00b10.12 rad limits. Distinguish local travel from missing operational evidence.",
+        "prompt": "Compare the signed rudder angle with the −0.12 to +0.12 rad range. Explain whether it fits, and how reversing sideslip affects the required direction.",
         "travelLimit": 0.12,
         "evidenceIndex": 0,
         "interpretationHint": "Compare the magnitude of your executed rudder demand with 0.12 rad in either direction."
@@ -440,7 +450,7 @@
         "id": "1",
         "label": "Doubled sideslip",
         "codeIndex": 1,
-        "prompt": "Record signed rudder demand and compare with BOTH \u00b10.12 rad limits. Distinguish local travel from missing operational evidence.",
+        "prompt": "Compare the signed rudder angle with the −0.12 to +0.12 rad range. Explain whether it fits, and how reversing sideslip affects the required direction.",
         "travelLimit": 0.12,
         "evidenceIndex": 0,
         "interpretationHint": "Compare the magnitude of your executed rudder demand with 0.12 rad in either direction."
@@ -449,7 +459,7 @@
         "id": "2",
         "label": "Reversed sideslip",
         "codeIndex": 2,
-        "prompt": "Record signed rudder demand and compare with BOTH \u00b10.12 rad limits. Distinguish local travel from missing operational evidence.",
+        "prompt": "Compare the signed rudder angle with the −0.12 to +0.12 rad range. Explain whether it fits, and how reversing sideslip affects the required direction.",
         "travelLimit": 0.12,
         "evidenceIndex": 0,
         "interpretationHint": "Compare the magnitude of your executed rudder demand with 0.12 rad in either direction."

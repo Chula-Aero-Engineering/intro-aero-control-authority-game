@@ -3,7 +3,7 @@
   "number": 2,
   "version": "3.1.0",
   "title": "Choose the yaw-moment model",
-  "chapter": "\u00a76.1, \u00a76.2, \u00a76.6, \u00a76.9 Transfer B",
+  "chapter": "§6.1, §6.2, §6.6, §6.9 Transfer B",
   "brief": "Model an asymmetric-thrust disturbance and connect it to the correct effector. Read the supplied effector map and distinguish yaw from pitch and roll.",
   "missing": [
     1
@@ -17,10 +17,10 @@
     "Static yaw balance only. No proof of engine-out controllability, bank limits, transient response, or minimum control speed.",
     "Doubling lost thrust at fixed arm doubles yaw demand and reduces margin.",
     "Right-engine loss: disturbance +7440 N m; balancing rudder -7440 N m; net 0 N m. Capacity remaining: 8600-7440=1160 N m. Full -8600 N m would overcorrect to -1160 N m net.",
-    "Zero loss \u2192 zero demand; 2400 N loss \u21927440 N m; 4800 N loss \u219214880 N m.",
+    "Zero loss → zero demand; 2400 N loss →7440 N m; 4800 N loss →14880 N m.",
     "Plot yaw demand against lost thrust and compare with 8600 N m capacity; identify the yaw effector and the sign/magnitude convention.",
     "Evaluate both student expressions. For illustration, apply only the opposing moment needed for balance, capped at -8600 N m. This ideal static command assumes immediate response; it is not an actuator or flight-control model.",
-    "Retain only the nominal static yaw screen; investigate coupling, actuator limits, and uncertainty before an operational claim."
+    "Retain only the nominal steady yaw-moment calculation; investigate coupling, actuator limits, and uncertainty before an claim about aircraft operation."
   ],
   "variables": {
     "deltaT": 2400,
@@ -33,14 +33,14 @@
       "label": "Signed engine-out yaw moment (N m; use deltaT, y)",
       "type": "equation",
       "section": 1,
-      "help": "Enter only an expression, not an equals sign. Use the named variables; \u00d7, *, \u00f7, /, +, \u2212, ^ and parentheses are accepted."
+      "help": "Enter a formula using deltaT (lost thrust in N) and y (perpendicular arm in m). Nose-right is positive. Use * for multiplication; omit the equals sign."
     },
     {
       "id": "rudderEquation",
       "label": "Signed rudder moment needed for balance (N m; use deltaT, y)",
       "type": "equation",
       "section": 1,
-      "help": "Use the same variables. The rudder must oppose the disturbance: their signed moments must add to zero. Enter an expression, without an equals sign."
+      "help": "Enter the signed moment that would make disturbance + rudder moment equal zero. Use deltaT and y, without an equals sign."
     },
     {
       "id": "effector",
@@ -56,10 +56,10 @@
     },
     {
       "id": "explanation1",
-      "label": "Explain the reasoning for physics model",
+      "label": "Explain your answer",
       "type": "text",
       "section": 1,
-      "help": "Explain the direction of the engine-out moment, why the rudder moment has the opposite sign, and why available capacity differs from the moment actually applied."
+      "help": "Explain why the engine-out moment and balancing rudder moment have opposite signs. Distinguish the moment needed from the maximum available."
     }
   ],
   "checks": [
@@ -158,14 +158,15 @@
     "variableKey": {
       "deltaT": "Lost thrust magnitude (N)",
       "y": "Perpendicular lateral engine arm (m)",
-      "available": "Available control moment capacity (N\u00b7m)"
+      "available": "Available control moment capacity (N·m)"
     },
     "reflection": {
       "included": "The model balances signed engine-out and rudder moments, with a maximum opposing rudder capacity.",
       "omitted": "It assumes the required rudder moment appears immediately; it does not model actuator delay or the yaw rate that develops before balance.",
       "question": "If the rudder takes time to move after the engine fails, what would you need to model to determine how far the nose turns before the moments balance?",
       "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
-    }
+    },
+    "terms": "Yaw means nose-left or nose-right rotation. A moment is a turning effect: force × perpendicular distance from the centre of gravity (CG). Capacity is the maximum available; command is what is actually applied."
   },
   "investigation": {
     "cases": [
@@ -215,7 +216,7 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain the signs of the disturbance and rudder moments. Can the rudder balance the disturbance within its capacity? Use the remaining net moment to explain.",
+        "prompt": "Use the signs of the two moments and the remaining net moment to explain whether the rudder can balance this engine-out case.",
         "evidenceIndex": 3,
         "interpretationHint": "The disturbance and balancing rudder must have opposite signs. Compare the magnitude needed with 8600 N m; zero net moment means balance.",
         "evidenceNote": "Applied rudder is an ideal teaching command: only enough to balance the stated disturbance, capped at the opposing capacity. It assumes your checked model and immediate actuation. The graph compares disturbance with capacity magnitude, not signed applied rudder."
@@ -266,7 +267,7 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain the signs of the disturbance and rudder moments. Can the rudder balance the disturbance within its capacity? Use the remaining net moment to explain.",
+        "prompt": "Use the signs of the two moments and the remaining net moment to explain whether the rudder can balance this engine-out case.",
         "evidenceIndex": 3,
         "interpretationHint": "The disturbance and balancing rudder must have opposite signs. Compare the magnitude needed with 8600 N m; zero net moment means balance.",
         "evidenceNote": "Applied rudder is an ideal teaching command: only enough to balance the stated disturbance, capped at the opposing capacity. It assumes your checked model and immediate actuation. The graph compares disturbance with capacity magnitude, not signed applied rudder."
@@ -317,7 +318,7 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain the signs of the disturbance and rudder moments. Can the rudder balance the disturbance within its capacity? Use the remaining net moment to explain.",
+        "prompt": "Use the signs of the two moments and the remaining net moment to explain whether the rudder can balance this engine-out case.",
         "evidenceIndex": 3,
         "interpretationHint": "The disturbance and balancing rudder must have opposite signs. Compare the magnitude needed with 8600 N m; zero net moment means balance.",
         "evidenceNote": "Applied rudder is an ideal teaching command: only enough to balance the stated disturbance, capped at the opposing capacity. It assumes your checked model and immediate actuation. The graph compares disturbance with capacity magnitude, not signed applied rudder."

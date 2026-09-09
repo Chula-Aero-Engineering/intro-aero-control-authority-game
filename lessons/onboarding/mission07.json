@@ -3,21 +3,21 @@
   "number": 7,
   "version": "3.0.0",
   "title": "Predict the limiting pitch condition",
-  "chapter": "\u00a76.4, \u00a76.6, \u00a76.11 \u2014 limiting conditions",
+  "chapter": "§6.4, §6.6, §6.11 — limiting conditions",
   "brief": "Record predictions before running five pitch-authority challenges. A lower-speed condition is not automatically a failure: calculate its margin.",
   "missing": [
     6
   ],
   "supplied": [
-    "How do lower speed, increased pitch inertia, a stronger opposing moment and effector degradation affect the trainer margin?",
-    "M_available=0.5*rho*V\u00b2*S*c*dCm; M_required=Iy*target-other; margin=M_available-M_required; initial acceleration=(M_available+other)/Iy at full command.",
-    "900 kg trainer; rho=1.20 kg/m\u00b3; V=20 m/s; S=27.25 m\u00b2; c=4 m; usable dCm=0.153; Iy=5000 kg m\u00b2; other=-750 N m; target=0.12 rad/s\u00b2. Nose-up moment is positive about the declared CG.",
+    "How do lower speed, increased pitch inertia, a stronger opposing moment and reduced elevator effectiveness affect the trainer margin?",
+    "M_available=0.5*rho*V²*S*c*dCm; M_required=Iy*target-other; margin=M_available-M_required; initial acceleration=(M_available+other)/Iy at full command.",
+    "900 kg trainer; rho=1.20 kg/m³; V=20 m/s; S=27.25 m²; c=4 m; usable dCm=0.153; Iy=5000 kg m²; other=-750 N m; target=0.12 rad/s². Nose-up moment is positive about the declared CG.",
     "Available moment, required moment and margin (N m); pass/fail for each explicitly changed condition.",
     "Change one parameter at a time. Increasing Iy changes response demand, not aerodynamic capacity. A degraded coefficient is a synthetic sensitivity case, not a failure probability.",
-    "Initial single-axis pitch screen at the declared condition. Constant coefficients and inertia. No proof of successful takeoff, ground clearance, stall recovery, or safe landing.",
+    "Initial pitch calculation at the declared condition. Constant coefficients and inertia. No proof of successful takeoff, ground clearance, stall recovery, or safe landing.",
     null,
     "Worked baseline: available 4002.48 N m; required 1350 N m; margin 2652.48 N m. For a changed case, recompute only the affected side of the budget and subtract. Record the changed-case prediction before inspecting its result.",
-    "Check 0.7\u00b2 speed scaling; distinguish the unchanged capacity in the inertia challenge from the increased required moment.",
+    "Check 0.7² speed scaling; distinguish the unchanged capacity in the inertia challenge from the increased required moment.",
     "Show a named challenge table and a speed sweep; keep predictions separate from observed results.",
     "Evaluate the full moment budget once for each named single-parameter change. Compare signed margin with zero.",
     "Decision method: retain only a condition whose available moment meets demand, under the stated assumptions. Explain which input change could require narrowing or revising the claim. Changed-case conclusions are made after inspection."
@@ -38,7 +38,7 @@
       "label": "Available-moment ratio at 14 versus 20 m/s",
       "type": "number",
       "section": 6,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Predict available moment at 14 m/s divided by available moment at 20 m/s, with everything else fixed. Enter a fraction. Enter a number only."
     },
     {
       "id": "lowSpeed",
@@ -49,7 +49,7 @@
         "Fails necessarily"
       ],
       "section": 6,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Predict whether the moment at 14 m/s can still cover the required moment. Less capacity does not automatically mean failure."
     },
     {
       "id": "inertia",
@@ -60,7 +60,7 @@
         "Increases aerodynamic capacity"
       ],
       "section": 6,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Only pitch inertia Iy doubles. Predict which part of the required-versus-available moment calculation changes."
     },
     {
       "id": "degraded",
@@ -71,14 +71,14 @@
         "Unchanged margin"
       ],
       "section": 6,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Only usable dCm changes from 0.153 to 0.04. Predict whether available moment still covers demand."
     },
     {
       "id": "explanation6",
-      "label": "Explain the reasoning for predictions",
+      "label": "Explain your answer",
       "type": "text",
       "section": 6,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain your predictions: which changes affect available moment, which affect required moment, and why a smaller margin need not mean failure."
     },
     {
       "id": "veryLowSpeed",
@@ -89,7 +89,7 @@
         "Insufficient authority",
         "Still passes"
       ],
-      "help": "Compare the changed demand with available capacity; record your prediction before inspecting."
+      "help": "Only speed changes to 10 m/s. Predict whether the minimum initial acceleration can still be met."
     },
     {
       "id": "opposition",
@@ -100,14 +100,14 @@
         "Passes with reduced margin",
         "Capacity increases"
       ],
-      "help": "Compare the changed demand with available capacity; record your prediction before inspecting."
+      "help": "Only the signed other moment changes from −750 to −2,000 N m. Predict the effect on the moment margin."
     }
   ],
   "checks": [
     {
       "field": "ratio",
       "expected": 0.49,
-      "message": "Use (14/20)\u00b2.",
+      "message": "Use (14/20)².",
       "tolerance": 0.0001
     },
     {
@@ -141,7 +141,7 @@
   ],
   "hints": [
     "Lower speed changes capacity quadratically; inertia changes demand.",
-    "At 14 m/s, 0.49\u00d74002.48=1961.2152 N m, still above 1350 N m.",
+    "At 14 m/s, 0.49×4002.48=1961.2152 N m, still above 1350 N m.",
     "Degraded dCm=0.04 yields 1046.4 N m. Separate this synthetic failure from the baseline."
   ],
   "sweep": {
@@ -258,7 +258,7 @@
   ],
   "experience": {
     "scenario": "The trainer has a positive baseline moment margin. You will predict the effect of five single-parameter changes before inspecting each result.",
-    "task": "Record a prediction for every named challenge, then run and inspect them. The baseline worked example remains visible; changed-case outcomes appear in the investigation.",
+    "task": "Make predictions for the five changed conditions before opening the results. Your first submitted predictions are kept so you can compare them with what the model calculates.",
     "method": "Speed and usable coefficient affect capacity. Inertia and opposing moment affect demand. A reduced margin does not necessarily mean failure: compare the resulting signed margin with zero. Original predictions are preserved in attempt history.",
     "investigate": "For each named challenge, compare your original prediction with the observation. Explain which side of the moment budget changed.",
     "tools": "Only this app and its calculation pad are needed.",
@@ -267,21 +267,22 @@
     "seriesLabel": "Supplied pitch margin",
     "referenceLabel": "Zero-margin boundary",
     "variableKey": {
-      "rho": "Air density (kg/m\u00b3)",
+      "rho": "Air density (kg/m³)",
       "V": "Freestream speed (m/s)",
-      "S": "Reference wing area (m\u00b2)",
+      "S": "Reference wing area (m²)",
       "c": "Reference chord (m)",
       "dCm": "Usable pitching coefficient increment (dimensionless)",
-      "Iy": "Pitch moment of inertia (kg\u00b7m\u00b2)",
-      "other": "Other pitching moment, nose-up positive (N\u00b7m)",
-      "target": "Minimum initial pitch acceleration (rad/s\u00b2)"
+      "Iy": "Pitch moment of inertia (kg·m²)",
+      "other": "Other pitching moment, nose-up positive (N·m)",
+      "target": "Minimum initial pitch acceleration (rad/s²)"
     },
     "reflection": {
       "included": "Each challenge changes a specified part of the initial pitch moment budget, such as speed, inertia or opposing moment.",
       "omitted": "The separate challenges do not test every combination of adverse changes happening together.",
       "question": "If low speed and increased inertia occurred together, how would you check whether the aircraft still meets the initial-acceleration requirement?",
       "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
-    }
+    },
+    "terms": "Available moment is the maximum elevator contribution. Required moment includes both the acceleration demand and the opposing moment. Each case changes one input; a positive or zero margin meets this calculation’s requirement."
   },
   "investigation": {
     "cases": [
@@ -317,7 +318,7 @@
           {
             "label": "Full-command initial acceleration",
             "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
-            "unit": "rad/s\u00b2"
+            "unit": "rad/s²"
           }
         ],
         "comparison": {
@@ -327,8 +328,8 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
-        "evidenceIndex": 0,
+        "prompt": "Compare this margin with the baseline margin and your prediction. Name the changed input and explain whether it changed available moment, required moment, or both.",
+        "evidenceIndex": 2,
         "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       },
       {
@@ -363,7 +364,7 @@
           {
             "label": "Full-command initial acceleration",
             "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
-            "unit": "rad/s\u00b2"
+            "unit": "rad/s²"
           }
         ],
         "comparison": {
@@ -373,9 +374,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "prompt": "Compare this margin with the baseline margin and your prediction. Name the changed input and explain whether it changed available moment, required moment, or both.",
         "predictionField": "lowSpeed",
-        "evidenceIndex": 0,
+        "evidenceIndex": 2,
         "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       },
       {
@@ -410,7 +411,7 @@
           {
             "label": "Full-command initial acceleration",
             "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
-            "unit": "rad/s\u00b2"
+            "unit": "rad/s²"
           }
         ],
         "comparison": {
@@ -420,9 +421,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "prompt": "Compare this margin with the baseline margin and your prediction. Name the changed input and explain whether it changed available moment, required moment, or both.",
         "predictionField": "veryLowSpeed",
-        "evidenceIndex": 0,
+        "evidenceIndex": 2,
         "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       },
       {
@@ -457,7 +458,7 @@
           {
             "label": "Full-command initial acceleration",
             "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
-            "unit": "rad/s\u00b2"
+            "unit": "rad/s²"
           }
         ],
         "comparison": {
@@ -467,9 +468,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "prompt": "Compare this margin with the baseline margin and your prediction. Name the changed input and explain whether it changed available moment, required moment, or both.",
         "predictionField": "inertia",
-        "evidenceIndex": 0,
+        "evidenceIndex": 2,
         "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       },
       {
@@ -504,7 +505,7 @@
           {
             "label": "Full-command initial acceleration",
             "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
-            "unit": "rad/s\u00b2"
+            "unit": "rad/s²"
           }
         ],
         "comparison": {
@@ -514,14 +515,14 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "prompt": "Compare this margin with the baseline margin and your prediction. Name the changed input and explain whether it changed available moment, required moment, or both.",
         "predictionField": "opposition",
-        "evidenceIndex": 0,
+        "evidenceIndex": 2,
         "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       },
       {
         "id": "5",
-        "label": "Synthetic degraded effector",
+        "label": "Reduced elevator effectiveness: dCm = 0.04",
         "inputs": {
           "rho": 1.2,
           "V": 20,
@@ -551,7 +552,7 @@
           {
             "label": "Full-command initial acceleration",
             "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
-            "unit": "rad/s\u00b2"
+            "unit": "rad/s²"
           }
         ],
         "comparison": {
@@ -561,9 +562,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "prompt": "Compare this margin with the baseline margin and your prediction. Name the changed input and explain whether it changed available moment, required moment, or both.",
         "predictionField": "degraded",
-        "evidenceIndex": 0,
+        "evidenceIndex": 2,
         "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       }
     ],

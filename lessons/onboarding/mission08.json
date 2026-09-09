@@ -3,24 +3,24 @@
   "number": 8,
   "version": "3.0.0",
   "title": "Back-check the trainer moment budget",
-  "chapter": "\u00a76.1, \u00a76.4, \u00a76.9 \u2014 sign, dimensions and force scale",
+  "chapter": "§6.1, §6.4, §6.9 — sign, dimensions and force scale",
   "brief": "Reproduce the chapter trainer budget independently, then check the equivalent force using an explicitly assumed arm.",
   "missing": [
     7
   ],
   "supplied": [
     "Can an independent reference calculation reproduce the trainer pitch margin and expose the implied force scale?",
-    "M_available=0.5*rho*V\u00b2*S*c*dCm; M_required=Iy*target-other; margin=M_available-M_required; initial acceleration=(M_available+other)/Iy at full command. Equivalent-force order check: F_equiv=M_available/arm.",
-    "900 kg trainer; rho=1.20 kg/m\u00b3; V=20 m/s; S=27.25 m\u00b2; c=4 m; usable dCm=0.153; Iy=5000 kg m\u00b2; other=-750 N m; target=0.12 rad/s\u00b2. Nose-up moment is positive about the declared CG. For the order check only, assume a perpendicular arm of 4.0 m.",
+    "M_available=0.5*rho*V²*S*c*dCm; M_required=Iy*target-other; margin=M_available-M_required; initial acceleration=(M_available+other)/Iy at full command. Equivalent-force comparison: F_equiv=M_available/arm.",
+    "900 kg trainer; rho=1.20 kg/m³; V=20 m/s; S=27.25 m²; c=4 m; usable dCm=0.153; Iy=5000 kg m²; other=-750 N m; target=0.12 rad/s². Nose-up moment is positive about the declared CG. For the equivalent-force comparison only, assume a perpendicular arm of 4.0 m.",
     "Required and available moment, nominal margin (N m), and equivalent force scale (N).",
     "The coefficient uses aircraft reference area and chord. The assumed arm is not a validated tail geometry or aerodynamic model.",
-    "Initial single-axis pitch screen at the declared condition. Constant coefficients and inertia. No proof of successful takeoff, ground clearance, stall recovery, or safe landing.",
+    "Initial pitch calculation at the declared condition. Constant coefficients and inertia. No proof of successful takeoff, ground clearance, stall recovery, or safe landing.",
     "A negative opposing moment increases the required control moment; the equivalent-force calculation is a scale check, not independent aerodynamic validation.",
     null,
-    "Check units at each step: dynamic pressure in Pa, moment in N m and equivalent force in N. A negative other moment must increase demand. Compare your results with the bench after running; accepted error is \u00b10.01 N m or N.",
+    "Check units at each step: dynamic pressure in Pa, moment in N m and equivalent force in N. A negative other moment must increase demand. Compare your results with the bench after running; accepted error is ±0.01 N m or N.",
     "Label equivalent force with its assumed arm; distinguish exact arithmetic from rounded chapter reporting.",
     "Compute the trainer budget, then divide available moment by each displayed assumed arm to inspect scale sensitivity.",
-    "Retain the nominal arithmetic screen; independently establish coefficient applicability, actual local flow, arm and actuator constraints."
+    "Retain the baseline calculation; independently establish coefficient applicability, actual local flow, arm and actuator constraints."
   ],
   "variables": {
     "rho": 1.2,
@@ -39,53 +39,53 @@
       "label": "Reference required moment (N m)",
       "type": "number",
       "section": 7,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Calculate the elevator moment needed to overcome the opposing moment and achieve the specified acceleration. Enter N m. Enter a number only."
     },
     {
       "id": "available",
       "label": "Reference available moment (N m)",
       "type": "number",
       "section": 7,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Calculate maximum available elevator moment from the supplied density, speed, area, chord and coefficient. Enter N m. Enter a number only."
     },
     {
       "id": "margin",
       "label": "Reference margin (N m)",
       "type": "number",
       "section": 7,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Subtract required moment from available moment. Keep the sign and enter N m. Enter a number only."
     },
     {
       "id": "force",
       "label": "Equivalent force for assumed 4 m arm (N)",
       "type": "number",
       "section": 7,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Divide the available moment by the assumed 4 m perpendicular arm. Enter the equivalent force in N. Enter a number only."
     },
     {
       "id": "meaning",
-      "label": "What the force calculation establishes",
+      "label": "What does the equivalent-force calculation tell you?",
       "type": "select",
       "options": [
         "Order-of-magnitude check only",
         "Independent tail-aerodynamics validation"
       ],
       "section": 7,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Choose what dividing moment by an assumed arm tells you. No actual tail-force measurement is supplied."
     },
     {
       "id": "explanation7",
-      "label": "Explain the reasoning for manual reference",
+      "label": "Explain your answer",
       "type": "text",
       "section": 7,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain your calculation in order: required moment, available moment, their difference, then equivalent force using the assumed arm."
     },
     {
       "id": "working",
       "type": "text",
       "section": 7,
       "label": "Show your calculation steps",
-      "help": "Show substitutions for dynamic pressure, available moment, required moment, margin and equivalent force. Units are required in your written working."
+      "help": "Show the formulas, substituted numbers and units. Use the calculation pad if helpful; this is your independent arithmetic check."
     }
   ],
   "checks": [
@@ -123,7 +123,7 @@
   "hints": [
     "Required moment is Iy*target-other; other is already signed.",
     "q=240 Pa and q*S*c*dCm=4002.48 N m.",
-    "Dividing by 4 m gives 1000.62 N; this checks scale, not tail validity."
+    "Dividing by 4 m gives 1000.62 N; this checks scale, not an actual tail-force measurement."
   ],
   "sweep": {
     "variable": "arm",
@@ -141,23 +141,23 @@
   "codeContract": null,
   "experience": {
     "scenario": "Independently reproduce the trainer moment budget, then inspect the equivalent force implied by an assumed perpendicular arm.",
-    "task": "Enter unrounded calculation results to two decimal places and show your substitutions. Use the on-page calculation pad or your own calculator.",
+    "task": "Independently calculate the required moment, available moment and margin. Then calculate the force that would produce the available moment at an assumed 4 m arm. Show your arithmetic; no new physics model or code is needed.",
     "method": "First compute dynamic pressure, then capacity. Required moment subtracts other, which is already signed. Subtract demand from capacity. Divide capacity by the assumed arm for a force scale. This rearrangement does not validate actual tail aerodynamics.",
     "investigate": "Compare assumed arms 2, 4 and 5 m at fixed moment. Explain why force changes while the moment budget does not.",
     "tools": "Only this app and its calculation pad are needed.",
     "xLabel": "Assumed perpendicular arm (m)",
     "yLabel": "Equivalent force (N)",
     "seriesLabel": "Equivalent force at selected arm",
-    "referenceLabel": "4 m benchmark \u2014 not a requirement",
+    "referenceLabel": "4 m benchmark — not a requirement",
     "variableKey": {
-      "rho": "Air density (kg/m\u00b3)",
+      "rho": "Air density (kg/m³)",
       "V": "Freestream speed (m/s)",
-      "S": "Reference wing area (m\u00b2)",
+      "S": "Reference wing area (m²)",
       "c": "Reference chord (m)",
       "dCm": "Usable pitching coefficient increment (dimensionless)",
-      "Iy": "Pitch moment of inertia (kg\u00b7m\u00b2)",
-      "other": "Other pitching moment, nose-up positive (N\u00b7m)",
-      "target": "Minimum initial pitch acceleration (rad/s\u00b2)",
+      "Iy": "Pitch moment of inertia (kg·m²)",
+      "other": "Other pitching moment, nose-up positive (N·m)",
+      "target": "Minimum initial pitch acceleration (rad/s²)",
       "arm": "Assumed equivalent force arm (m), not validated tail geometry"
     },
     "reflection": {
@@ -165,7 +165,8 @@
       "omitted": "It does not calculate actual tail lift, local flow or the true location of the aerodynamic force.",
       "question": "What aircraft information would you need before treating the equivalent force as an estimate of the actual tail force?",
       "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
-    }
+    },
+    "terms": "An equivalent force is a force that would produce the same moment at an assumed perpendicular arm. It is not a measured tail force. The arm here is a teaching assumption, separate from the reference chord in the coefficient equation."
   },
   "investigation": {
     "cases": [
@@ -209,7 +210,7 @@
           "pass": "Equal to the 4 m benchmark",
           "fail": "Different from the 4 m benchmark"
         },
-        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption.",
+        "prompt": "Compare the equivalent force with the 4 m reference case. Explain why changing the assumed arm changes force while the available moment stays fixed.",
         "evidenceIndex": 3,
         "interpretationHint": "Compare force at this assumed arm with the 4 m benchmark. Describe the direction of change, not an aerodynamic approval."
       },
@@ -253,7 +254,7 @@
           "pass": "Equal to the 4 m benchmark",
           "fail": "Different from the 4 m benchmark"
         },
-        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption.",
+        "prompt": "Compare the equivalent force with the 4 m reference case. Explain why changing the assumed arm changes force while the available moment stays fixed.",
         "evidenceIndex": 3,
         "interpretationHint": "Compare force at this assumed arm with the 4 m benchmark. Describe the direction of change, not an aerodynamic approval."
       },
@@ -297,7 +298,7 @@
           "pass": "Equal to the 4 m benchmark",
           "fail": "Different from the 4 m benchmark"
         },
-        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption.",
+        "prompt": "Compare the equivalent force with the 4 m reference case. Explain why changing the assumed arm changes force while the available moment stays fixed.",
         "evidenceIndex": 3,
         "interpretationHint": "Compare force at this assumed arm with the 4 m benchmark. Describe the direction of change, not an aerodynamic approval."
       }

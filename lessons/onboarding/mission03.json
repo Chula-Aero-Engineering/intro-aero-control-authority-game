@@ -3,8 +3,8 @@
   "number": 3,
   "version": "3.0.0",
   "title": "Respect derivative units and usable travel",
-  "chapter": "\u00a76.3 \u2014 Worked Example A",
-  "brief": "Enter the signed inputs from Worked Example A: \u22121.05 rad\u207b\u00b9, required \u0394Cm=\u22120.25, and +18\u00b0 usable travel. Avoid the factor-of-57.3 unit error.",
+  "chapter": "§6.3 — Worked Example A",
+  "brief": "Enter the signed inputs from Worked Example A: −1.05 rad⁻¹, required ΔCm=−0.25, and +18° usable travel. Avoid the factor-of-57.3 unit error.",
   "missing": [
     2
   ],
@@ -12,15 +12,15 @@
     "Using Chapter 6 Worked Example A, does a requested dCm=-0.25 lie within the usable positive elevator travel?",
     "deltaRad=demand/slope; deltaDeg=deltaRad*180/pi. Here slope is per radian; positive elevator deflection produces a negative pitching-moment increment.",
     null,
-    "Required elevator deflection in rad and deg, travel residual in deg, and local-screen status.",
+    "Required elevator deflection in rad and deg, remaining elevator travel in deg, and whether the angle fits the stated range.",
     "The local derivative is held fixed provisionally. The stated usable stop is a limit, not proof that the derivative applies throughout the travel.",
-    "Local derivative/travel screen only. Actuator holding force, rate, nonlinear response and coupled limits remain unverified.",
+    "This calculation checks the elevator angle using a fixed local derivative. Actuator holding force, rate, nonlinear response and coupled limits remain unverified.",
     "The required deflection should be positive and smaller than 18 degrees.",
     "(-0.25)/(-1.05)=0.238095 rad=13.6419 deg; residual=4.3581 deg.",
     "Retain the negative coefficient sign; use -1.05 per radian, not per degree; compare 13.6419 deg with the 18 deg usable limit.",
     "Plot demand-derived deflection against coefficient demand and show the usable limit in degrees.",
     "For each coefficient demand evaluate demand/slope*180/pi and compare with the supplied usableLimit. Do not substitute degrees into a per-radian derivative.",
-    "Provisionally retain the local travel screen; request a coefficient-versus-deflection sweep and actuator data."
+    "Provisionally retain the travel comparison; request a coefficient-versus-deflection sweep and actuator data."
   ],
   "variables": {
     "demand": -0.25,
@@ -31,31 +31,31 @@
   "fields": [
     {
       "id": "slope",
-      "label": "Effectiveness derivative (per radian)",
+      "label": "Coefficient change per radian of elevator movement",
       "type": "number",
       "section": 2,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter the supplied change in pitching-moment coefficient per radian of elevator movement. Keep its negative sign. Enter a number only."
     },
     {
       "id": "demand",
-      "label": "Required signed coefficient increment",
+      "label": "Requested coefficient change (keep its sign)",
       "type": "number",
       "section": 2,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter the requested change in pitching-moment coefficient, including its sign. A coefficient has no units. Enter a number only."
     },
     {
       "id": "usableLimit",
-      "label": "Positive usable travel limit (deg)",
+      "label": "Maximum allowed positive elevator angle (deg)",
       "type": "number",
       "section": 2,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter the supplied maximum positive elevator deflection in degrees. This is a movement limit, not evidence that the model works at every angle. Enter a number only."
     },
     {
       "id": "explanation2",
-      "label": "Explain the reasoning for inputs",
+      "label": "Explain your answer",
       "type": "text",
       "section": 2,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain what the two negative signs mean, why dividing gives radians, and how you will compare the result with a limit in degrees."
     }
   ],
   "checks": [
@@ -81,7 +81,7 @@
   "hints": [
     "Negative demand divided by negative effectiveness gives positive deflection.",
     "Keep the derivative per radian; convert the resulting angle to degrees once.",
-    "The local result is about 13.64 degrees, but passing the travel check is not full authority verification."
+    "The local result is about 13.64 degrees, but passing the travel check is not proof of actual elevator effectiveness."
   ],
   "sweep": {
     "variable": "demand",
@@ -98,10 +98,10 @@
   "codeCases": null,
   "codeContract": null,
   "experience": {
-    "scenario": "This signed elevator example asks for a negative pitching-moment coefficient increment of \u22120.25, with a local derivative of \u22121.05 per radian and usable positive travel of 18\u00b0.",
+    "scenario": "The requested pitching-moment coefficient change is −0.25. The supplied elevator model gives a change of −1.05 per radian of positive elevator movement, and the allowed positive movement ends at +18°. You will enter these inputs and check the required angle.",
     "task": "Enter the three given signed inputs. Then verify the resulting direction and units by comparing demands.",
-    "method": "A derivative is the change in coefficient per unit deflection. Here positive elevator deflection produces negative coefficient change. Divide demand by the per-radian derivative to obtain radians, then multiply by 180/\u03c0 for degrees. The usable stop is not a guarantee that the local derivative remains valid.",
-    "investigate": "Compare demands \u22120.25 and \u22120.35. Explain which exceeds usable travel and why a sign error changes direction rather than improving authority.",
+    "method": "A derivative is the change in coefficient per unit deflection. Here positive elevator deflection produces negative coefficient change. Divide demand by the per-radian derivative to obtain radians, then multiply by 180/π for degrees. The usable stop is not a guarantee that the local derivative remains valid.",
+    "investigate": "Compare demands −0.25 and −0.35. Explain which exceeds usable travel and why a sign error changes direction rather than improving authority.",
     "tools": "Only this app and its calculation pad are needed.",
     "xLabel": "Coefficient demand (dimensionless)",
     "yLabel": "Elevator deflection (deg)",
@@ -109,8 +109,8 @@
     "referenceLabel": "Positive usable travel",
     "variableKey": {
       "demand": "Signed pitching coefficient demand (dimensionless)",
-      "slope": "Signed coefficient derivative per elevator radian (rad\u207b\u00b9)",
-      "pi": "\u03c0, radians-to-degrees conversion constant",
+      "slope": "Signed coefficient derivative per elevator radian (rad⁻¹)",
+      "pi": "π, radians-to-degrees conversion constant",
       "usableLimit": "Usable deflection limit (deg)"
     },
     "reflection": {
@@ -118,7 +118,8 @@
       "omitted": "It does not test whether that constant effectiveness remains accurate near the travel limit.",
       "question": "What measurements would you need before trusting the same elevator effectiveness near the travel limit?",
       "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
-    }
+    },
+    "terms": "A pitching-moment coefficient expresses moment relative to dynamic pressure × reference area × chord. Its change is written dCm or ΔCm. A derivative here means coefficient change per radian of elevator movement; it is a local straight-line approximation."
   },
   "investigation": {
     "cases": [
@@ -145,7 +146,7 @@
             "unit": "deg"
           },
           {
-            "label": "Positive travel residual",
+            "label": "Remaining positive travel",
             "expression": "usableLimit-demand/slope*180/pi",
             "unit": "deg"
           }
@@ -159,8 +160,8 @@
           "min": 0,
           "directionFailure": "Wrong direction for declared positive travel"
         },
-        "prompt": "Explain the sign and conversion before interpreting the travel limit.",
-        "evidenceIndex": 0,
+        "prompt": "Compare the required elevator angle in degrees with the allowed 0° to +18° range. Explain what the sign tells you about direction.",
+        "evidenceIndex": 1,
         "interpretationHint": "Check the sign first, then compare the required positive deflection with the usable travel."
       },
       {
@@ -186,7 +187,7 @@
             "unit": "deg"
           },
           {
-            "label": "Positive travel residual",
+            "label": "Remaining positive travel",
             "expression": "usableLimit-demand/slope*180/pi",
             "unit": "deg"
           }
@@ -200,8 +201,8 @@
           "min": 0,
           "directionFailure": "Wrong direction for declared positive travel"
         },
-        "prompt": "Explain the sign and conversion before interpreting the travel limit.",
-        "evidenceIndex": 0,
+        "prompt": "Compare the required elevator angle in degrees with the allowed 0° to +18° range. Explain what the sign tells you about direction.",
+        "evidenceIndex": 1,
         "interpretationHint": "Check the sign first, then compare the required positive deflection with the usable travel."
       }
     ],

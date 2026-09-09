@@ -3,7 +3,7 @@
   "number": 4,
   "version": "3.0.0",
   "title": "Separate trim, stability, and control",
-  "chapter": "\u00a76.5, \u00a76.11 \u2014 stable does not mean controllable",
+  "chapter": "§6.5, §6.11 — stable does not mean controllable",
   "brief": "Build a result display that cannot confuse trimmed, stable, and sufficiently controllable. This deliberately insufficient-authority condition is synthetic.",
   "missing": [
     3
@@ -14,9 +14,9 @@
     "Synthetic comparison: reference net moment=0 N m; dCm/dalpha=-0.6 per rad; available=800 N m; required=1350 N m. Indicators refer to their declared reference state.",
     null,
     "Trim, stability, and control indicators answer different questions. The separate available-control increment is compared with the required-control increment.",
-    "No dynamic stability or full-envelope control conclusion follows from these three static indicators.",
+    "No dynamic stability or whole-flight-range control conclusion follows from these three static indicators.",
     "Trim and restoring tendency can coexist with a negative control margin.",
-    "Control margin=800\u22121350=\u2212550 N m even though the other two indicators pass.",
+    "Control margin=800−1350=−550 N m even though the other two indicators pass.",
     "At available=1350 N m the inclusive requirement is met exactly. At 800 it fails. A negative restoring slope cannot change that arithmetic.",
     "Display three separate statuses; use a signed control margin with units and an inclusive zero threshold.",
     "Sweep available control moment; compute available-required; compare with zero. Keep the trim and stability indicators unchanged.",
@@ -29,7 +29,7 @@
   "fields": [
     {
       "id": "output",
-      "label": "Quantity deciding control sufficiency",
+      "label": "Which output tells you whether enough control moment is available?",
       "type": "select",
       "options": [
         "Available minus required control moment",
@@ -37,7 +37,7 @@
         "Restoring derivative alone"
       ],
       "section": 3,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Which calculation tells you whether the available control moment covers the required moment?"
     },
     {
       "id": "unit",
@@ -49,18 +49,18 @@
         "kg"
       ],
       "section": 3,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Choose the units of available moment minus required moment."
     },
     {
       "id": "threshold",
       "label": "Minimum acceptable margin (N m)",
       "type": "number",
       "section": 3,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter the smallest acceptable value of available minus required moment. Equality counts as meeting the requirement. Enter a number only."
     },
     {
       "id": "control",
-      "label": "Control conclusion at 800 N m capacity",
+      "label": "Can 800 N m cover the required 1,350 N m?",
       "type": "select",
       "options": [
         "Insufficient authority",
@@ -68,14 +68,14 @@
         "Sufficient because stable"
       ],
       "section": 3,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Use the 800 N m available and 1,350 N m required values. Do not decide from trim or stability alone."
     },
     {
       "id": "explanation3",
-      "label": "Explain the reasoning for outputs",
+      "label": "Explain your answer",
       "type": "text",
       "section": 3,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "Explain why available moment minus required moment answers the control question. Explain why zero starting moment does not answer it."
     }
   ],
   "checks": [
@@ -124,7 +124,7 @@
   "codeCases": null,
   "codeContract": null,
   "experience": {
-    "scenario": "A synthetic condition is trimmed and statically restoring, yet has only 800 N m control capacity against 1350 N m demand.",
+    "scenario": "In this teaching example the aircraft starts with balanced pitching moments and a static restoring tendency. The elevator can provide 800 N m of additional moment, while the requested response needs 1,350 N m. You will decide which output should be used to compare them.",
     "task": "Choose the quantity, unit and threshold for the control status. You are configuring the interpretation of a supplied display; you do not need to build UI code.",
     "method": "Trim asks whether reference net moment is zero. Static stability asks about restoring tendency after a disturbance. Control asks whether an additional commanded response can be produced. Compare available minus required moment with zero.",
     "investigate": "Inspect capacity 800, 1350 and 2000 N m. Identify which status changes while trim and restoring tendency remain fixed.",
@@ -134,15 +134,16 @@
     "seriesLabel": "Supplied control margin",
     "referenceLabel": "Minimum acceptable margin",
     "variableKey": {
-      "available": "Available control moment capacity (N\u00b7m)",
-      "required": "Required additional control moment (N\u00b7m)"
+      "available": "Available control moment capacity (N·m)",
+      "required": "Required additional control moment (N·m)"
     },
     "reflection": {
       "included": "The cases compare starting moment balance, a static restoring derivative, and available versus required control moment.",
       "omitted": "They do not simulate how pitch angle and pitch rate evolve after a control input.",
       "question": "Even when the control margin is positive, what additional information would you need to predict how quickly the aircraft reaches a new pitch angle?",
       "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
-    }
+    },
+    "terms": "Trim means the moments balance at the starting condition. Static restoring tendency means a small angle disturbance creates an opposing moment. Control authority means enough additional moment is available for the requested response. Margin means available minus required moment."
   },
   "investigation": {
     "cases": [
@@ -186,7 +187,7 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare the available control moment with the required 1,350 N m. Can this case meet the requirement? Explain using the control margin. Does starting in balance tell you how much extra moment the elevator can produce?",
+        "prompt": "Use the control margin to explain whether this case meets the 1,350 N m requirement. The starting balance and restoring tendency are unchanged between cases.",
         "evidenceIndex": 4,
         "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       },
@@ -230,7 +231,7 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare the available control moment with the required 1,350 N m. Can this case meet the requirement? Explain using the control margin. Does starting in balance tell you how much extra moment the elevator can produce?",
+        "prompt": "Use the control margin to explain whether this case meets the 1,350 N m requirement. The starting balance and restoring tendency are unchanged between cases.",
         "evidenceIndex": 4,
         "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       },
@@ -274,7 +275,7 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare the available control moment with the required 1,350 N m. Can this case meet the requirement? Explain using the control margin. Does starting in balance tell you how much extra moment the elevator can produce?",
+        "prompt": "Use the control margin to explain whether this case meets the 1,350 N m requirement. The starting balance and restoring tendency are unchanged between cases.",
         "evidenceIndex": 4,
         "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       }
@@ -283,6 +284,7 @@
       "800",
       "1350",
       "2000"
-    ]
+    ],
+    "prompt": "Compare available control moments of 800, 1,350 and 2,000 N m with the same 1,350 N m requirement. Record the margin for each case. Explain why changing the available control moment does not change the starting trim or restoring tendency."
   }
 }

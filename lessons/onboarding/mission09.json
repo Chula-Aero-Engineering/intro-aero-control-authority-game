@@ -3,18 +3,18 @@
   "number": 9,
   "version": "3.0.0",
   "title": "Catch an unsafe authority calculator",
-  "chapter": "\u00a76.7\u20136.8 \u2014 reproducible verification",
+  "chapter": "§6.7–6.8 — reproducible verification",
   "brief": "Write verification expectations that expose control-authority bugs. The plotted candidate deliberately uses the wrong opposing-moment sign.",
   "missing": [
     8
   ],
   "supplied": [
     "Which tests distinguish a correct pitch-authority calculator from a wrong opposing-moment sign, linear speed scaling, or input acceptance bug?",
-    "M_available=0.5*rho*V\u00b2*S*c*dCm; M_required=Iy*target-other; margin=M_available-M_required; initial acceleration=(M_available+other)/Iy at full command.",
-    "900 kg trainer; rho=1.20 kg/m\u00b3; V=20 m/s; S=27.25 m\u00b2; c=4 m; usable dCm=0.153; Iy=5000 kg m\u00b2; other=-750 N m; target=0.12 rad/s\u00b2. Nose-up moment is positive about the declared CG.",
+    "M_available=0.5*rho*V²*S*c*dCm; M_required=Iy*target-other; margin=M_available-M_required; initial acceleration=(M_available+other)/Iy at full command.",
+    "900 kg trainer; rho=1.20 kg/m³; V=20 m/s; S=27.25 m²; c=4 m; usable dCm=0.153; Iy=5000 kg m²; other=-750 N m; target=0.12 rad/s². Nose-up moment is positive about the declared CG.",
     "Numerical verification cases, speed ratio, boundary rejection and insufficient-authority detection.",
     "All reference cases use the same sign convention and compatible reference dimensions. Cases intentionally probe independent implementation errors.",
-    "Initial single-axis pitch screen at the declared condition. Constant coefficients and inertia. No proof of successful takeoff, ground clearance, stall recovery, or safe landing.",
+    "Initial pitch calculation at the declared condition. Constant coefficients and inertia. No proof of successful takeoff, ground clearance, stall recovery, or safe landing.",
     "A baseline-only test is inadequate. Zero usable coefficient must leave a negative margin when positive control demand remains.",
     "Baseline required=1350 N m; capacity=4002.48 N m. M_available(40)/M_available(20)=4. At dCm=0, margin=-1350 N m.",
     null,
@@ -38,21 +38,21 @@
       "label": "Expected required moment with other=-750 (N m)",
       "type": "number",
       "section": 8,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Calculate required elevator moment for other = −750 N m. This expected value will test whether the calculator handles the opposing sign correctly. Enter a number only."
     },
     {
       "id": "ratio",
       "label": "Expected available(40 m/s)/available(20 m/s)",
       "type": "number",
       "section": 8,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Predict capacity at 40 m/s divided by capacity at 20 m/s, with all other inputs fixed. Enter a number only."
     },
     {
       "id": "zero",
       "label": "Expected margin when usable dCm=0 (N m)",
       "type": "number",
       "section": 8,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Calculate available minus required moment when usable dCm is zero but the response requirement is unchanged. Keep the sign. Enter a number only."
     },
     {
       "id": "invalid",
@@ -63,25 +63,25 @@
         "Return infinite acceleration"
       ],
       "section": 8,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "Iy=0 is outside this model. Choose what the software should do instead of dividing by zero."
     },
     {
       "id": "negativeMargin",
-      "label": "Expected behavior for valid insufficient authority",
+      "label": "What should the calculator do with a valid negative margin?",
       "type": "select",
       "options": [
         "Return negative margin",
         "Reject the case as malformed"
       ],
       "section": 8,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "All inputs are valid, but available moment is smaller than required moment. Should the software report that result or reject the input?"
     },
     {
       "id": "explanation8",
-      "label": "Explain the reasoning for verification cases",
+      "label": "Explain your answer",
       "type": "text",
       "section": 8,
-      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+      "help": "For each test, explain the mistake it is meant to catch. Distinguish a valid negative margin from an input the calculator cannot use."
     }
   ],
   "checks": [
@@ -94,7 +94,7 @@
     {
       "field": "ratio",
       "expected": 4,
-      "message": "This catches replacing V\u00b2 with V.",
+      "message": "This catches replacing V² with V.",
       "tolerance": 0.01
     },
     {
@@ -146,21 +146,22 @@
     "seriesLabel": "Deliberately faulty calculator",
     "referenceLabel": "Correct calculation",
     "variableKey": {
-      "rho": "Air density (kg/m\u00b3)",
+      "rho": "Air density (kg/m³)",
       "V": "Freestream speed (m/s)",
-      "S": "Reference wing area (m\u00b2)",
+      "S": "Reference wing area (m²)",
       "c": "Reference chord (m)",
       "dCm": "Usable pitching coefficient increment (dimensionless)",
-      "Iy": "Pitch moment of inertia (kg\u00b7m\u00b2)",
-      "other": "Other pitching moment, nose-up positive (N\u00b7m)",
-      "target": "Minimum initial pitch acceleration (rad/s\u00b2)"
+      "Iy": "Pitch moment of inertia (kg·m²)",
+      "other": "Other pitching moment, nose-up positive (N·m)",
+      "target": "Minimum initial pitch acceleration (rad/s²)"
     },
     "reflection": {
       "included": "The test cases check selected sign conventions, speed scaling, zero authority and invalid input handling.",
       "omitted": "Passing these examples does not prove that every possible input is handled correctly.",
       "question": "Propose one additional test input and explain what error it could reveal that the existing cases might miss.",
       "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
-    }
+    },
+    "terms": "An expected result is the answer a correct calculation should give for a chosen input. A failed software test means its output disagrees. A negative aircraft margin can be a correct software output."
   },
   "investigation": {
     "cases": [
@@ -194,9 +195,9 @@
           "pass": "Expected result catches defect",
           "fail": "Revise expected result"
         },
-        "prompt": "Which sign rule does this test enforce?",
+        "prompt": "Explain which calculator mistake this test would catch, using the displayed input and outputs.",
         "evidenceIndex": 0,
-        "interpretationHint": "Compare your expected result with the two candidate results. Explain which defect the expectation would catch."
+        "interpretationHint": "Compare your expected result with the candidate outputs. The question is whether your test detects a calculator error, not whether the aircraft passes."
       },
       {
         "id": "speed",
@@ -229,9 +230,9 @@
           "pass": "Expected result catches defect",
           "fail": "Revise expected result"
         },
-        "prompt": "Explain why doubling speed does not merely double capacity.",
+        "prompt": "Explain which calculator mistake this test would catch, using the displayed input and outputs.",
         "evidenceIndex": 0,
-        "interpretationHint": "Compare your expected result with the two candidate results. Explain which defect the expectation would catch."
+        "interpretationHint": "Compare your expected result with the candidate outputs. The question is whether your test detects a calculator error, not whether the aircraft passes."
       },
       {
         "id": "zero",
@@ -263,9 +264,9 @@
           "pass": "Expected result catches defect",
           "fail": "Revise expected result"
         },
-        "prompt": "Why is negative margin a valid result?",
+        "prompt": "Explain which calculator mistake this test would catch, using the displayed input and outputs.",
         "evidenceIndex": 0,
-        "interpretationHint": "Compare your expected result with the two candidate results. Explain which defect the expectation would catch."
+        "interpretationHint": "Compare your expected result with the candidate outputs. The question is whether your test detects a calculator error, not whether the aircraft passes."
       },
       {
         "id": "invalid",
@@ -296,9 +297,9 @@
           "answerField": "invalid",
           "expected": "Reject invalid input"
         },
-        "prompt": "Why must this input be rejected rather than classified as an aircraft failure?",
+        "prompt": "Explain which calculator mistake this test would catch, using the displayed input and outputs.",
         "evidenceIndex": 0,
-        "interpretationHint": "Compare your expected result with the two candidate results. Explain which defect the expectation would catch."
+        "interpretationHint": "Compare your expected result with the candidate outputs. The question is whether your test detects a calculator error, not whether the aircraft passes."
       }
     ],
     "required": [
