@@ -136,6 +136,12 @@
     "variableKey": {
       "available": "Available control moment capacity (N\u00b7m)",
       "required": "Required additional control moment (N\u00b7m)"
+    },
+    "reflection": {
+      "included": "The cases compare starting moment balance, a static restoring derivative, and available versus required control moment.",
+      "omitted": "They do not simulate how pitch angle and pitch rate evolve after a control input.",
+      "question": "Even when the control margin is positive, what additional information would you need to predict how quickly the aircraft reaches a new pitch angle?",
+      "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
     }
   },
   "investigation": {

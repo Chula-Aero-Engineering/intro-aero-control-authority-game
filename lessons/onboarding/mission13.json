@@ -3,7 +3,7 @@
   "number": 13,
   "version": "3.0.0",
   "title": "Homework: reopen the crosswind claim",
-  "chapter": "§6.10, §6.12 — changed requirement and complete review",
+  "chapter": "\u00a76.10, \u00a76.12 \u2014 changed requirement and complete review",
   "brief": "Review a changed crosswind requirement through twelve connected sections. Start with the mission briefing below.",
   "missing": [
     0,
@@ -53,14 +53,14 @@
       "label": "Local rudder balance: deltaR = (use CnBeta, beta, Cn0, CnRudder)",
       "type": "equation",
       "section": 1,
-      "help": "Enter only an expression, not an equals sign. Use the named variables; ×, *, ÷, /, +, −, ^ and parentheses are accepted."
+      "help": "Enter only an expression, not an equals sign. Use the named variables; \u00d7, *, \u00f7, /, +, \u2212, ^ and parentheses are accepted."
     },
     {
       "id": "beta",
       "label": "Synthetic sideslip beta (rad)",
       "type": "number",
       "section": 2,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "output",
@@ -100,14 +100,14 @@
       "label": "Predicted rudder-deflection ratio if beta doubles",
       "type": "number",
       "section": 6,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "reference",
       "label": "Local rudder demand at beta=0.08 rad (rad)",
       "type": "number",
       "section": 7,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "boundary",
@@ -318,7 +318,7 @@
     }
   ],
   "hints": [
-    "The 16.7° crab angle is a wind-triangle heading offset, not rudder deflection or the synthetic beta.",
+    "The 16.7\u00b0 crab angle is a wind-triangle heading offset, not rudder deflection or the synthetic beta.",
     "Solve the signed local yaw balance: deltaR=-(CnBeta*beta+Cn0)/CnRudder. Check both sides of the travel range.",
     "Even a passing local yaw/travel case cannot establish coupled crosswind landing capability. Withhold that claim and identify the next evidence."
   ],
@@ -392,9 +392,9 @@
     "description": "Implement calculate(input) returning -(CnBeta*beta+Cn0)/CnRudder in rad. Require finite numeric inputs and nonzero CnRudder. Throw Error for invalid inputs. This local yaw balance cannot establish crosswind controllability."
   },
   "experience": {
-    "scenario": "The trainer now faces a 6 m/s crosswind at 20 m/s runway-axis airspeed. Wind-triangle geometry gives a 16.7° crab heading offset. This is not rudder deflection or sideslip.",
+    "scenario": "The trainer now faces a 6 m/s crosswind at 20 m/s runway-axis airspeed. Wind-triangle geometry gives a 16.7\u00b0 crab heading offset. This is not rudder deflection or sideslip.",
     "task": "Complete all twelve sections using the scenario and synthetic local balance below. Keep the local calculation separate from the operational crosswind decision.",
-    "method": "For the local teaching exercise only: CnBeta=0.10/rad, beta=0.08 rad, Cn0=0, CnRudder=−0.08/rad, rudder limits ±0.12 rad. Balance CnBeta×beta + CnRudder×deltaR + Cn0 = 0. The beta value is an independent sideslip scenario, not converted crab angle. No roll, lateral force, gust, de-crab, tire, clearance or workload model is supplied.",
+    "method": "For the local teaching exercise only: CnBeta=0.10/rad, beta=0.08 rad, Cn0=0, CnRudder=\u22120.08/rad, rudder limits \u00b10.12 rad. Balance CnBeta\u00d7beta + CnRudder\u00d7deltaR + Cn0 = 0. The beta value is an independent sideslip scenario, not converted crab angle. No roll, lateral force, gust, de-crab, tire, clearance or workload model is supplied.",
     "investigate": "Inspect baseline, doubled and reversed sideslip using your actual code. Record signed travel sufficiency, then identify missing evidence and consequences before deciding the operational claim.",
     "tools": "Use the built-in JavaScript editor. An existing coding assistant is optional.",
     "xLabel": "Synthetic sideslip (rad)",
@@ -407,16 +407,22 @@
         {
           "axis": "y",
           "value": -0.12,
-          "label": "Negative limit −0.12 rad"
+          "label": "Negative limit \u22120.12 rad"
         }
       ]
     },
     "variableKey": {
-      "CnBeta": "Yaw coefficient derivative with sideslip (rad⁻¹)",
+      "CnBeta": "Yaw coefficient derivative with sideslip (rad\u207b\u00b9)",
       "beta": "Independent sideslip angle (rad)",
       "Cn0": "Yaw coefficient offset (dimensionless)",
-      "CnRudder": "Yaw coefficient derivative with rudder (rad⁻¹)",
+      "CnRudder": "Yaw coefficient derivative with rudder (rad\u207b\u00b9)",
       "usableLimit": "Signed rudder limit magnitude (rad); applies in both directions"
+    },
+    "reflection": {
+      "included": "Your code checks a local yaw-moment balance and signed rudder travel for specified sideslip values.",
+      "omitted": "It does not simulate a gust, the time taken to respond, coupled roll motion or a crosswind landing.",
+      "question": "Before accepting a crosswind operating limit, which missing test or model would you investigate first, and why?",
+      "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
     }
   },
   "investigation": {
@@ -425,7 +431,7 @@
         "id": "0",
         "label": "Synthetic local yaw reference",
         "codeIndex": 0,
-        "prompt": "Record signed rudder demand and compare with BOTH ±0.12 rad limits. Distinguish local travel from missing operational evidence.",
+        "prompt": "Record signed rudder demand and compare with BOTH \u00b10.12 rad limits. Distinguish local travel from missing operational evidence.",
         "travelLimit": 0.12,
         "evidenceIndex": 0,
         "interpretationHint": "Compare the magnitude of your executed rudder demand with 0.12 rad in either direction."
@@ -434,7 +440,7 @@
         "id": "1",
         "label": "Doubled sideslip",
         "codeIndex": 1,
-        "prompt": "Record signed rudder demand and compare with BOTH ±0.12 rad limits. Distinguish local travel from missing operational evidence.",
+        "prompt": "Record signed rudder demand and compare with BOTH \u00b10.12 rad limits. Distinguish local travel from missing operational evidence.",
         "travelLimit": 0.12,
         "evidenceIndex": 0,
         "interpretationHint": "Compare the magnitude of your executed rudder demand with 0.12 rad in either direction."
@@ -443,7 +449,7 @@
         "id": "2",
         "label": "Reversed sideslip",
         "codeIndex": 2,
-        "prompt": "Record signed rudder demand and compare with BOTH ±0.12 rad limits. Distinguish local travel from missing operational evidence.",
+        "prompt": "Record signed rudder demand and compare with BOTH \u00b10.12 rad limits. Distinguish local travel from missing operational evidence.",
         "travelLimit": 0.12,
         "evidenceIndex": 0,
         "interpretationHint": "Compare the magnitude of your executed rudder demand with 0.12 rad in either direction."

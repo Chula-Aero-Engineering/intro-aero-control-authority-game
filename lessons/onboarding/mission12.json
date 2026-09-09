@@ -3,7 +3,7 @@
   "number": 12,
   "version": "3.0.0",
   "title": "Review uncertainty before retaining a claim",
-  "chapter": "§6.7–6.9 — uncertainty and technical review",
+  "chapter": "\u00a76.7\u20136.9 \u2014 uncertainty and technical review",
   "brief": "Make two bounded review decisions without mixing aircraft: the trainer pitch screen and the separate engine-out yaw screen. Explain why nominal success is not enough.",
   "missing": [
     11
@@ -11,7 +11,7 @@
   "supplied": [
     "Which control claims survive conservative uncertainty bounds in the trainer pitch case and the separate twin-engine yaw case?",
     "Conservative margin=(available-availableUncertainty)-(required+requiredUncertainty). For yaw: margin=(1-lossFraction)*8600-(1+demandIncrease)*7440.",
-    "Trainer chapter rounded screen: available=4000±300 N m; required=1350±200 N m. Separate yaw aircraft: nominal available=8600 N m and required=7440 N m; test 10% less capacity and 5% more demand.",
+    "Trainer chapter rounded screen: available=4000\u00b1300 N m; required=1350\u00b1200 N m. Separate yaw aircraft: nominal available=8600 N m and required=7440 N m; test 10% less capacity and 5% more demand.",
     "Nominal and conservative margins with a condition-specific decision for each aircraft.",
     "Use stated interval bounds, not a probability of safety. The chapter rounds trainer capacity to 4.00 kN m for this uncertainty example.",
     "Neither favorable static pitch arithmetic nor a nominal yaw pass establishes transient mission performance. Do not transfer evidence between the two aircraft.",
@@ -32,14 +32,14 @@
       "label": "Conservative trainer margin using chapter rounded inputs (N m)",
       "type": "number",
       "section": 11,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "yawMargin",
       "label": "Conservative yaw margin under both changes (N m)",
       "type": "number",
       "section": 11,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "trainerDecision",
@@ -150,7 +150,7 @@
   "experience": {
     "scenario": "Review two separate aircraft: the trainer pitch screen and the twin-engine yaw screen. Each needs its own conservative evidence and bounded decision.",
     "task": "Calculate both conservative margins, choose decisions and next evidence, then write an evidence-linked decision record.",
-    "method": "Use lowest available capacity minus highest demand. The trainer uses rounded 4000 ± 300 and 1350 ± 200 N m. The yaw case reduces capacity by 10% and increases demand by 5%. Interval bounds are not probabilities of safety.",
+    "method": "Use lowest available capacity minus highest demand. The trainer uses rounded 4000 \u00b1 300 and 1350 \u00b1 200 N m. The yaw case reduces capacity by 10% and increases demand by 5%. Interval bounds are not probabilities of safety.",
     "investigate": "Compare the trainer budget and yaw cases at 0%, 10% and 15% capacity loss, with the yaw demand increase fixed at 5%.",
     "tools": "Only this app and its calculation pad are needed.",
     "xLabel": "Yaw capacity loss (fraction)",
@@ -160,6 +160,12 @@
     "variableKey": {
       "lossFraction": "Fraction of yaw capacity lost (0.10 means 10%)",
       "demandIncrease": "Fractional yaw demand increase (0.05 means 5%)"
+    },
+    "reflection": {
+      "included": "The cases apply specified capacity losses and a demand increase to the separate pitch and yaw examples.",
+      "omitted": "They do not establish whether those percentages cover the uncertainty of either real aircraft.",
+      "question": "How would you determine whether the tested uncertainty percentages are large enough for the aircraft being assessed?",
+      "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
     }
   },
   "investigation": {

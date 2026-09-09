@@ -3,7 +3,7 @@
   "number": 10,
   "version": "3.0.0",
   "title": "Specify command and actuator limits",
-  "chapter": "§6.2–6.3, §6.6 — command, travel and actuator rate",
+  "chapter": "\u00a76.2\u20136.3, \u00a76.6 \u2014 command, travel and actuator rate",
   "brief": "Specify an instrument that separates available capacity, applied command, and actuator timing. Static capacity alone must not unlock a time-critical claim.",
   "missing": [
     9
@@ -11,12 +11,12 @@
   "supplied": [
     "Can a commanded elevator response be delivered within the available travel and time, while keeping capacity distinct from applied moment?",
     "M_applied=u*available; 0<=u<=1. Required normalized command=(Iy*target-other)/available. For this synthetic actuator case, timeNeeded=travelDeg/rateDegPerSec.",
-    "available=4002.48 N m; Iy=5000; target=0.12 rad/s²; other=-750 N m. Synthetic actuator demand travel=12 deg, rate=20 deg/s, deadline=0.4 s.",
+    "available=4002.48 N m; Iy=5000; target=0.12 rad/s\u00b2; other=-750 N m. Synthetic actuator demand travel=12 deg, rate=20 deg/s, deadline=0.4 s.",
     "Available capacity, applied moment (N m), normalized command, slew time (s), and separate static/rate statuses.",
     "The linear command map is a teaching approximation. Constant actuator slew rate ignores load dependence; no validated hinge-moment or pilot-force model is supplied.",
     "A favorable static moment margin does not establish timely delivery or real elevator aerodynamics.",
-    "Half command applies 2001.24 N m; capacity remains 4002.48 N m. The 12° movement takes 0.6 s and misses the 0.4 s deadline.",
-    "1350/4002.48≈0.33729 command for the initial acceleration target. 12/20=0.6 s; 0.6>0.4.",
+    "Half command applies 2001.24 N m; capacity remains 4002.48 N m. The 12\u00b0 movement takes 0.6 s and misses the 0.4 s deadline.",
+    "1350/4002.48\u22480.33729 command for the initial acceleration target. 12/20=0.6 s; 0.6>0.4.",
     "Check u=0, 0.5, 1; reject u outside [0,1]. Show that static capacity passes while the synthetic rate deadline fails.",
     null,
     "Sweep u and calculate applied moment and net initial acceleration. Independently compare actuator time with the declared deadline.",
@@ -35,14 +35,14 @@
       "label": "Maximum normalized command",
       "type": "number",
       "section": 9,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "applied",
       "label": "Displayed applied moment at half command (N m)",
       "type": "number",
       "section": 9,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "label",
@@ -57,10 +57,10 @@
     },
     {
       "id": "slew",
-      "label": "Time to move 12° at 20°/s (s)",
+      "label": "Time to move 12\u00b0 at 20\u00b0/s (s)",
       "type": "number",
       "section": 9,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "timely",
@@ -134,15 +134,15 @@
   "codeCases": null,
   "codeContract": null,
   "experience": {
-    "scenario": "The trainer may have enough static capacity but still miss an actuator deadline. A synthetic actuator must move 12° at 20°/s within 0.4 s.",
+    "scenario": "The trainer may have enough static capacity but still miss an actuator deadline. A synthetic actuator must move 12\u00b0 at 20\u00b0/s within 0.4 s.",
     "task": "Enter the command scale and label choices, compute half-command moment and movement time, then inspect the supplied instrument.",
-    "method": "Normalized command uses 0 = none, 0.5 = half, 1 = full (not 100). Applied moment = command × capacity. Capacity remains available even at zero command. Movement time = travel / slew rate; a positive static margin does not ensure timely delivery.",
+    "method": "Normalized command uses 0 = none, 0.5 = half, 1 = full (not 100). Applied moment = command \u00d7 capacity. Capacity remains available even at zero command. Movement time = travel / slew rate; a positive static margin does not ensure timely delivery.",
     "investigate": "Inspect zero, half and full command; compare actuator movement time against the deadline. Explain the distinct static and rate statuses. In the actuator panel, compare 20, 30 and 40 degrees per second with travel and deadline fixed. Record the equality case in your explanation.",
     "tools": "Only this app and its calculation pad are needed.",
-    "xLabel": "Normalized command (0–1)",
+    "xLabel": "Normalized command (0\u20131)",
     "yLabel": "Pitching moment (N m)",
     "seriesLabel": "Applied elevator moment",
-    "referenceLabel": "Available capacity — not demand",
+    "referenceLabel": "Available capacity \u2014 not demand",
     "plotExtras": {
       "referenceLines": [
         {
@@ -153,11 +153,11 @@
       ]
     },
     "variableKey": {
-      "u": "Applied normalized command (0–1)",
-      "available": "Available control moment capacity (N·m)",
-      "Iy": "Pitch moment of inertia (kg·m²)",
-      "other": "Other pitching moment, nose-up positive (N·m)",
-      "target": "Minimum initial pitch acceleration (rad/s²)"
+      "u": "Applied normalized command (0\u20131)",
+      "available": "Available control moment capacity (N\u00b7m)",
+      "Iy": "Pitch moment of inertia (kg\u00b7m\u00b2)",
+      "other": "Other pitching moment, nose-up positive (N\u00b7m)",
+      "target": "Minimum initial pitch acceleration (rad/s\u00b2)"
     },
     "timing": {
       "travel": 12,
@@ -168,6 +168,12 @@
         30,
         40
       ]
+    },
+    "reflection": {
+      "included": "The experiment checks moment capacity and estimates movement time from travel and a constant actuator rate.",
+      "omitted": "It does not include command delay, actuator acceleration or a reduction in speed under aerodynamic load.",
+      "question": "What actuator measurements under load would you need before trusting the predicted time to reach the requested deflection?",
+      "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
     }
   },
   "investigation": {
@@ -202,7 +208,7 @@
           {
             "label": "Initial acceleration",
             "expression": "(u*available+other)/Iy",
-            "unit": "rad/s²"
+            "unit": "rad/s\u00b2"
           },
           {
             "label": "Actuator movement time",
@@ -257,7 +263,7 @@
           {
             "label": "Initial acceleration",
             "expression": "(u*available+other)/Iy",
-            "unit": "rad/s²"
+            "unit": "rad/s\u00b2"
           },
           {
             "label": "Actuator movement time",
@@ -312,7 +318,7 @@
           {
             "label": "Initial acceleration",
             "expression": "(u*available+other)/Iy",
-            "unit": "rad/s²"
+            "unit": "rad/s\u00b2"
           },
           {
             "label": "Actuator movement time",

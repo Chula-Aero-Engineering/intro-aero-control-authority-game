@@ -3,15 +3,15 @@
   "number": 9,
   "version": "3.0.0",
   "title": "Catch an unsafe authority calculator",
-  "chapter": "§6.7–6.8 — reproducible verification",
+  "chapter": "\u00a76.7\u20136.8 \u2014 reproducible verification",
   "brief": "Write verification expectations that expose control-authority bugs. The plotted candidate deliberately uses the wrong opposing-moment sign.",
   "missing": [
     8
   ],
   "supplied": [
     "Which tests distinguish a correct pitch-authority calculator from a wrong opposing-moment sign, linear speed scaling, or input acceptance bug?",
-    "M_available=0.5*rho*V²*S*c*dCm; M_required=Iy*target-other; margin=M_available-M_required; initial acceleration=(M_available+other)/Iy at full command.",
-    "900 kg trainer; rho=1.20 kg/m³; V=20 m/s; S=27.25 m²; c=4 m; usable dCm=0.153; Iy=5000 kg m²; other=-750 N m; target=0.12 rad/s². Nose-up moment is positive about the declared CG.",
+    "M_available=0.5*rho*V\u00b2*S*c*dCm; M_required=Iy*target-other; margin=M_available-M_required; initial acceleration=(M_available+other)/Iy at full command.",
+    "900 kg trainer; rho=1.20 kg/m\u00b3; V=20 m/s; S=27.25 m\u00b2; c=4 m; usable dCm=0.153; Iy=5000 kg m\u00b2; other=-750 N m; target=0.12 rad/s\u00b2. Nose-up moment is positive about the declared CG.",
     "Numerical verification cases, speed ratio, boundary rejection and insufficient-authority detection.",
     "All reference cases use the same sign convention and compatible reference dimensions. Cases intentionally probe independent implementation errors.",
     "Initial single-axis pitch screen at the declared condition. Constant coefficients and inertia. No proof of successful takeoff, ground clearance, stall recovery, or safe landing.",
@@ -38,21 +38,21 @@
       "label": "Expected required moment with other=-750 (N m)",
       "type": "number",
       "section": 8,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "ratio",
       "label": "Expected available(40 m/s)/available(20 m/s)",
       "type": "number",
       "section": 8,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "zero",
       "label": "Expected margin when usable dCm=0 (N m)",
       "type": "number",
       "section": 8,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "invalid",
@@ -94,7 +94,7 @@
     {
       "field": "ratio",
       "expected": 4,
-      "message": "This catches replacing V² with V.",
+      "message": "This catches replacing V\u00b2 with V.",
       "tolerance": 0.01
     },
     {
@@ -146,14 +146,20 @@
     "seriesLabel": "Deliberately faulty calculator",
     "referenceLabel": "Correct calculation",
     "variableKey": {
-      "rho": "Air density (kg/m³)",
+      "rho": "Air density (kg/m\u00b3)",
       "V": "Freestream speed (m/s)",
-      "S": "Reference wing area (m²)",
+      "S": "Reference wing area (m\u00b2)",
       "c": "Reference chord (m)",
       "dCm": "Usable pitching coefficient increment (dimensionless)",
-      "Iy": "Pitch moment of inertia (kg·m²)",
-      "other": "Other pitching moment, nose-up positive (N·m)",
-      "target": "Minimum initial pitch acceleration (rad/s²)"
+      "Iy": "Pitch moment of inertia (kg\u00b7m\u00b2)",
+      "other": "Other pitching moment, nose-up positive (N\u00b7m)",
+      "target": "Minimum initial pitch acceleration (rad/s\u00b2)"
+    },
+    "reflection": {
+      "included": "The test cases check selected sign conventions, speed scaling, zero authority and invalid input handling.",
+      "omitted": "Passing these examples does not prove that every possible input is handled correctly.",
+      "question": "Propose one additional test input and explain what error it could reveal that the existing cases might miss.",
+      "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
     }
   },
   "investigation": {

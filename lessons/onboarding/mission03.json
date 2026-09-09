@@ -3,8 +3,8 @@
   "number": 3,
   "version": "3.0.0",
   "title": "Respect derivative units and usable travel",
-  "chapter": "§6.3 — Worked Example A",
-  "brief": "Enter the signed inputs from Worked Example A: −1.05 rad⁻¹, required ΔCm=−0.25, and +18° usable travel. Avoid the factor-of-57.3 unit error.",
+  "chapter": "\u00a76.3 \u2014 Worked Example A",
+  "brief": "Enter the signed inputs from Worked Example A: \u22121.05 rad\u207b\u00b9, required \u0394Cm=\u22120.25, and +18\u00b0 usable travel. Avoid the factor-of-57.3 unit error.",
   "missing": [
     2
   ],
@@ -34,21 +34,21 @@
       "label": "Effectiveness derivative (per radian)",
       "type": "number",
       "section": 2,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "demand",
       "label": "Required signed coefficient increment",
       "type": "number",
       "section": 2,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.0001. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "usableLimit",
       "label": "Positive usable travel limit (deg)",
       "type": "number",
       "section": 2,
-      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: \u00b10.01. Keep the sign; enter ratios as fractions, not percentages."
     },
     {
       "id": "explanation2",
@@ -98,10 +98,10 @@
   "codeCases": null,
   "codeContract": null,
   "experience": {
-    "scenario": "This signed elevator example asks for a negative pitching-moment coefficient increment of −0.25, with a local derivative of −1.05 per radian and usable positive travel of 18°.",
+    "scenario": "This signed elevator example asks for a negative pitching-moment coefficient increment of \u22120.25, with a local derivative of \u22121.05 per radian and usable positive travel of 18\u00b0.",
     "task": "Enter the three given signed inputs. Then verify the resulting direction and units by comparing demands.",
-    "method": "A derivative is the change in coefficient per unit deflection. Here positive elevator deflection produces negative coefficient change. Divide demand by the per-radian derivative to obtain radians, then multiply by 180/π for degrees. The usable stop is not a guarantee that the local derivative remains valid.",
-    "investigate": "Compare demands −0.25 and −0.35. Explain which exceeds usable travel and why a sign error changes direction rather than improving authority.",
+    "method": "A derivative is the change in coefficient per unit deflection. Here positive elevator deflection produces negative coefficient change. Divide demand by the per-radian derivative to obtain radians, then multiply by 180/\u03c0 for degrees. The usable stop is not a guarantee that the local derivative remains valid.",
+    "investigate": "Compare demands \u22120.25 and \u22120.35. Explain which exceeds usable travel and why a sign error changes direction rather than improving authority.",
     "tools": "Only this app and its calculation pad are needed.",
     "xLabel": "Coefficient demand (dimensionless)",
     "yLabel": "Elevator deflection (deg)",
@@ -109,9 +109,15 @@
     "referenceLabel": "Positive usable travel",
     "variableKey": {
       "demand": "Signed pitching coefficient demand (dimensionless)",
-      "slope": "Signed coefficient derivative per elevator radian (rad⁻¹)",
-      "pi": "π, radians-to-degrees conversion constant",
+      "slope": "Signed coefficient derivative per elevator radian (rad\u207b\u00b9)",
+      "pi": "\u03c0, radians-to-degrees conversion constant",
       "usableLimit": "Usable deflection limit (deg)"
+    },
+    "reflection": {
+      "included": "The calculation uses a constant coefficient change per radian of elevator deflection and checks the required angle against the usable travel limit.",
+      "omitted": "It does not test whether that constant effectiveness remains accurate near the travel limit.",
+      "question": "What measurements would you need before trusting the same elevator effectiveness near the travel limit?",
+      "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
     }
   },
   "investigation": {

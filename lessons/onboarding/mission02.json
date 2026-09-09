@@ -159,6 +159,12 @@
       "deltaT": "Lost thrust magnitude (N)",
       "y": "Perpendicular lateral engine arm (m)",
       "available": "Available control moment capacity (N\u00b7m)"
+    },
+    "reflection": {
+      "included": "The model balances signed engine-out and rudder moments, with a maximum opposing rudder capacity.",
+      "omitted": "It assumes the required rudder moment appears immediately; it does not model actuator delay or the yaw rate that develops before balance.",
+      "question": "If the rudder takes time to move after the engine fails, what would you need to model to determine how far the nose turns before the moments balance?",
+      "help": "Use one specific detail from this investigation. Explain what you would check next and why it matters; you do not need to perform that new test here."
     }
   },
   "investigation": {
