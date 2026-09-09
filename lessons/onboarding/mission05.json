@@ -36,15 +36,15 @@
   "fields": [
     {
       "id": "assumption",
-      "label": "Assumption in the unadjusted estimate",
+      "label": "What does the original estimate assume about airflow at the elevator?",
       "type": "select",
       "options": [
-        "Effector local speed equals freestream",
+        "It assumes airflow at the elevator has the same speed as the undisturbed airflow.",
         "Control moment is independent of speed",
         "Pitch inertia is zero"
       ],
       "section": 4,
-      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+      "help": "The original estimate uses the aircraft flight speed to calculate elevator authority. Identify the assumption this makes; you are not being asked whether it is always true. The wing wake or propeller flow can change the local airspeed."
     },
     {
       "id": "consequence",
@@ -76,8 +76,8 @@
   "checks": [
     {
       "field": "assumption",
-      "expected": "Effector local speed equals freestream",
-      "message": "Identify which speed entered dynamic pressure.",
+      "expected": "It assumes airflow at the elevator has the same speed as the undisturbed airflow.",
+      "message": "The original estimate substitutes flight speed for local elevator airspeed. This is a modeling assumption, not a verified fact about the aircraft.",
       "tolerance": 1e-06
     },
     {
