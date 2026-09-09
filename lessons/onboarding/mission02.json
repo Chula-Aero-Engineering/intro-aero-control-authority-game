@@ -160,7 +160,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain how the perpendicular arm and selected effector affect the yaw claim."
+        "prompt": "Explain how the perpendicular arm and selected effector affect the yaw claim.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare lost-thrust moment with available rudder capacity; both must use N m."
       },
       {
         "id": "2400",
@@ -193,7 +195,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain how the perpendicular arm and selected effector affect the yaw claim."
+        "prompt": "Explain how the perpendicular arm and selected effector affect the yaw claim.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare lost-thrust moment with available rudder capacity; both must use N m."
       },
       {
         "id": "4800",
@@ -226,7 +230,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain how the perpendicular arm and selected effector affect the yaw claim."
+        "prompt": "Explain how the perpendicular arm and selected effector affect the yaw claim.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare lost-thrust moment with available rudder capacity; both must use N m."
       }
     ],
     "required": [

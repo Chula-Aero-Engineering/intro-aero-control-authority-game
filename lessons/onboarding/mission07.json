@@ -321,7 +321,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?"
+        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       },
       {
         "id": "1",
@@ -366,11 +368,13 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
-        "predictionField": "lowSpeed"
+        "predictionField": "lowSpeed",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       },
       {
         "id": "2",
-        "label": "Synthetic insufficient speed: 10 m/s",
+        "label": "Synthetic speed: 10 m/s",
         "inputs": {
           "rho": 1.2,
           "V": 10,
@@ -411,7 +415,9 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
-        "predictionField": "veryLowSpeed"
+        "predictionField": "veryLowSpeed",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       },
       {
         "id": "3",
@@ -456,7 +462,9 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
-        "predictionField": "inertia"
+        "predictionField": "inertia",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       },
       {
         "id": "4",
@@ -501,7 +509,9 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
-        "predictionField": "opposition"
+        "predictionField": "opposition",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       },
       {
         "id": "5",
@@ -546,7 +556,9 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
-        "predictionField": "degraded"
+        "predictionField": "degraded",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare the signed moment margin with zero, then explain which side of the budget changed."
       }
     ],
     "required": [

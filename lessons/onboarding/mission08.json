@@ -197,13 +197,15 @@
           }
         ],
         "comparison": {
-          "left": "arm",
-          "right": "0",
-          "op": "gte",
-          "pass": "Scale comparison only",
-          "fail": "Scale comparison only"
+          "left": "0.5*rho*V^2*S*c*dCm/arm",
+          "right": "0.5*rho*V^2*S*c*dCm/4",
+          "op": "eq",
+          "pass": "Equal to the 4 m benchmark",
+          "fail": "Different from the 4 m benchmark"
         },
-        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption."
+        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption.",
+        "evidenceIndex": 3,
+        "interpretationHint": "Compare force at this assumed arm with the 4 m benchmark. Describe the direction of change, not an aerodynamic approval."
       },
       {
         "id": "4",
@@ -239,13 +241,15 @@
           }
         ],
         "comparison": {
-          "left": "arm",
-          "right": "0",
-          "op": "gte",
-          "pass": "Scale comparison only",
-          "fail": "Scale comparison only"
+          "left": "0.5*rho*V^2*S*c*dCm/arm",
+          "right": "0.5*rho*V^2*S*c*dCm/4",
+          "op": "eq",
+          "pass": "Equal to the 4 m benchmark",
+          "fail": "Different from the 4 m benchmark"
         },
-        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption."
+        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption.",
+        "evidenceIndex": 3,
+        "interpretationHint": "Compare force at this assumed arm with the 4 m benchmark. Describe the direction of change, not an aerodynamic approval."
       },
       {
         "id": "5",
@@ -281,13 +285,15 @@
           }
         ],
         "comparison": {
-          "left": "arm",
-          "right": "0",
-          "op": "gte",
-          "pass": "Scale comparison only",
-          "fail": "Scale comparison only"
+          "left": "0.5*rho*V^2*S*c*dCm/arm",
+          "right": "0.5*rho*V^2*S*c*dCm/4",
+          "op": "eq",
+          "pass": "Equal to the 4 m benchmark",
+          "fail": "Different from the 4 m benchmark"
         },
-        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption."
+        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption.",
+        "evidenceIndex": 3,
+        "interpretationHint": "Compare force at this assumed arm with the 4 m benchmark. Describe the direction of change, not an aerodynamic approval."
       }
     ],
     "required": [

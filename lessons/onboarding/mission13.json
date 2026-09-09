@@ -426,21 +426,27 @@
         "label": "Synthetic local yaw reference",
         "codeIndex": 0,
         "prompt": "Record signed rudder demand and compare with BOTH ±0.12 rad limits. Distinguish local travel from missing operational evidence.",
-        "travelLimit": 0.12
+        "travelLimit": 0.12,
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare the magnitude of your executed rudder demand with 0.12 rad in either direction."
       },
       {
         "id": "1",
-        "label": "Doubled sideslip demands twice the rudder",
+        "label": "Doubled sideslip",
         "codeIndex": 1,
         "prompt": "Record signed rudder demand and compare with BOTH ±0.12 rad limits. Distinguish local travel from missing operational evidence.",
-        "travelLimit": 0.12
+        "travelLimit": 0.12,
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare the magnitude of your executed rudder demand with 0.12 rad in either direction."
       },
       {
         "id": "2",
-        "label": "Reversed sideslip reverses rudder",
+        "label": "Reversed sideslip",
         "codeIndex": 2,
         "prompt": "Record signed rudder demand and compare with BOTH ±0.12 rad limits. Distinguish local travel from missing operational evidence.",
-        "travelLimit": 0.12
+        "travelLimit": 0.12,
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare the magnitude of your executed rudder demand with 0.12 rad in either direction."
       }
     ],
     "required": [

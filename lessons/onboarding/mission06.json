@@ -125,9 +125,9 @@
   "codeCases": null,
   "codeContract": null,
   "experience": {
-    "scenario": "The local elevator slope is qualified only from −10° to +10°. Usable travel reaches +18°, but the requested 13.64° lies outside the qualified fit. Synthetic nonlinear observations are supplied.",
+    "scenario": "The local elevator slope is qualified from −10° to +10°. Usable travel reaches +18°. Evaluate the requested 13.64° against the fit interval and compare the supplied synthetic nonlinear observations with demand.",
     "task": "Enter the fit limits and distinguish model qualification from available travel and from measured response sufficiency.",
-    "method": "A travel stop describes permitted motion; a fit interval describes where a model was qualified. Compare the local tangent with the supplied observations and the −0.25 demand. More negative response has larger negative-moment magnitude. No observation at 13.64° is supplied: the tangent there is an unqualified estimate.",
+    "method": "A travel stop describes permitted motion; a fit interval describes where a model was qualified. Compare the local tangent with the supplied observations and the −0.25 demand. More negative response has larger negative-moment magnitude. No observation at 13.64° is supplied: assess the tangent there against the qualified fit interval.",
     "investigate": "Inspect 10°, the requested 13.64°, and 18°. Record model qualification separately from the nonlinear evidence and demand.",
     "tools": "Only this app and its calculation pad are needed.",
     "xLabel": "Elevator deflection (deg)",
@@ -205,7 +205,9 @@
           "fail": "Outside qualified fit"
         },
         "prompt": "Distinguish qualified fit, available travel, and whether the supplied nonlinear data meet demand.",
-        "evidenceNote": "No nonlinear interpolation is claimed. The supplied most-negative observation is −0.21 at 18°, short of −0.25."
+        "evidenceNote": "No nonlinear interpolation is claimed. Compare only the supplied observations with the requirement.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare this deflection with the qualified ±10° fit interval. Separately compare observed coefficient with the demand."
       },
       {
         "id": "13.64",
@@ -241,7 +243,9 @@
           "fail": "Outside qualified fit"
         },
         "prompt": "Distinguish qualified fit, available travel, and whether the supplied nonlinear data meet demand.",
-        "evidenceNote": "No nonlinear interpolation is claimed. The supplied most-negative observation is −0.21 at 18°, short of −0.25."
+        "evidenceNote": "No nonlinear interpolation is claimed. Compare only the supplied observations with the requirement.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare this deflection with the qualified ±10° fit interval. Separately compare observed coefficient with the demand."
       },
       {
         "id": "18",
@@ -278,7 +282,9 @@
           "fail": "Outside qualified fit"
         },
         "prompt": "Distinguish qualified fit, available travel, and whether the supplied nonlinear data meet demand.",
-        "evidenceNote": "No nonlinear interpolation is claimed. The supplied most-negative observation is −0.21 at 18°, short of −0.25."
+        "evidenceNote": "No nonlinear interpolation is claimed. Compare only the supplied observations with the requirement.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare this deflection with the qualified ±10° fit interval. Separately compare observed coefficient with the demand."
       }
     ],
     "required": [

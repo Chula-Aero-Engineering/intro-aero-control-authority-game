@@ -137,7 +137,7 @@
     "scenario": "The trainer needs to begin pitching nose-up at 20 m/s. Its elevator must overcome a nose-down moment and achieve an initial angular acceleration of at least 0.12 rad/s².",
     "task": "Write a question naming the aircraft condition, elevator, measured initial response and minimum requirement. You are defining success, not calculating a new target.",
     "method": "Use the frame: At [condition], can [control] produce [response] of at least [requirement]? Initial angular acceleration is a change in rotation rate, not pitch angle or takeoff distance. Equality meets a minimum requirement.",
-    "investigate": "Compare the trainer at 20, 14 and 10 m/s. Which conditions meet the initial acceleration demand, and why can this not answer whether the aircraft takes off safely?",
+    "investigate": "Compare the trainer at 20, 14 and 10 m/s. Use the slow-motion replay and pitch-angle-versus-time graph. For each case, record the initial acceleration, decide whether it meets the specified minimum, and explain your comparison. What additional evidence would be needed for a takeoff claim?",
     "tools": "Only this app and its calculation pad are needed.",
     "xLabel": "Airspeed (m/s)",
     "yLabel": "Initial pitch acceleration (rad/s²)",
@@ -184,16 +184,23 @@
             "label": "Full-command initial acceleration",
             "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
             "unit": "rad/s²"
+          },
+          {
+            "label": "Specified minimum initial acceleration",
+            "expression": "target",
+            "unit": "rad/s²"
           }
         ],
         "comparison": {
-          "left": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
-          "right": "0",
+          "left": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
+          "right": "target",
           "op": "gte",
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare initial acceleration with 0.12 rad/s². Why does this not establish takeoff?"
+        "prompt": "Compare initial acceleration with 0.12 rad/s². Why does this not establish takeoff?",
+        "evidenceIndex": 3,
+        "interpretationHint": "Compare the full-command initial acceleration with the specified minimum, 0.12 rad/s². Equality meets this minimum."
       },
       {
         "id": "14",
@@ -221,16 +228,23 @@
             "label": "Full-command initial acceleration",
             "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
             "unit": "rad/s²"
+          },
+          {
+            "label": "Specified minimum initial acceleration",
+            "expression": "target",
+            "unit": "rad/s²"
           }
         ],
         "comparison": {
-          "left": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
-          "right": "0",
+          "left": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
+          "right": "target",
           "op": "gte",
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare initial acceleration with 0.12 rad/s². Why does this not establish takeoff?"
+        "prompt": "Compare initial acceleration with 0.12 rad/s². Why does this not establish takeoff?",
+        "evidenceIndex": 3,
+        "interpretationHint": "Compare the full-command initial acceleration with the specified minimum, 0.12 rad/s². Equality meets this minimum."
       },
       {
         "id": "10",
@@ -258,16 +272,23 @@
             "label": "Full-command initial acceleration",
             "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
             "unit": "rad/s²"
+          },
+          {
+            "label": "Specified minimum initial acceleration",
+            "expression": "target",
+            "unit": "rad/s²"
           }
         ],
         "comparison": {
-          "left": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
-          "right": "0",
+          "left": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
+          "right": "target",
           "op": "gte",
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare initial acceleration with 0.12 rad/s². Why does this not establish takeoff?"
+        "prompt": "Compare initial acceleration with 0.12 rad/s². Why does this not establish takeoff?",
+        "evidenceIndex": 3,
+        "interpretationHint": "Compare the full-command initial acceleration with the specified minimum, 0.12 rad/s². Equality meets this minimum."
       }
     ],
     "required": [

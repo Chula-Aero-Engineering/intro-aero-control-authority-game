@@ -223,7 +223,9 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Explain the applied moment and the separate rate failure: 0.6 s exceeds the 0.4 s deadline.",
-        "evidenceNote": "Static capacity can meet demand, but this synthetic actuator always misses the stated deadline. Linear command and constant slew rate are teaching assumptions."
+        "evidenceNote": "Linear command and constant slew rate are teaching assumptions. Compare the displayed movement time and deadline separately.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare applied moment with required moment, not with maximum capacity. Assess the actuator deadline separately."
       },
       {
         "id": "0.5",
@@ -276,7 +278,9 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Explain the applied moment and the separate rate failure: 0.6 s exceeds the 0.4 s deadline.",
-        "evidenceNote": "Static capacity can meet demand, but this synthetic actuator always misses the stated deadline. Linear command and constant slew rate are teaching assumptions."
+        "evidenceNote": "Linear command and constant slew rate are teaching assumptions. Compare the displayed movement time and deadline separately.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare applied moment with required moment, not with maximum capacity. Assess the actuator deadline separately."
       },
       {
         "id": "1",
@@ -329,7 +333,9 @@
           "fail": "Insufficient authority"
         },
         "prompt": "Explain the applied moment and the separate rate failure: 0.6 s exceeds the 0.4 s deadline.",
-        "evidenceNote": "Static capacity can meet demand, but this synthetic actuator always misses the stated deadline. Linear command and constant slew rate are teaching assumptions."
+        "evidenceNote": "Linear command and constant slew rate are teaching assumptions. Compare the displayed movement time and deadline separately.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare applied moment with required moment, not with maximum capacity. Assess the actuator deadline separately."
       }
     ],
     "required": [

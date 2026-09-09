@@ -188,7 +188,9 @@
           "pass": "Expected result catches defect",
           "fail": "Revise expected result"
         },
-        "prompt": "Which sign rule does this test enforce?"
+        "prompt": "Which sign rule does this test enforce?",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare your expected result with the two candidate results. Explain which defect the expectation would catch."
       },
       {
         "id": "speed",
@@ -221,7 +223,9 @@
           "pass": "Expected result catches defect",
           "fail": "Revise expected result"
         },
-        "prompt": "Explain why doubling speed does not merely double capacity."
+        "prompt": "Explain why doubling speed does not merely double capacity.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare your expected result with the two candidate results. Explain which defect the expectation would catch."
       },
       {
         "id": "zero",
@@ -253,7 +257,9 @@
           "pass": "Expected result catches defect",
           "fail": "Revise expected result"
         },
-        "prompt": "Why is negative margin a valid result?"
+        "prompt": "Why is negative margin a valid result?",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare your expected result with the two candidate results. Explain which defect the expectation would catch."
       },
       {
         "id": "invalid",
@@ -284,7 +290,9 @@
           "answerField": "invalid",
           "expected": "Reject invalid input"
         },
-        "prompt": "Why must this input be rejected rather than classified as an aircraft failure?"
+        "prompt": "Why must this input be rejected rather than classified as an aircraft failure?",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare your expected result with the two candidate results. Explain which defect the expectation would catch."
       }
     ],
     "required": [

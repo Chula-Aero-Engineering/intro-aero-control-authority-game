@@ -180,7 +180,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?"
+        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       },
       {
         "id": "1350",
@@ -222,7 +224,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?"
+        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       },
       {
         "id": "2000",
@@ -264,7 +268,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?"
+        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare available minus required moment with zero. Trim and stability answer different questions."
       }
     ],
     "required": [

@@ -298,19 +298,25 @@
         "id": "0",
         "label": "Trainer baseline",
         "codeIndex": 0,
-        "prompt": "Use the actual input and output to explain whether the implementation handles this case, including valid insufficiency versus invalid input."
+        "prompt": "Use the actual input and output to explain whether the implementation handles this case, including valid insufficiency versus invalid input.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Use your actual returned signed margin to classify authority. For invalid inertia, inspect whether the function rejected input."
       },
       {
         "id": "2",
-        "label": "10 m/s: valid insufficient authority",
+        "label": "10 m/s input",
         "codeIndex": 2,
-        "prompt": "Use the actual input and output to explain whether the implementation handles this case, including valid insufficiency versus invalid input."
+        "prompt": "Use the actual input and output to explain whether the implementation handles this case, including valid insufficiency versus invalid input.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Use your actual returned signed margin to classify authority. For invalid inertia, inspect whether the function rejected input."
       },
       {
         "id": "7",
-        "label": "Reject zero inertia",
+        "label": "Zero inertia input",
         "codeIndex": 7,
-        "prompt": "Use the actual input and output to explain whether the implementation handles this case, including valid insufficiency versus invalid input."
+        "prompt": "Use the actual input and output to explain whether the implementation handles this case, including valid insufficiency versus invalid input.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Use your actual returned signed margin to classify authority. For invalid inertia, inspect whether the function rejected input."
       }
     ],
     "required": [

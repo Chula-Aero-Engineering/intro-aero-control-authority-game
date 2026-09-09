@@ -207,7 +207,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Name the supported pitch claim, its limit and the next evidence needed."
+        "prompt": "Name the supported pitch claim, its limit and the next evidence needed.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare lowest capacity minus highest demand with zero; distinguish this bound from a probability."
       },
       {
         "id": "0",
@@ -259,7 +261,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare with zero and explain why the nominal margin cannot approve the operational claim."
+        "prompt": "Compare with zero and explain why the nominal margin cannot approve the operational claim.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare lowest capacity minus highest demand with zero; distinguish this bound from a probability."
       },
       {
         "id": "0.1",
@@ -311,7 +315,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare with zero and explain why the nominal margin cannot approve the operational claim."
+        "prompt": "Compare with zero and explain why the nominal margin cannot approve the operational claim.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare lowest capacity minus highest demand with zero; distinguish this bound from a probability."
       },
       {
         "id": "0.15",
@@ -363,7 +369,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Compare with zero and explain why the nominal margin cannot approve the operational claim."
+        "prompt": "Compare with zero and explain why the nominal margin cannot approve the operational claim.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare lowest capacity minus highest demand with zero; distinguish this bound from a probability."
       }
     ],
     "required": [

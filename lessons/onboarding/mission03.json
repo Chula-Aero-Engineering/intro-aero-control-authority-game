@@ -153,7 +153,9 @@
           "min": 0,
           "directionFailure": "Wrong direction for declared positive travel"
         },
-        "prompt": "Explain the sign and conversion before interpreting the travel limit."
+        "prompt": "Explain the sign and conversion before interpreting the travel limit.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Check the sign first, then compare the required positive deflection with the usable travel."
       },
       {
         "id": "-0.35",
@@ -192,7 +194,9 @@
           "min": 0,
           "directionFailure": "Wrong direction for declared positive travel"
         },
-        "prompt": "Explain the sign and conversion before interpreting the travel limit."
+        "prompt": "Explain the sign and conversion before interpreting the travel limit.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Check the sign first, then compare the required positive deflection with the usable travel."
       }
     ],
     "required": [

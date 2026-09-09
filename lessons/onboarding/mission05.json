@@ -171,7 +171,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain the square of the speed ratio and what evidence would replace this teaching assumption."
+        "prompt": "Explain the square of the speed ratio and what evidence would replace this teaching assumption.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare adjusted capacity with demand at this local-flow factor."
       },
       {
         "id": "0.7",
@@ -208,7 +210,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain the square of the speed ratio and what evidence would replace this teaching assumption."
+        "prompt": "Explain the square of the speed ratio and what evidence would replace this teaching assumption.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare adjusted capacity with demand at this local-flow factor."
       },
       {
         "id": "0.5",
@@ -245,7 +249,9 @@
           "pass": "Requirement met",
           "fail": "Insufficient authority"
         },
-        "prompt": "Explain the square of the speed ratio and what evidence would replace this teaching assumption."
+        "prompt": "Explain the square of the speed ratio and what evidence would replace this teaching assumption.",
+        "evidenceIndex": 0,
+        "interpretationHint": "Compare adjusted capacity with demand at this local-flow factor."
       }
     ],
     "required": [
