@@ -1,7 +1,7 @@
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 const run=promisify(execFile);
-export const templateRepo=process.env.COURSE_TEMPLATE_REPO||'vtaerodoctor-hokie/intro-aero-control-authority-game-test';
+export const templateRepo=process.env.COURSE_TEMPLATE_REPO||'vtaerodoctor-hokie/intro-aero-control-authority-game';
 export async function publicGithub(endpoint){
  // gh uses the instructor's existing GitHub login; no App or student authorization.
  // This process reads JSON only. It never clones or executes student repositories.
