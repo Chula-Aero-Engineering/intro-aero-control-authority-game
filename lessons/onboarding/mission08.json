@@ -1,0 +1,299 @@
+{
+  "id": "mission08",
+  "number": 8,
+  "version": "3.0.0",
+  "title": "Back-check the trainer moment budget",
+  "chapter": "§6.1, §6.4, §6.9 — sign, dimensions and force scale",
+  "brief": "Reproduce the chapter trainer budget independently, then check the equivalent force using an explicitly assumed arm.",
+  "missing": [
+    7
+  ],
+  "supplied": [
+    "Can an independent reference calculation reproduce the trainer pitch margin and expose the implied force scale?",
+    "M_available=0.5*rho*V²*S*c*dCm; M_required=Iy*target-other; margin=M_available-M_required; initial acceleration=(M_available+other)/Iy at full command. Equivalent-force order check: F_equiv=M_available/arm.",
+    "900 kg trainer; rho=1.20 kg/m³; V=20 m/s; S=27.25 m²; c=4 m; usable dCm=0.153; Iy=5000 kg m²; other=-750 N m; target=0.12 rad/s². Nose-up moment is positive about the declared CG. For the order check only, assume a perpendicular arm of 4.0 m.",
+    "Required and available moment, nominal margin (N m), and equivalent force scale (N).",
+    "The coefficient uses aircraft reference area and chord. The assumed arm is not a validated tail geometry or aerodynamic model.",
+    "Initial single-axis pitch screen at the declared condition. Constant coefficients and inertia. No proof of successful takeoff, ground clearance, stall recovery, or safe landing.",
+    "A negative opposing moment increases the required control moment; the equivalent-force calculation is a scale check, not independent aerodynamic validation.",
+    null,
+    "Check units at each step: dynamic pressure in Pa, moment in N m and equivalent force in N. A negative other moment must increase demand. Compare your results with the bench after running; accepted error is ±0.01 N m or N.",
+    "Label equivalent force with its assumed arm; distinguish exact arithmetic from rounded chapter reporting.",
+    "Compute the trainer budget, then divide available moment by each displayed assumed arm to inspect scale sensitivity.",
+    "Retain the nominal arithmetic screen; independently establish coefficient applicability, actual local flow, arm and actuator constraints."
+  ],
+  "variables": {
+    "rho": 1.2,
+    "V": 20,
+    "S": 27.25,
+    "c": 4,
+    "dCm": 0.153,
+    "Iy": 5000,
+    "other": -750,
+    "target": 0.12,
+    "arm": 4
+  },
+  "fields": [
+    {
+      "id": "required",
+      "label": "Reference required moment (N m)",
+      "type": "number",
+      "section": 7,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "available",
+      "label": "Reference available moment (N m)",
+      "type": "number",
+      "section": 7,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "margin",
+      "label": "Reference margin (N m)",
+      "type": "number",
+      "section": 7,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "force",
+      "label": "Equivalent force for assumed 4 m arm (N)",
+      "type": "number",
+      "section": 7,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "meaning",
+      "label": "What the force calculation establishes",
+      "type": "select",
+      "options": [
+        "Order-of-magnitude check only",
+        "Independent tail-aerodynamics validation"
+      ],
+      "section": 7,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "explanation7",
+      "label": "Explain the reasoning for manual reference",
+      "type": "text",
+      "section": 7,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "working",
+      "type": "text",
+      "section": 7,
+      "label": "Show your calculation steps",
+      "help": "Show substitutions for dynamic pressure, available moment, required moment, margin and equivalent force. Units are required in your written working."
+    }
+  ],
+  "checks": [
+    {
+      "field": "required",
+      "expected": 1350,
+      "message": "Subtract the negative opposing moment.",
+      "tolerance": 0.01
+    },
+    {
+      "field": "available",
+      "expected": 4002.48,
+      "message": "Use dynamic pressure 240 Pa and the aircraft reference dimensions.",
+      "tolerance": 0.01
+    },
+    {
+      "field": "margin",
+      "expected": 2652.48,
+      "message": "Subtract compatible required moment from available moment.",
+      "tolerance": 0.01
+    },
+    {
+      "field": "force",
+      "expected": 1000.62,
+      "message": "Divide by the explicitly assumed 4 m arm.",
+      "tolerance": 0.01
+    },
+    {
+      "field": "meaning",
+      "expected": "Order-of-magnitude check only",
+      "message": "Rearranging the same estimate is not independent validation.",
+      "tolerance": 1e-06
+    }
+  ],
+  "hints": [
+    "Required moment is Iy*target-other; other is already signed.",
+    "q=240 Pa and q*S*c*dCm=4002.48 N m.",
+    "Dividing by 4 m gives 1000.62 N; this checks scale, not tail validity."
+  ],
+  "sweep": {
+    "variable": "arm",
+    "values": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "expression": "0.5*rho*V^2*S*c*dCm/arm",
+    "reference": "1000.62",
+    "units": "Assumed perpendicular arm in m; equivalent force in N."
+  },
+  "codeCases": null,
+  "codeContract": null,
+  "experience": {
+    "scenario": "Independently reproduce the trainer moment budget, then inspect the equivalent force implied by an assumed perpendicular arm.",
+    "task": "Enter unrounded calculation results to two decimal places and show your substitutions. Use the on-page calculation pad or your own calculator.",
+    "method": "First compute dynamic pressure, then capacity. Required moment subtracts other, which is already signed. Subtract demand from capacity. Divide capacity by the assumed arm for a force scale. This rearrangement does not validate actual tail aerodynamics.",
+    "investigate": "Compare assumed arms 2, 4 and 5 m at fixed moment. Explain why force changes while the moment budget does not.",
+    "tools": "Only this app and its calculation pad are needed.",
+    "xLabel": "Assumed perpendicular arm (m)",
+    "yLabel": "Equivalent force (N)",
+    "seriesLabel": "Equivalent force at selected arm",
+    "referenceLabel": "4 m benchmark — not a requirement",
+    "variableKey": {
+      "rho": "Air density (kg/m³)",
+      "V": "Freestream speed (m/s)",
+      "S": "Reference wing area (m²)",
+      "c": "Reference chord (m)",
+      "dCm": "Usable pitching coefficient increment (dimensionless)",
+      "Iy": "Pitch moment of inertia (kg·m²)",
+      "other": "Other pitching moment, nose-up positive (N·m)",
+      "target": "Minimum initial pitch acceleration (rad/s²)",
+      "arm": "Assumed equivalent force arm (m), not validated tail geometry"
+    }
+  },
+  "investigation": {
+    "cases": [
+      {
+        "id": "2",
+        "label": "Assumed arm 2 m",
+        "inputs": {
+          "arm": 2
+        },
+        "readouts": [
+          {
+            "label": "Available elevator capacity",
+            "expression": "0.5*rho*V^2*S*c*dCm",
+            "unit": "N m"
+          },
+          {
+            "label": "Required elevator moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Pitch-authority margin",
+            "expression": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Equivalent force at this assumed arm",
+            "expression": "0.5*rho*V^2*S*c*dCm/arm",
+            "unit": "N"
+          },
+          {
+            "label": "4 m force benchmark (not a requirement)",
+            "expression": "0.5*rho*V^2*S*c*dCm/4",
+            "unit": "N"
+          }
+        ],
+        "comparison": {
+          "left": "arm",
+          "right": "0",
+          "op": "gte",
+          "pass": "Scale comparison only",
+          "fail": "Scale comparison only"
+        },
+        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption."
+      },
+      {
+        "id": "4",
+        "label": "Assumed arm 4 m",
+        "inputs": {
+          "arm": 4
+        },
+        "readouts": [
+          {
+            "label": "Available elevator capacity",
+            "expression": "0.5*rho*V^2*S*c*dCm",
+            "unit": "N m"
+          },
+          {
+            "label": "Required elevator moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Pitch-authority margin",
+            "expression": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Equivalent force at this assumed arm",
+            "expression": "0.5*rho*V^2*S*c*dCm/arm",
+            "unit": "N"
+          },
+          {
+            "label": "4 m force benchmark (not a requirement)",
+            "expression": "0.5*rho*V^2*S*c*dCm/4",
+            "unit": "N"
+          }
+        ],
+        "comparison": {
+          "left": "arm",
+          "right": "0",
+          "op": "gte",
+          "pass": "Scale comparison only",
+          "fail": "Scale comparison only"
+        },
+        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption."
+      },
+      {
+        "id": "5",
+        "label": "Assumed arm 5 m",
+        "inputs": {
+          "arm": 5
+        },
+        "readouts": [
+          {
+            "label": "Available elevator capacity",
+            "expression": "0.5*rho*V^2*S*c*dCm",
+            "unit": "N m"
+          },
+          {
+            "label": "Required elevator moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Pitch-authority margin",
+            "expression": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Equivalent force at this assumed arm",
+            "expression": "0.5*rho*V^2*S*c*dCm/arm",
+            "unit": "N"
+          },
+          {
+            "label": "4 m force benchmark (not a requirement)",
+            "expression": "0.5*rho*V^2*S*c*dCm/4",
+            "unit": "N"
+          }
+        ],
+        "comparison": {
+          "left": "arm",
+          "right": "0",
+          "op": "gte",
+          "pass": "Scale comparison only",
+          "fail": "Scale comparison only"
+        },
+        "prompt": "Explain why the force changes but the moment budget does not. Identify the unvalidated assumption."
+      }
+    ],
+    "required": [
+      "2",
+      "4",
+      "5"
+    ]
+  }
+}

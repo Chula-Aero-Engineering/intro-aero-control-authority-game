@@ -1,0 +1,341 @@
+{
+  "id": "mission10",
+  "number": 10,
+  "version": "3.0.0",
+  "title": "Specify command and actuator limits",
+  "chapter": "§6.2–6.3, §6.6 — command, travel and actuator rate",
+  "brief": "Specify an instrument that separates available capacity, applied command, and actuator timing. Static capacity alone must not unlock a time-critical claim.",
+  "missing": [
+    9
+  ],
+  "supplied": [
+    "Can a commanded elevator response be delivered within the available travel and time, while keeping capacity distinct from applied moment?",
+    "M_applied=u*available; 0<=u<=1. Required normalized command=(Iy*target-other)/available. For this synthetic actuator case, timeNeeded=travelDeg/rateDegPerSec.",
+    "available=4002.48 N m; Iy=5000; target=0.12 rad/s²; other=-750 N m. Synthetic actuator demand travel=12 deg, rate=20 deg/s, deadline=0.4 s.",
+    "Available capacity, applied moment (N m), normalized command, slew time (s), and separate static/rate statuses.",
+    "The linear command map is a teaching approximation. Constant actuator slew rate ignores load dependence; no validated hinge-moment or pilot-force model is supplied.",
+    "A favorable static moment margin does not establish timely delivery or real elevator aerodynamics.",
+    "Half command applies 2001.24 N m; capacity remains 4002.48 N m. The 12° movement takes 0.6 s and misses the 0.4 s deadline.",
+    "1350/4002.48≈0.33729 command for the initial acceleration target. 12/20=0.6 s; 0.6>0.4.",
+    "Check u=0, 0.5, 1; reject u outside [0,1]. Show that static capacity passes while the synthetic rate deadline fails.",
+    null,
+    "Sweep u and calculate applied moment and net initial acceleration. Independently compare actuator time with the declared deadline.",
+    "Retain the static screen, withhold the time-critical response claim for this actuator scenario and request load/rate evidence."
+  ],
+  "variables": {
+    "u": 0.5,
+    "available": 4002.48,
+    "Iy": 5000,
+    "other": -750,
+    "target": 0.12
+  },
+  "fields": [
+    {
+      "id": "maximum",
+      "label": "Maximum normalized command",
+      "type": "number",
+      "section": 9,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "applied",
+      "label": "Displayed applied moment at half command (N m)",
+      "type": "number",
+      "section": 9,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "label",
+      "label": "Label on the maximum available moment",
+      "type": "select",
+      "options": [
+        "Available capacity",
+        "Current applied moment"
+      ],
+      "section": 9,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "slew",
+      "label": "Time to move 12° at 20°/s (s)",
+      "type": "number",
+      "section": 9,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "timely",
+      "label": "Response relative to the 0.4 s deadline",
+      "type": "select",
+      "options": [
+        "Rate requirement fails",
+        "Static margin proves it is timely"
+      ],
+      "section": 9,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "explanation9",
+      "label": "Explain the reasoning for feature requirements",
+      "type": "text",
+      "section": 9,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    }
+  ],
+  "checks": [
+    {
+      "field": "maximum",
+      "expected": 1,
+      "message": "Use the declared normalized interval.",
+      "tolerance": 0.0001
+    },
+    {
+      "field": "applied",
+      "expected": 2001.24,
+      "message": "Apply only the commanded fraction of capacity.",
+      "tolerance": 0.01
+    },
+    {
+      "field": "label",
+      "expected": "Available capacity",
+      "message": "Capacity is not the current applied moment.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "slew",
+      "expected": 0.6,
+      "message": "Travel divided by slew rate gives the minimum stated movement time.",
+      "tolerance": 0.0001
+    },
+    {
+      "field": "timely",
+      "expected": "Rate requirement fails",
+      "message": "A 0.6 s movement misses a 0.4 s deadline.",
+      "tolerance": 1e-06
+    }
+  ],
+  "hints": [
+    "At u=0.5 apply half of 4002.48 N m.",
+    "Travel/rate=12/20=0.6 s.",
+    "Show both results: static moment is available, but this synthetic actuator misses its deadline."
+  ],
+  "sweep": {
+    "variable": "u",
+    "values": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "expression": "u*available",
+    "reference": "available",
+    "units": "Normalized command dimensionless; applied and available pitching moment in N m."
+  },
+  "codeCases": null,
+  "codeContract": null,
+  "experience": {
+    "scenario": "The trainer may have enough static capacity but still miss an actuator deadline. A synthetic actuator must move 12° at 20°/s within 0.4 s.",
+    "task": "Enter the command scale and label choices, compute half-command moment and movement time, then inspect the supplied instrument.",
+    "method": "Normalized command uses 0 = none, 0.5 = half, 1 = full (not 100). Applied moment = command × capacity. Capacity remains available even at zero command. Movement time = travel / slew rate; a positive static margin does not ensure timely delivery.",
+    "investigate": "Inspect zero, half and full command; compare actuator movement time against the deadline. Explain the distinct static and rate statuses. In the actuator panel, compare 20, 30 and 40 degrees per second with travel and deadline fixed. Record the equality case in your explanation.",
+    "tools": "Only this app and its calculation pad are needed.",
+    "xLabel": "Normalized command (0–1)",
+    "yLabel": "Pitching moment (N m)",
+    "seriesLabel": "Applied elevator moment",
+    "referenceLabel": "Available capacity — not demand",
+    "plotExtras": {
+      "referenceLines": [
+        {
+          "axis": "y",
+          "value": 1350,
+          "label": "Required moment 1350 N m"
+        }
+      ]
+    },
+    "variableKey": {
+      "u": "Applied normalized command (0–1)",
+      "available": "Available control moment capacity (N·m)",
+      "Iy": "Pitch moment of inertia (kg·m²)",
+      "other": "Other pitching moment, nose-up positive (N·m)",
+      "target": "Minimum initial pitch acceleration (rad/s²)"
+    },
+    "timing": {
+      "travel": 12,
+      "rate": 20,
+      "deadline": 0.4,
+      "rates": [
+        20,
+        30,
+        40
+      ]
+    }
+  },
+  "investigation": {
+    "cases": [
+      {
+        "id": "0",
+        "label": "Command 0 (0%)",
+        "inputs": {
+          "u": 0
+        },
+        "readouts": [
+          {
+            "label": "Available capacity",
+            "expression": "available",
+            "unit": "N m"
+          },
+          {
+            "label": "Applied moment",
+            "expression": "u*available",
+            "unit": "N m"
+          },
+          {
+            "label": "Required moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Applied-minus-required margin",
+            "expression": "u*available-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Initial acceleration",
+            "expression": "(u*available+other)/Iy",
+            "unit": "rad/s²"
+          },
+          {
+            "label": "Actuator movement time",
+            "expression": "12/20",
+            "unit": "s"
+          },
+          {
+            "label": "Deadline",
+            "expression": "0.4",
+            "unit": "s"
+          }
+        ],
+        "comparison": {
+          "left": "u*available-(Iy*target-other)",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Explain the applied moment and the separate rate failure: 0.6 s exceeds the 0.4 s deadline.",
+        "evidenceNote": "Static capacity can meet demand, but this synthetic actuator always misses the stated deadline. Linear command and constant slew rate are teaching assumptions."
+      },
+      {
+        "id": "0.5",
+        "label": "Command 0.5 (50%)",
+        "inputs": {
+          "u": 0.5
+        },
+        "readouts": [
+          {
+            "label": "Available capacity",
+            "expression": "available",
+            "unit": "N m"
+          },
+          {
+            "label": "Applied moment",
+            "expression": "u*available",
+            "unit": "N m"
+          },
+          {
+            "label": "Required moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Applied-minus-required margin",
+            "expression": "u*available-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Initial acceleration",
+            "expression": "(u*available+other)/Iy",
+            "unit": "rad/s²"
+          },
+          {
+            "label": "Actuator movement time",
+            "expression": "12/20",
+            "unit": "s"
+          },
+          {
+            "label": "Deadline",
+            "expression": "0.4",
+            "unit": "s"
+          }
+        ],
+        "comparison": {
+          "left": "u*available-(Iy*target-other)",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Explain the applied moment and the separate rate failure: 0.6 s exceeds the 0.4 s deadline.",
+        "evidenceNote": "Static capacity can meet demand, but this synthetic actuator always misses the stated deadline. Linear command and constant slew rate are teaching assumptions."
+      },
+      {
+        "id": "1",
+        "label": "Command 1 (100%)",
+        "inputs": {
+          "u": 1
+        },
+        "readouts": [
+          {
+            "label": "Available capacity",
+            "expression": "available",
+            "unit": "N m"
+          },
+          {
+            "label": "Applied moment",
+            "expression": "u*available",
+            "unit": "N m"
+          },
+          {
+            "label": "Required moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Applied-minus-required margin",
+            "expression": "u*available-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Initial acceleration",
+            "expression": "(u*available+other)/Iy",
+            "unit": "rad/s²"
+          },
+          {
+            "label": "Actuator movement time",
+            "expression": "12/20",
+            "unit": "s"
+          },
+          {
+            "label": "Deadline",
+            "expression": "0.4",
+            "unit": "s"
+          }
+        ],
+        "comparison": {
+          "left": "u*available-(Iy*target-other)",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Explain the applied moment and the separate rate failure: 0.6 s exceeds the 0.4 s deadline.",
+        "evidenceNote": "Static capacity can meet demand, but this synthetic actuator always misses the stated deadline. Linear command and constant slew rate are teaching assumptions."
+      }
+    ],
+    "required": [
+      "0",
+      "0.5",
+      "1"
+    ]
+  }
+}

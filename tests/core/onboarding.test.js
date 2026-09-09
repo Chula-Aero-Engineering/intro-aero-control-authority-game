@@ -1,0 +1,58 @@
+import {caseResult,investigationComplete} from '../../src/core/onboarding/investigation.js';
+import {describe,it,expect} from 'vitest';
+import fs from 'node:fs';
+import {evaluate} from '../../src/core/onboarding/expression.js';
+import {runMission,progress,reflectionChecks} from '../../src/core/onboarding/engine.js';
+import {reviewSubmission} from '../../scripts/instructor/review.mjs';
+import {Store,encrypt,decrypt} from '../../scripts/instructor/store.mjs';
+import {validateClassroomUrl} from '../../scripts/classroom-client.mjs';
+const missions=Array.from({length:13},(_,i)=>JSON.parse(fs.readFileSync(new URL(`../../lessons/onboarding/mission${String(i+1).padStart(2,'0')}.json`,import.meta.url))));
+const reflection={observation:'Observed the comparison.',change:'Checked the units.',limit:'Only the supplied condition.',result:'supported'};
+function answer(m){const a=Object.fromEntries(m.fields.map(f=>[f.id,f.type==='number'?0:f.type==='select'?f.options[0]:'Written reasoning for instructor review.']));for(const c of m.checks)if(c.field)a[c.field]=c.expected;return a;}
+function completedWork(m,a,result=runMission(m,a)) {
+ const id=m.id+'-test';
+ if(m.codeCases)result.codeChecks=m.codeCases.map(c=>({actual:c.throws?'input rejection':c.expected,passed:true}));
+ const w={answer:a,reflection:{...reflection,confirmedFor:id},attempt:{id,answerSnapshot:JSON.stringify(a),missionVersion:m.version,result},observations:{}};
+ for(const c of m.investigation.cases){const v=caseResult(m,a,result,c);w.observations[c.id]={attemptId:id,note:'Compared the recorded values and their stated limits.',conclusion:v.conclusion};}
+ return w;
+}
+describe('onboarding progression and evaluation',()=>{
+ it('has exactly one missing section per lesson and twelve in capstone',()=>{missions.slice(0,12).forEach((m,i)=>{expect(m.missing).toEqual([i]);expect(m.supplied.filter(x=>x!==null)).toHaveLength(11);expect(m.fields.every(f=>f.section===i)).toBe(true);});expect(missions[12].missing).toHaveLength(12);});
+ it('runs a complete twelve-mission progression plus capstone',()=>{const work={};for(const m of missions){const a=answer(m);if(m.number===2)a.equation='deltaT*y';if(m.number===13)a.equation='-(CnBeta*beta+Cn0)/CnRudder';if(m.codeCases)a.code='Student code is tested separately in the browser';const result=runMission(m,a);expect(result.passed,m.id).toBe(true);work[m.id]=completedWork(m,a,result);expect(progress(missions,work)[m.number-1].complete,m.id).toBe(true);}});
+ it('requires supplied answers without pretending to grade prose',()=>{for(const m of missions)expect(runMission(m,{}).runnable).toBe(false);expect(reflectionChecks(reflection)).toBe(true);});
+ it('accepts the first question, exposes wrong thresholds and invalidates edited evidence',()=>{const m=missions[0],a=answer(m),result=runMission(m,a);expect(result.passed).toBe(true);expect(result.traces[0].supplied).toBeLessThan(.12);expect(result.traces[1].supplied).toBeGreaterThan(.12);const w=completedWork(m,a,result);expect(progress(missions,{mission01:w})[1].state).toBe('available');w.answer={...a,threshold:1};expect(progress(missions,{mission01:w})[0].stale).toBe(true);expect(progress(missions,{mission01:w})[1].state).toBe('available');});
+ it('does not trust a forged passed flag for numeric answers',()=>{const m=missions[0],a={...answer(m),threshold:10},w=completedWork(m,a,{passed:true});expect(progress(missions,{mission01:w})[0].complete).toBe(false);expect(reviewSubmission(m,w).status).toBe('revise');const msg={kind:'override',mission:m.id,snapshot:JSON.stringify(a)};expect(progress(missions,{mission01:w},[msg])[0].complete).toBe(true);msg.snapshot='{}';expect(progress(missions,{mission01:w},[msg])[0].complete).toBe(false);});
+ it('tests asymmetric thrust with a deliberately wrong moment arm',()=>{const m=missions[1],a=answer(m);a.equation='deltaT*y';expect(runMission(m,a).passed).toBe(true);a.equation='deltaT/y';const r=runMission(m,a);expect(r.runnable).toBe(true);expect(r.passed).toBe(false);expect(r.checks.some(c=>c.expected===7440&&!c.passed)).toBe(true);});
+ it('shows nonlinear control authority departing from the local tangent',()=>{const m=missions[5],r=runMission(m,answer(m));expect(r.passed).toBe(true);expect(r.traces.at(-1).reference).toBe(-.21);expect(r.traces.at(-1).supplied).toBeCloseTo(-.3298672286);});
+ it('has no general lift/drag exercises and declares a chapter mapping for every mission',()=>{for(const m of missions){expect(m.chapter).toContain('§6.');expect(Array.isArray(m.checks)).toBe(true);expect(new Set(m.fields.map(f=>f.id)).size).toBe(m.fields.length);expect(m.fields.every(f=>f.id&&f.type&&f.section>=0&&f.section<12)).toBe(true);expect(m.title).not.toMatch(/drag|lift/i);}});
+ it('distinguishes a local derivative, a fit limit and actuator timing',()=>{expect((-0.25/-1.05)*180/Math.PI).toBeCloseTo(13.6419,4);const a=answer(missions[9]);a.timely='Static margin proves it is timely';expect(runMission(missions[9],a).passed).toBe(false);});
+ it('checks all trainer challenge budgets independently',()=>{const rows=missions[6].challenges;for(const r of rows){const i=r.inputs;expect(r.required).toBeCloseTo(i.Iy*i.target-i.other);expect(r.available).toBeCloseTo((i.rho/2)*i.V*i.V*i.S*i.c*i.dCm);expect(r.margin).toBeCloseTo(r.available-r.required);}expect(rows.find(r=>r.name.includes('14 m/s')).margin).toBeGreaterThan(0);expect(rows.find(r=>r.name.includes('10 m/s')).margin).toBeLessThan(0);expect(rows.find(r=>r.name.includes('degraded')).margin).toBeLessThan(0);});
+ it('makes the uncertainty and changed crosswind decisions explicit',()=>{const a=answer(missions[11]);expect(a.yawMargin).toBe(-72);expect(a.trainerMargin).toBe(2150);const m=missions[12],b=answer(m);b.equation='-(CnBeta*beta+Cn0)/CnRudder';expect(runMission(m,b).passed).toBe(true);b.decision='Approve from the earlier pitch screen';expect(runMission(m,b).passed).toBe(false);});
+ it('invalidates the former general-aerodynamics mission version without deleting the old record',()=>{const m=missions[0],a=answer(m),w={answer:a,reflection,attempt:{answerSnapshot:JSON.stringify(a),missionVersion:'1.0.0',result:{passed:true}}};expect(progress(missions,{mission01:w})[0].stale).toBe(true);expect(w.attempt.missionVersion).toBe('1.0.0');});
+ it('requires current observations and confirmed reflection; preserves independent completed work after earlier edits',()=>{
+ const m=missions[0],a=answer(m),w=completedWork(m,a);expect(investigationComplete(m,w)).toBe(true);delete w.observations['20'];expect(progress(missions,{mission01:w})[0].complete).toBe(false);
+ const w1=completedWork(m,a),m2=missions[1],a2={...answer(m2),equation:'deltaT*y'},w2=completedWork(m2,a2);w1.answer={...a,threshold:.65};expect(progress(missions,{mission01:w1,mission02:w2})[1].complete).toBe(true);
+ w2.reflection.confirmedFor='old';expect(progress(missions,{mission01:w1,mission02:w2})[1].complete).toBe(false);
+ });
+ it('provides evaluable labelled investigation cases and scope feedback',()=>{
+ for(const m of missions){const a=answer(m);if(m.number===2)a.equation='deltaT*y';if(m.number===13)a.equation='-(CnBeta*beta+Cn0)/CnRudder';const w=completedWork(m,a);for(const c of m.investigation.cases){const v=caseResult(m,a,w.attempt.result,c);expect(v.conclusion,m.id+c.id).not.toBe('Cannot evaluate this case');expect(v.readouts.every(r=>!String(r.value).startsWith('Unavailable')),m.id+c.id).toBe(true);}}
+ const a=answer(missions[0]);a.question='Can this aircraft take off safely?';expect(runMission(missions[0],a).checks.some(c=>c.field==='question'&&!c.passed)).toBe(true);
+ expect(evaluate('2 × 3 − 1 ÷ 2')).toBe(5.5);
+ });
+ it('does not execute expressions as JavaScript',()=>{expect(evaluate('-2^2+3*(4-1)')).toBe(5);for(const s of ['globalThis.fetch(1)','1/0','NaN','x.y','while(true){}'])expect(()=>evaluate(s)).toThrow();});
+});
+describe('instructor access and data',()=>{
+ it('encrypts tokens and separates feedback-only connection credentials',()=>{const encrypted=encrypt('secret-token','key');expect(encrypted).not.toContain('secret-token');expect(decrypt(encrypted,'key')).toBe('secret-token');expect(()=>decrypt(encrypted,'wrong')).toThrow();const db=new Store(':memory:');const token=db.createConnection('student');expect(db.connection(token).login).toBe('student');expect(db.session(token)).toBeUndefined();expect(db.connection('bad')).toBeUndefined();db.close();});
+ it('restricts classroom proxy destinations',()=>{expect(validateClassroomUrl('https://abc-5180.app.github.dev/')).toBe('https://abc-5180.app.github.dev');for(const u of ['http://localhost','https://evil.com','https://app.github.dev.evil.com','https://x.app.github.dev/private','https://user:pass@x.app.github.dev'])expect(()=>validateClassroomUrl(u)).toThrow();});
+});
+
+describe('checkpoint artifact exports',()=>{
+ it('exports code as review artifacts without executing it',async()=>{const {implementationFiles}=await import('../../scripts/onboarding-implementation.mjs');const m=missions[10],files=implementationFiles(m.id,{answer:{code:'throw Error("must not execute")'},attempt:{result:{passed:false}}},m);expect(Object.keys(files)).toHaveLength(3);expect(Object.keys(files).every(p=>p.startsWith('student-work/onboarding/implementation/mission11/'))).toBe(true);expect(files[Object.keys(files)[0]]).toContain('must not execute');expect(implementationFiles('mission01',{},missions[0])).toEqual({});});
+});
+
+describe('student investigation diagnostics',()=>{
+ it('does not call wrong-direction elevator travel acceptable',()=>{const m=missions[2],a={...answer(m),slope:1.05};const r=runMission(m,a);expect(caseResult(m,a,r,m.investigation.cases[0]).conclusion).toMatch(/Wrong direction/);});
+ it('uses student test expectations to judge whether a defect is caught',()=>{const m=missions[8],a={...answer(m),ratio:2};const r=runMission(m,a);expect(caseResult(m,a,r,m.investigation.cases.find(c=>c.id==='speed')).conclusion).toBe('Revise expected result');a.ratio=4;expect(caseResult(m,a,r,m.investigation.cases.find(c=>c.id==='speed')).conclusion).toBe('Expected result catches defect');});
+ it('provides a variable key for every declared input',()=>{for(const m of missions)for(const k of Object.keys(m.variables))expect(m.experience.variableKey[k],m.id+':'+k).toBeTruthy();});
+ it('locates JavaScript syntax errors before execution',async()=>{const {runStudentCode}=await import('../../src/core/onboarding/codeRunner.js');const checks=await runStudentCode('function calculate(input) {\n return } }',[]);expect(checks[0].passed).toBe(false);expect(checks[0].line).toBe(2);expect(checks[0].column).toBeGreaterThan(0);});
+});

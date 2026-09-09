@@ -1,0 +1,452 @@
+{
+  "id": "mission13",
+  "number": 13,
+  "version": "3.0.0",
+  "title": "Homework: reopen the crosswind claim",
+  "chapter": "§6.10, §6.12 — changed requirement and complete review",
+  "brief": "Review a changed crosswind requirement through twelve connected sections. Start with the mission briefing below.",
+  "missing": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "supplied": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "variables": {
+    "CnBeta": 0.1,
+    "beta": 0.08,
+    "Cn0": 0,
+    "CnRudder": -0.08,
+    "usableLimit": 0.12
+  },
+  "fields": [
+    {
+      "id": "question",
+      "label": "Changed crosswind engineering question",
+      "type": "text",
+      "section": 0,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "equation",
+      "label": "Local rudder balance: deltaR = (use CnBeta, beta, Cn0, CnRudder)",
+      "type": "equation",
+      "section": 1,
+      "help": "Enter only an expression, not an equals sign. Use the named variables; ×, *, ÷, /, +, −, ^ and parentheses are accepted."
+    },
+    {
+      "id": "beta",
+      "label": "Synthetic sideslip beta (rad)",
+      "type": "number",
+      "section": 2,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "output",
+      "label": "Outputs required for the operational claim",
+      "type": "select",
+      "options": [
+        "Coupled yaw, roll, lateral force and transient limits",
+        "Pitch margin alone"
+      ],
+      "section": 3,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "assumption",
+      "label": "Nature of supplied derivative data",
+      "type": "select",
+      "options": [
+        "Synthetic local held-condition coefficients",
+        "Validated all-envelope aircraft data"
+      ],
+      "section": 4,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "validity",
+      "label": "What the local yaw balance can establish",
+      "type": "select",
+      "options": [
+        "Local static yaw balance only",
+        "Safe crosswind touchdown"
+      ],
+      "section": 5,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "prediction",
+      "label": "Predicted rudder-deflection ratio if beta doubles",
+      "type": "number",
+      "section": 6,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "reference",
+      "label": "Local rudder demand at beta=0.08 rad (rad)",
+      "type": "number",
+      "section": 7,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "boundary",
+      "label": "Behavior when CnRudder=0",
+      "type": "select",
+      "options": [
+        "Reject ineffective local balance",
+        "Return zero rudder demand"
+      ],
+      "section": 8,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "requirement",
+      "label": "Result when roll/gust/ground-contact evidence is missing",
+      "type": "select",
+      "options": [
+        "Insufficient model",
+        "Operational pass"
+      ],
+      "section": 9,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "code",
+      "label": "JavaScript: function calculate(input) returning rudder demand (rad)",
+      "type": "code",
+      "section": 10,
+      "help": "Paste a JavaScript function named calculate(input). Return a number; do not paste Markdown fences or terminal commands."
+    },
+    {
+      "id": "decision",
+      "label": "Crosswind operational decision",
+      "type": "select",
+      "options": [
+        "Withhold crosswind claim pending coupled evidence",
+        "Approve from the earlier pitch screen"
+      ],
+      "section": 11,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "explanation0",
+      "label": "Explain the reasoning for engineering question",
+      "type": "text",
+      "section": 0,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation1",
+      "label": "Explain the reasoning for physics model",
+      "type": "text",
+      "section": 1,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation2",
+      "label": "Explain the reasoning for inputs",
+      "type": "text",
+      "section": 2,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation3",
+      "label": "Explain the reasoning for outputs",
+      "type": "text",
+      "section": 3,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation4",
+      "label": "Explain the reasoning for assumptions",
+      "type": "text",
+      "section": 4,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation5",
+      "label": "Explain the reasoning for validity",
+      "type": "text",
+      "section": 5,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation6",
+      "label": "Explain the reasoning for predictions",
+      "type": "text",
+      "section": 6,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation7",
+      "label": "Explain the reasoning for manual reference",
+      "type": "text",
+      "section": 7,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation8",
+      "label": "Explain the reasoning for verification cases",
+      "type": "text",
+      "section": 8,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation9",
+      "label": "Explain the reasoning for feature requirements",
+      "type": "text",
+      "section": 9,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation10",
+      "label": "Explain the reasoning for implementation",
+      "type": "text",
+      "section": 10,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "explanation11",
+      "label": "Explain the reasoning for decision",
+      "type": "text",
+      "section": 11,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "decisionEvidence",
+      "label": "Evidence supporting your decision",
+      "help": "Name the inspected case and its result with units; connect it to the claim.",
+      "type": "text",
+      "section": 11
+    },
+    {
+      "id": "nextEvidence",
+      "label": "Specific missing evidence and next action",
+      "help": "Identify which missing model or measurement would change the decision, who needs it and why.",
+      "type": "text",
+      "section": 11
+    },
+    {
+      "id": "consequences",
+      "label": "Who is affected if this claim is wrong?",
+      "help": "Explain a concrete consequence for pilot, passengers, ground crew or design review.",
+      "type": "text",
+      "section": 11
+    }
+  ],
+  "checks": [
+    {
+      "studentExpression": "equation",
+      "expected": 0.1,
+      "message": "The supplied synthetic local yaw balance requires +0.1 rad rudder.",
+      "tolerance": 0.0001
+    },
+    {
+      "field": "beta",
+      "expected": 0.08,
+      "message": "Use radians and preserve the declared positive sideslip.",
+      "tolerance": 0.0001
+    },
+    {
+      "field": "output",
+      "expected": "Coupled yaw, roll, lateral force and transient limits",
+      "message": "A yaw-only screen cannot establish the operational claim.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "assumption",
+      "expected": "Synthetic local held-condition coefficients",
+      "message": "Do not present the teaching values as aircraft evidence.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "validity",
+      "expected": "Local static yaw balance only",
+      "message": "Keep the local balance separate from landing safety.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "prediction",
+      "expected": 2,
+      "message": "With Cn0=0, the local rudder demand scales linearly with beta.",
+      "tolerance": 0.01
+    },
+    {
+      "field": "reference",
+      "expected": 0.1,
+      "message": "Show the independent signed balance calculation.",
+      "tolerance": 0.0001
+    },
+    {
+      "field": "boundary",
+      "expected": "Reject ineffective local balance",
+      "message": "Division by zero effectiveness is not a valid control solution.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "requirement",
+      "expected": "Insufficient model",
+      "message": "Missing coupled evidence must remain visible.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "decision",
+      "expected": "Withhold crosswind claim pending coupled evidence",
+      "message": "The earlier pitch screen does not answer the changed roll/yaw requirement.",
+      "tolerance": 1e-06
+    }
+  ],
+  "hints": [
+    "The 16.7° crab angle is a wind-triangle heading offset, not rudder deflection or the synthetic beta.",
+    "Solve the signed local yaw balance: deltaR=-(CnBeta*beta+Cn0)/CnRudder. Check both sides of the travel range.",
+    "Even a passing local yaw/travel case cannot establish coupled crosswind landing capability. Withhold that claim and identify the next evidence."
+  ],
+  "sweep": {
+    "variable": "beta",
+    "values": [
+      -0.08,
+      0,
+      0.08,
+      0.12,
+      0.16
+    ],
+    "expression": null,
+    "reference": "usableLimit",
+    "units": "Synthetic sideslip beta and signed rudder demand in rad. Positive travel limit +0.12 rad shown; negative limit is -0.12 rad.",
+    "studentField": "equation"
+  },
+  "codeCases": [
+    {
+      "input": {
+        "CnBeta": 0.1,
+        "beta": 0.08,
+        "Cn0": 0,
+        "CnRudder": -0.08
+      },
+      "expected": 0.1,
+      "label": "Synthetic local yaw reference"
+    },
+    {
+      "input": {
+        "CnBeta": 0.1,
+        "beta": 0.16,
+        "Cn0": 0,
+        "CnRudder": -0.08
+      },
+      "expected": 0.2,
+      "label": "Doubled sideslip demands twice the rudder"
+    },
+    {
+      "input": {
+        "CnBeta": 0.1,
+        "beta": -0.08,
+        "Cn0": 0,
+        "CnRudder": -0.08
+      },
+      "expected": -0.1,
+      "label": "Reversed sideslip reverses rudder"
+    },
+    {
+      "input": {
+        "CnBeta": 0.1,
+        "beta": 0.08,
+        "Cn0": 0,
+        "CnRudder": 0
+      },
+      "throws": true,
+      "label": "Reject zero rudder effectiveness"
+    }
+  ],
+  "codeContract": {
+    "input": [
+      "CnBeta",
+      "beta",
+      "Cn0",
+      "CnRudder"
+    ],
+    "output": {
+      "quantity": "signed local rudder demand",
+      "unit": "rad"
+    },
+    "description": "Implement calculate(input) returning -(CnBeta*beta+Cn0)/CnRudder in rad. Require finite numeric inputs and nonzero CnRudder. Throw Error for invalid inputs. This local yaw balance cannot establish crosswind controllability."
+  },
+  "experience": {
+    "scenario": "The trainer now faces a 6 m/s crosswind at 20 m/s runway-axis airspeed. Wind-triangle geometry gives a 16.7° crab heading offset. This is not rudder deflection or sideslip.",
+    "task": "Complete all twelve sections using the scenario and synthetic local balance below. Keep the local calculation separate from the operational crosswind decision.",
+    "method": "For the local teaching exercise only: CnBeta=0.10/rad, beta=0.08 rad, Cn0=0, CnRudder=−0.08/rad, rudder limits ±0.12 rad. Balance CnBeta×beta + CnRudder×deltaR + Cn0 = 0. The beta value is an independent sideslip scenario, not converted crab angle. No roll, lateral force, gust, de-crab, tire, clearance or workload model is supplied.",
+    "investigate": "Inspect baseline, doubled and reversed sideslip using your actual code. Record signed travel sufficiency, then identify missing evidence and consequences before deciding the operational claim.",
+    "tools": "Use the built-in JavaScript editor. An existing coding assistant is optional.",
+    "xLabel": "Synthetic sideslip (rad)",
+    "yLabel": "Signed rudder demand (rad)",
+    "seriesLabel": "Your JavaScript rudder demand",
+    "referenceLabel": "Positive rudder limit",
+    "starter": "function calculate(input) {\n  // Read the named input properties from the example below.\n  // Check the stated input limits before calculating.\n  // Return ONE numeric result using the supplied physics model.\n  throw new Error(\"Replace this starter with your calculation\");\n}",
+    "plotExtras": {
+      "referenceLines": [
+        {
+          "axis": "y",
+          "value": -0.12,
+          "label": "Negative limit −0.12 rad"
+        }
+      ]
+    },
+    "variableKey": {
+      "CnBeta": "Yaw coefficient derivative with sideslip (rad⁻¹)",
+      "beta": "Independent sideslip angle (rad)",
+      "Cn0": "Yaw coefficient offset (dimensionless)",
+      "CnRudder": "Yaw coefficient derivative with rudder (rad⁻¹)",
+      "usableLimit": "Signed rudder limit magnitude (rad); applies in both directions"
+    }
+  },
+  "investigation": {
+    "cases": [
+      {
+        "id": "0",
+        "label": "Synthetic local yaw reference",
+        "codeIndex": 0,
+        "prompt": "Record signed rudder demand and compare with BOTH ±0.12 rad limits. Distinguish local travel from missing operational evidence.",
+        "travelLimit": 0.12
+      },
+      {
+        "id": "1",
+        "label": "Doubled sideslip demands twice the rudder",
+        "codeIndex": 1,
+        "prompt": "Record signed rudder demand and compare with BOTH ±0.12 rad limits. Distinguish local travel from missing operational evidence.",
+        "travelLimit": 0.12
+      },
+      {
+        "id": "2",
+        "label": "Reversed sideslip reverses rudder",
+        "codeIndex": 2,
+        "prompt": "Record signed rudder demand and compare with BOTH ±0.12 rad limits. Distinguish local travel from missing operational evidence.",
+        "travelLimit": 0.12
+      }
+    ],
+    "required": [
+      "0",
+      "1",
+      "2"
+    ]
+  }
+}

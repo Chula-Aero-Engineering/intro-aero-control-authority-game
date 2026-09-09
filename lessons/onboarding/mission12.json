@@ -1,0 +1,376 @@
+{
+  "id": "mission12",
+  "number": 12,
+  "version": "3.0.0",
+  "title": "Review uncertainty before retaining a claim",
+  "chapter": "§6.7–6.9 — uncertainty and technical review",
+  "brief": "Make two bounded review decisions without mixing aircraft: the trainer pitch screen and the separate engine-out yaw screen. Explain why nominal success is not enough.",
+  "missing": [
+    11
+  ],
+  "supplied": [
+    "Which control claims survive conservative uncertainty bounds in the trainer pitch case and the separate twin-engine yaw case?",
+    "Conservative margin=(available-availableUncertainty)-(required+requiredUncertainty). For yaw: margin=(1-lossFraction)*8600-(1+demandIncrease)*7440.",
+    "Trainer chapter rounded screen: available=4000±300 N m; required=1350±200 N m. Separate yaw aircraft: nominal available=8600 N m and required=7440 N m; test 10% less capacity and 5% more demand.",
+    "Nominal and conservative margins with a condition-specific decision for each aircraft.",
+    "Use stated interval bounds, not a probability of safety. The chapter rounds trainer capacity to 4.00 kN m for this uncertainty example.",
+    "Neither favorable static pitch arithmetic nor a nominal yaw pass establishes transient mission performance. Do not transfer evidence between the two aircraft.",
+    "The trainer interval margin remains positive; the separate yaw case becomes slightly negative under both adverse changes.",
+    "Trainer: (4000-300)-(1350+200)=2150 N m. Yaw: 0.9*8600-1.05*7440=-72 N m.",
+    "Yaw nominal margin=1160; with only 10% capacity loss=300; with both adverse changes=-72 N m. Preserve the failure rather than rounding it away.",
+    "Display separate aircraft and conditions; record requirement, model, evidence, decision, limitation and next evidence.",
+    "Sweep yaw capacity loss while applying the stated 5% demand increase; compare the resulting margin with zero.",
+    null
+  ],
+  "variables": {
+    "lossFraction": 0.1,
+    "demandIncrease": 0.05
+  },
+  "fields": [
+    {
+      "id": "trainerMargin",
+      "label": "Conservative trainer margin using chapter rounded inputs (N m)",
+      "type": "number",
+      "section": 11,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "yawMargin",
+      "label": "Conservative yaw margin under both changes (N m)",
+      "type": "number",
+      "section": 11,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "trainerDecision",
+      "label": "Trainer decision",
+      "type": "select",
+      "options": [
+        "Retain for further pitch analysis only",
+        "Approve successful short-runway takeoff"
+      ],
+      "section": 11,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "yawDecision",
+      "label": "Yaw decision",
+      "type": "select",
+      "options": [
+        "Withhold operational claim and investigate uncertainty",
+        "Approve because nominal margin was positive"
+      ],
+      "section": 11,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "next",
+      "label": "Next evidence to request",
+      "type": "select",
+      "options": [
+        "Compatible coefficient, local-flow, actuator and transient evidence",
+        "A more confident software statement"
+      ],
+      "section": 11,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "explanation11",
+      "label": "Explain the reasoning for decision",
+      "type": "text",
+      "section": 11,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "decisionEvidence",
+      "label": "Evidence supporting your decision",
+      "help": "Name the inspected case and its result with units; connect it to the claim.",
+      "type": "text",
+      "section": 11
+    },
+    {
+      "id": "nextEvidence",
+      "label": "Specific missing evidence and next action",
+      "help": "Identify which missing model or measurement would change the decision, who needs it and why.",
+      "type": "text",
+      "section": 11
+    }
+  ],
+  "checks": [
+    {
+      "field": "trainerMargin",
+      "expected": 2150,
+      "message": "Use the conservative rounded chapter bounds.",
+      "tolerance": 0.01
+    },
+    {
+      "field": "yawMargin",
+      "expected": -72,
+      "message": "Do not round a negative margin into a pass.",
+      "tolerance": 0.01
+    },
+    {
+      "field": "trainerDecision",
+      "expected": "Retain for further pitch analysis only",
+      "message": "A static screen does not establish successful takeoff.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "yawDecision",
+      "expected": "Withhold operational claim and investigate uncertainty",
+      "message": "The adverse yaw interval fails.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "next",
+      "expected": "Compatible coefficient, local-flow, actuator and transient evidence",
+      "message": "Request evidence that addresses the remaining model and condition gaps.",
+      "tolerance": 1e-06
+    }
+  ],
+  "hints": [
+    "Use the lowest available and highest required moment in the interval screen.",
+    "Trainer conservative margin is 2150 N m; the yaw screen under both adverse changes is -72 N m.",
+    "Retain the trainer direction for further analysis, but withhold unsupported mission-level claims."
+  ],
+  "sweep": {
+    "variable": "lossFraction",
+    "values": [
+      0,
+      0.05,
+      0.1,
+      0.15
+    ],
+    "expression": "(1-lossFraction)*8600-(1+demandIncrease)*7440",
+    "reference": "0",
+    "units": "Fractional loss of available yaw authority; conservative yaw margin in N m."
+  },
+  "codeCases": null,
+  "codeContract": null,
+  "experience": {
+    "scenario": "Review two separate aircraft: the trainer pitch screen and the twin-engine yaw screen. Each needs its own conservative evidence and bounded decision.",
+    "task": "Calculate both conservative margins, choose decisions and next evidence, then write an evidence-linked decision record.",
+    "method": "Use lowest available capacity minus highest demand. The trainer uses rounded 4000 ± 300 and 1350 ± 200 N m. The yaw case reduces capacity by 10% and increases demand by 5%. Interval bounds are not probabilities of safety.",
+    "investigate": "Compare the trainer budget and yaw cases at 0%, 10% and 15% capacity loss, with the yaw demand increase fixed at 5%.",
+    "tools": "Only this app and its calculation pad are needed.",
+    "xLabel": "Yaw capacity loss (fraction)",
+    "yLabel": "Conservative yaw margin (N m)",
+    "seriesLabel": "Yaw margin with 5% demand increase",
+    "referenceLabel": "Zero-margin boundary",
+    "variableKey": {
+      "lossFraction": "Fraction of yaw capacity lost (0.10 means 10%)",
+      "demandIncrease": "Fractional yaw demand increase (0.05 means 5%)"
+    }
+  },
+  "investigation": {
+    "cases": [
+      {
+        "id": "trainer",
+        "label": "Trainer conservative pitch budget",
+        "inputs": {},
+        "readouts": [
+          {
+            "label": "Nominal trainer capacity",
+            "expression": "4000",
+            "unit": "N m"
+          },
+          {
+            "label": "Nominal trainer demand",
+            "expression": "1350",
+            "unit": "N m"
+          },
+          {
+            "label": "Nominal trainer margin",
+            "expression": "4000-1350",
+            "unit": "N m"
+          },
+          {
+            "label": "Lowest capacity",
+            "expression": "4000-300",
+            "unit": "N m"
+          },
+          {
+            "label": "Highest demand",
+            "expression": "1350+200",
+            "unit": "N m"
+          },
+          {
+            "label": "Conservative margin",
+            "expression": "(4000-300)-(1350+200)",
+            "unit": "N m"
+          }
+        ],
+        "comparison": {
+          "left": "(4000-300)-(1350+200)",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Name the supported pitch claim, its limit and the next evidence needed."
+      },
+      {
+        "id": "0",
+        "label": "Yaw capacity loss 0% (demand +5%)",
+        "inputs": {
+          "lossFraction": 0
+        },
+        "readouts": [
+          {
+            "label": "Nominal yaw capacity",
+            "expression": "8600",
+            "unit": "N m"
+          },
+          {
+            "label": "Nominal yaw demand",
+            "expression": "7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Nominal yaw margin",
+            "expression": "8600-7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Adverse yaw capacity",
+            "expression": "(1-lossFraction)*8600",
+            "unit": "N m"
+          },
+          {
+            "label": "Demand with fixed +5%",
+            "expression": "1.05*7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Conservative yaw margin",
+            "expression": "(1-lossFraction)*8600-1.05*7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Capacity loss at zero margin, with demand +5%",
+            "expression": "100*(1-1.05*7440/8600)",
+            "unit": "%"
+          }
+        ],
+        "comparison": {
+          "left": "(1-lossFraction)*8600-1.05*7440",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Compare with zero and explain why the nominal margin cannot approve the operational claim."
+      },
+      {
+        "id": "0.1",
+        "label": "Yaw capacity loss 10% (demand +5%)",
+        "inputs": {
+          "lossFraction": 0.1
+        },
+        "readouts": [
+          {
+            "label": "Nominal yaw capacity",
+            "expression": "8600",
+            "unit": "N m"
+          },
+          {
+            "label": "Nominal yaw demand",
+            "expression": "7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Nominal yaw margin",
+            "expression": "8600-7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Adverse yaw capacity",
+            "expression": "(1-lossFraction)*8600",
+            "unit": "N m"
+          },
+          {
+            "label": "Demand with fixed +5%",
+            "expression": "1.05*7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Conservative yaw margin",
+            "expression": "(1-lossFraction)*8600-1.05*7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Capacity loss at zero margin, with demand +5%",
+            "expression": "100*(1-1.05*7440/8600)",
+            "unit": "%"
+          }
+        ],
+        "comparison": {
+          "left": "(1-lossFraction)*8600-1.05*7440",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Compare with zero and explain why the nominal margin cannot approve the operational claim."
+      },
+      {
+        "id": "0.15",
+        "label": "Yaw capacity loss 15% (demand +5%)",
+        "inputs": {
+          "lossFraction": 0.15
+        },
+        "readouts": [
+          {
+            "label": "Nominal yaw capacity",
+            "expression": "8600",
+            "unit": "N m"
+          },
+          {
+            "label": "Nominal yaw demand",
+            "expression": "7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Nominal yaw margin",
+            "expression": "8600-7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Adverse yaw capacity",
+            "expression": "(1-lossFraction)*8600",
+            "unit": "N m"
+          },
+          {
+            "label": "Demand with fixed +5%",
+            "expression": "1.05*7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Conservative yaw margin",
+            "expression": "(1-lossFraction)*8600-1.05*7440",
+            "unit": "N m"
+          },
+          {
+            "label": "Capacity loss at zero margin, with demand +5%",
+            "expression": "100*(1-1.05*7440/8600)",
+            "unit": "%"
+          }
+        ],
+        "comparison": {
+          "left": "(1-lossFraction)*8600-1.05*7440",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Compare with zero and explain why the nominal margin cannot approve the operational claim."
+      }
+    ],
+    "required": [
+      "trainer",
+      "0",
+      "0.1",
+      "0.15"
+    ]
+  }
+}

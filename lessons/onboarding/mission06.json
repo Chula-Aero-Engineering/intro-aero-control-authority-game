@@ -1,0 +1,290 @@
+{
+  "id": "mission06",
+  "number": 6,
+  "version": "3.0.0",
+  "title": "Find the limit before the geometric stop",
+  "chapter": "§6.3, §6.6 — effectiveness, usable authority and nonlinear limits",
+  "brief": "Distinguish local effectiveness, usable travel, and nonlinear authority. This explicitly synthetic extension prevents a geometric stop from being mistaken for model validity.",
+  "missing": [
+    5
+  ],
+  "supplied": [
+    "Does a local slope establish the required ΔCm=-0.25 at a demanded 13.64° elevator deflection?",
+    "Local tangent ΔCm=-1.05*deltaDeg*pi/180. For this additional synthetic dataset, the documented local-fit interval is -10 to +10 deg; usable travel reaches +18 deg.",
+    "Synthetic extension of the chapter exercise: deltaDeg [-10,0,10,15,18]; observed ΔCm [0.183260,0,-0.183260,-0.20,-0.21]. These are teaching observations, not aircraft test data.",
+    "Local tangent estimate, supplied nonlinear observation, local-fit validity and authority conclusion.",
+    "The -1.05 per-radian slope is local. Reaching a travel stop does not establish flow attachment, actuator holding ability or rate capability.",
+    null,
+    "At large positive deflection the local tangent overstates the magnitude in this synthetic dataset.",
+    "Linear estimate at 18°=-0.329867, but supplied synthetic response=-0.21, short of the -0.25 demand.",
+    "Check fit endpoints ±10°; 13.64° lies outside this local fit; maximum supplied negative response magnitude is only 0.21.",
+    "Label extrapolation separately from the supplied nonlinear observations; never present the geometric limit as a validated fit boundary.",
+    "Plot the tangent and the five supplied observations against deflection. Evaluate the requested deflection against the documented ±10° fit interval.",
+    "The local fit cannot establish the requested response; the supplied synthetic nonlinear screen is insufficient at the declared usable limit."
+  ],
+  "variables": {
+    "deltaDeg": 5,
+    "pi": 3.141592653589793
+  },
+  "fields": [
+    {
+      "id": "minimum",
+      "label": "Lower local-fit limit (deg)",
+      "type": "number",
+      "section": 5,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "maximum",
+      "label": "Upper local-fit limit (deg)",
+      "type": "number",
+      "section": 5,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.01. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "outside",
+      "label": "Use of local fit at 13.64°",
+      "type": "select",
+      "options": [
+        "Insufficient model for this extrapolation",
+        "Validated by the 18° stop"
+      ],
+      "section": 5,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "authority",
+      "label": "Conclusion using supplied nonlinear observations",
+      "type": "select",
+      "options": [
+        "Insufficient negative-moment authority",
+        "Sufficient because travel is available"
+      ],
+      "section": 5,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "explanation5",
+      "label": "Explain the reasoning for validity",
+      "type": "text",
+      "section": 5,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    }
+  ],
+  "checks": [
+    {
+      "field": "minimum",
+      "expected": -10,
+      "message": "Use the documented synthetic fit interval.",
+      "tolerance": 0.01
+    },
+    {
+      "field": "maximum",
+      "expected": 10,
+      "message": "Usable travel and fit validity are different limits.",
+      "tolerance": 0.01
+    },
+    {
+      "field": "outside",
+      "expected": "Insufficient model for this extrapolation",
+      "message": "A local slope cannot establish the response outside its qualified interval.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "authority",
+      "expected": "Insufficient negative-moment authority",
+      "message": "The supplied -0.21 increment cannot meet the -0.25 demand.",
+      "tolerance": 1e-06
+    }
+  ],
+  "hints": [
+    "A usable stop is not the validity limit of a local derivative.",
+    "Compare 13.64° with the qualified ±10° interval, then inspect the nonlinear observations.",
+    "At +18° the supplied response is only -0.21; a -0.25 demand is not met."
+  ],
+  "sweep": {
+    "variable": "deltaDeg",
+    "values": [
+      -10,
+      0,
+      10,
+      15,
+      18
+    ],
+    "expression": "-1.05*deltaDeg*pi/180",
+    "reference": "-1.05*deltaDeg*pi/180",
+    "units": "Elevator deflection in deg; signed pitching-moment increment dimensionless.",
+    "referenceValues": [
+      0.1832595714594046,
+      0,
+      -0.1832595714594046,
+      -0.2,
+      -0.21
+    ]
+  },
+  "codeCases": null,
+  "codeContract": null,
+  "experience": {
+    "scenario": "The local elevator slope is qualified only from −10° to +10°. Usable travel reaches +18°, but the requested 13.64° lies outside the qualified fit. Synthetic nonlinear observations are supplied.",
+    "task": "Enter the fit limits and distinguish model qualification from available travel and from measured response sufficiency.",
+    "method": "A travel stop describes permitted motion; a fit interval describes where a model was qualified. Compare the local tangent with the supplied observations and the −0.25 demand. More negative response has larger negative-moment magnitude. No observation at 13.64° is supplied: the tangent there is an unqualified estimate.",
+    "investigate": "Inspect 10°, the requested 13.64°, and 18°. Record model qualification separately from the nonlinear evidence and demand.",
+    "tools": "Only this app and its calculation pad are needed.",
+    "xLabel": "Elevator deflection (deg)",
+    "yLabel": "Coefficient increment",
+    "seriesLabel": "Local tangent estimate",
+    "referenceLabel": "Synthetic observation",
+    "plotExtras": {
+      "regions": [
+        {
+          "label": "Qualified local fit",
+          "xMin": -10,
+          "xMax": 10,
+          "yMin": -0.36,
+          "yMax": 0.2,
+          "color": "#bbdfcf"
+        }
+      ],
+      "referenceLines": [
+        {
+          "axis": "y",
+          "value": -0.25,
+          "label": "Required ΔCm = −0.25"
+        },
+        {
+          "axis": "x",
+          "value": 13.64,
+          "label": "Requested 13.64°"
+        },
+        {
+          "axis": "x",
+          "value": 18,
+          "label": "Travel stop +18°"
+        }
+      ]
+    },
+    "variableKey": {
+      "deltaDeg": "Elevator deflection (deg)",
+      "pi": "π, radians-to-degrees conversion constant"
+    }
+  },
+  "investigation": {
+    "cases": [
+      {
+        "id": "10",
+        "label": "Elevator deflection 10°",
+        "inputs": {
+          "deltaDeg": 10
+        },
+        "readouts": [
+          {
+            "label": "Local tangent estimate",
+            "expression": "-1.05*deltaDeg*pi/180",
+            "unit": "coefficient"
+          },
+          {
+            "label": "Synthetic observation",
+            "expression": "-0.18326",
+            "unit": "coefficient"
+          },
+          {
+            "label": "Required increment",
+            "expression": "-0.25",
+            "unit": "coefficient"
+          },
+          {
+            "label": "Travel stop",
+            "text": "+18°; different from fit qualification"
+          }
+        ],
+        "comparison": {
+          "left": "deltaDeg",
+          "right": "10",
+          "op": "lte",
+          "pass": "Inside qualified fit",
+          "fail": "Outside qualified fit"
+        },
+        "prompt": "Distinguish qualified fit, available travel, and whether the supplied nonlinear data meet demand.",
+        "evidenceNote": "No nonlinear interpolation is claimed. The supplied most-negative observation is −0.21 at 18°, short of −0.25."
+      },
+      {
+        "id": "13.64",
+        "label": "Elevator deflection 13.64°",
+        "inputs": {
+          "deltaDeg": 13.64
+        },
+        "readouts": [
+          {
+            "label": "Local tangent estimate",
+            "expression": "-1.05*deltaDeg*pi/180",
+            "unit": "coefficient"
+          },
+          {
+            "label": "Synthetic observation",
+            "text": "No observation supplied at this angle"
+          },
+          {
+            "label": "Required increment",
+            "expression": "-0.25",
+            "unit": "coefficient"
+          },
+          {
+            "label": "Travel stop",
+            "text": "+18°; different from fit qualification"
+          }
+        ],
+        "comparison": {
+          "left": "deltaDeg",
+          "right": "10",
+          "op": "lte",
+          "pass": "Inside qualified fit",
+          "fail": "Outside qualified fit"
+        },
+        "prompt": "Distinguish qualified fit, available travel, and whether the supplied nonlinear data meet demand.",
+        "evidenceNote": "No nonlinear interpolation is claimed. The supplied most-negative observation is −0.21 at 18°, short of −0.25."
+      },
+      {
+        "id": "18",
+        "label": "Elevator deflection 18°",
+        "inputs": {
+          "deltaDeg": 18
+        },
+        "readouts": [
+          {
+            "label": "Local tangent estimate",
+            "expression": "-1.05*deltaDeg*pi/180",
+            "unit": "coefficient"
+          },
+          {
+            "label": "Synthetic observation",
+            "expression": "-0.21",
+            "unit": "coefficient"
+          },
+          {
+            "label": "Required increment",
+            "expression": "-0.25",
+            "unit": "coefficient"
+          },
+          {
+            "label": "Travel stop",
+            "text": "+18°; different from fit qualification"
+          }
+        ],
+        "comparison": {
+          "left": "deltaDeg",
+          "right": "10",
+          "op": "lte",
+          "pass": "Inside qualified fit",
+          "fail": "Outside qualified fit"
+        },
+        "prompt": "Distinguish qualified fit, available travel, and whether the supplied nonlinear data meet demand.",
+        "evidenceNote": "No nonlinear interpolation is claimed. The supplied most-negative observation is −0.21 at 18°, short of −0.25."
+      }
+    ],
+    "required": [
+      "10",
+      "13.64",
+      "18"
+    ]
+  }
+}

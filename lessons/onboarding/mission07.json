@@ -1,0 +1,561 @@
+{
+  "id": "mission07",
+  "number": 7,
+  "version": "3.0.0",
+  "title": "Predict the limiting pitch condition",
+  "chapter": "§6.4, §6.6, §6.11 — limiting conditions",
+  "brief": "Record predictions before running five pitch-authority challenges. A lower-speed condition is not automatically a failure: calculate its margin.",
+  "missing": [
+    6
+  ],
+  "supplied": [
+    "How do lower speed, increased pitch inertia, a stronger opposing moment and effector degradation affect the trainer margin?",
+    "M_available=0.5*rho*V²*S*c*dCm; M_required=Iy*target-other; margin=M_available-M_required; initial acceleration=(M_available+other)/Iy at full command.",
+    "900 kg trainer; rho=1.20 kg/m³; V=20 m/s; S=27.25 m²; c=4 m; usable dCm=0.153; Iy=5000 kg m²; other=-750 N m; target=0.12 rad/s². Nose-up moment is positive about the declared CG.",
+    "Available moment, required moment and margin (N m); pass/fail for each explicitly changed condition.",
+    "Change one parameter at a time. Increasing Iy changes response demand, not aerodynamic capacity. A degraded coefficient is a synthetic sensitivity case, not a failure probability.",
+    "Initial single-axis pitch screen at the declared condition. Constant coefficients and inertia. No proof of successful takeoff, ground clearance, stall recovery, or safe landing.",
+    null,
+    "Worked baseline: available 4002.48 N m; required 1350 N m; margin 2652.48 N m. For a changed case, recompute only the affected side of the budget and subtract. Record the changed-case prediction before inspecting its result.",
+    "Check 0.7² speed scaling; distinguish the unchanged capacity in the inertia challenge from the increased required moment.",
+    "Show a named challenge table and a speed sweep; keep predictions separate from observed results.",
+    "Evaluate the full moment budget once for each named single-parameter change. Compare signed margin with zero.",
+    "Decision method: retain only a condition whose available moment meets demand, under the stated assumptions. Explain which input change could require narrowing or revising the claim. Changed-case conclusions are made after inspection."
+  ],
+  "variables": {
+    "rho": 1.2,
+    "V": 20,
+    "S": 27.25,
+    "c": 4,
+    "dCm": 0.153,
+    "Iy": 5000,
+    "other": -750,
+    "target": 0.12
+  },
+  "fields": [
+    {
+      "id": "ratio",
+      "label": "Available-moment ratio at 14 versus 20 m/s",
+      "type": "number",
+      "section": 6,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "lowSpeed",
+      "label": "Predicted 14 m/s outcome",
+      "type": "select",
+      "options": [
+        "Still passes with less margin",
+        "Fails necessarily"
+      ],
+      "section": 6,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "inertia",
+      "label": "Effect of doubling Iy on required moment",
+      "type": "select",
+      "options": [
+        "Increases required moment",
+        "Increases aerodynamic capacity"
+      ],
+      "section": 6,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "degraded",
+      "label": "Predicted dCm=0.04 outcome",
+      "type": "select",
+      "options": [
+        "Insufficient authority",
+        "Unchanged margin"
+      ],
+      "section": 6,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "explanation6",
+      "label": "Explain the reasoning for predictions",
+      "type": "text",
+      "section": 6,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    },
+    {
+      "id": "veryLowSpeed",
+      "label": "Predicted 10 m/s outcome",
+      "type": "select",
+      "section": 6,
+      "options": [
+        "Insufficient authority",
+        "Still passes"
+      ],
+      "help": "Compare the changed demand with available capacity; record your prediction before inspecting."
+    },
+    {
+      "id": "opposition",
+      "label": "Predicted stronger opposing moment outcome",
+      "type": "select",
+      "section": 6,
+      "options": [
+        "Passes with reduced margin",
+        "Capacity increases"
+      ],
+      "help": "Compare the changed demand with available capacity; record your prediction before inspecting."
+    }
+  ],
+  "checks": [
+    {
+      "field": "ratio",
+      "expected": 0.49,
+      "message": "Use (14/20)².",
+      "tolerance": 0.0001
+    },
+    {
+      "field": "lowSpeed",
+      "expected": "Still passes with less margin",
+      "message": "1961.2152 N m capacity still exceeds 1350 N m demand.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "inertia",
+      "expected": "Increases required moment",
+      "message": "Required moment contains Iy*target; capacity does not contain Iy.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "degraded",
+      "expected": "Insufficient authority",
+      "message": "The degraded capacity 1046.4 N m is below 1350 N m.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "veryLowSpeed",
+      "expected": "Insufficient authority",
+      "message": "Inspect the named changed condition and compare its signed margin with zero."
+    },
+    {
+      "field": "opposition",
+      "expected": "Passes with reduced margin",
+      "message": "Inspect the named changed condition and compare its signed margin with zero."
+    }
+  ],
+  "hints": [
+    "Lower speed changes capacity quadratically; inertia changes demand.",
+    "At 14 m/s, 0.49×4002.48=1961.2152 N m, still above 1350 N m.",
+    "Degraded dCm=0.04 yields 1046.4 N m. Separate this synthetic failure from the baseline."
+  ],
+  "sweep": {
+    "variable": "V",
+    "values": [
+      10,
+      14,
+      20,
+      24
+    ],
+    "expression": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+    "reference": "0",
+    "units": "Airspeed in m/s; pitch-authority margin in N m."
+  },
+  "codeCases": null,
+  "codeContract": null,
+  "challenges": [
+    {
+      "name": "Trainer baseline",
+      "inputs": {
+        "rho": 1.2,
+        "V": 20,
+        "S": 27.25,
+        "c": 4,
+        "dCm": 0.153,
+        "Iy": 5000,
+        "other": -750,
+        "target": 0.12
+      },
+      "available": 4002.48,
+      "required": 1350.0,
+      "margin": 2652.48
+    },
+    {
+      "name": "Lower speed: 14 m/s",
+      "inputs": {
+        "rho": 1.2,
+        "V": 14,
+        "S": 27.25,
+        "c": 4,
+        "dCm": 0.153,
+        "Iy": 5000,
+        "other": -750,
+        "target": 0.12
+      },
+      "available": 1961.2151999999999,
+      "required": 1350.0,
+      "margin": 611.2151999999999
+    },
+    {
+      "name": "Synthetic insufficient speed: 10 m/s",
+      "inputs": {
+        "rho": 1.2,
+        "V": 10,
+        "S": 27.25,
+        "c": 4,
+        "dCm": 0.153,
+        "Iy": 5000,
+        "other": -750,
+        "target": 0.12
+      },
+      "available": 1000.62,
+      "required": 1350.0,
+      "margin": -349.38
+    },
+    {
+      "name": "Doubled inertia",
+      "inputs": {
+        "rho": 1.2,
+        "V": 20,
+        "S": 27.25,
+        "c": 4,
+        "dCm": 0.153,
+        "Iy": 10000,
+        "other": -750,
+        "target": 0.12
+      },
+      "available": 4002.48,
+      "required": 1950.0,
+      "margin": 2052.48
+    },
+    {
+      "name": "Stronger opposing moment",
+      "inputs": {
+        "rho": 1.2,
+        "V": 20,
+        "S": 27.25,
+        "c": 4,
+        "dCm": 0.153,
+        "Iy": 5000,
+        "other": -2000,
+        "target": 0.12
+      },
+      "available": 4002.48,
+      "required": 2600.0,
+      "margin": 1402.48
+    },
+    {
+      "name": "Synthetic degraded effector",
+      "inputs": {
+        "rho": 1.2,
+        "V": 20,
+        "S": 27.25,
+        "c": 4,
+        "dCm": 0.04,
+        "Iy": 5000,
+        "other": -750,
+        "target": 0.12
+      },
+      "available": 1046.4,
+      "required": 1350.0,
+      "margin": -303.5999999999999
+    }
+  ],
+  "experience": {
+    "scenario": "The trainer has a positive baseline moment margin. You will predict the effect of five single-parameter changes before inspecting each result.",
+    "task": "Record a prediction for every named challenge, then run and inspect them. The baseline worked example remains visible; changed-case outcomes appear in the investigation.",
+    "method": "Speed and usable coefficient affect capacity. Inertia and opposing moment affect demand. A reduced margin does not necessarily mean failure: compare the resulting signed margin with zero. Original predictions are preserved in attempt history.",
+    "investigate": "For each named challenge, compare your original prediction with the observation. Explain which side of the moment budget changed.",
+    "tools": "Only this app and its calculation pad are needed.",
+    "xLabel": "Airspeed (m/s)",
+    "yLabel": "Pitch margin (N m)",
+    "seriesLabel": "Supplied pitch margin",
+    "referenceLabel": "Zero-margin boundary",
+    "variableKey": {
+      "rho": "Air density (kg/m³)",
+      "V": "Freestream speed (m/s)",
+      "S": "Reference wing area (m²)",
+      "c": "Reference chord (m)",
+      "dCm": "Usable pitching coefficient increment (dimensionless)",
+      "Iy": "Pitch moment of inertia (kg·m²)",
+      "other": "Other pitching moment, nose-up positive (N·m)",
+      "target": "Minimum initial pitch acceleration (rad/s²)"
+    }
+  },
+  "investigation": {
+    "cases": [
+      {
+        "id": "0",
+        "label": "Trainer baseline",
+        "inputs": {
+          "rho": 1.2,
+          "V": 20,
+          "S": 27.25,
+          "c": 4,
+          "dCm": 0.153,
+          "Iy": 5000,
+          "other": -750,
+          "target": 0.12
+        },
+        "readouts": [
+          {
+            "label": "Available elevator capacity",
+            "expression": "0.5*rho*V^2*S*c*dCm",
+            "unit": "N m"
+          },
+          {
+            "label": "Required elevator moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Pitch-authority margin",
+            "expression": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Full-command initial acceleration",
+            "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
+            "unit": "rad/s²"
+          }
+        ],
+        "comparison": {
+          "left": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?"
+      },
+      {
+        "id": "1",
+        "label": "Lower speed: 14 m/s",
+        "inputs": {
+          "rho": 1.2,
+          "V": 14,
+          "S": 27.25,
+          "c": 4,
+          "dCm": 0.153,
+          "Iy": 5000,
+          "other": -750,
+          "target": 0.12
+        },
+        "readouts": [
+          {
+            "label": "Available elevator capacity",
+            "expression": "0.5*rho*V^2*S*c*dCm",
+            "unit": "N m"
+          },
+          {
+            "label": "Required elevator moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Pitch-authority margin",
+            "expression": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Full-command initial acceleration",
+            "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
+            "unit": "rad/s²"
+          }
+        ],
+        "comparison": {
+          "left": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "predictionField": "lowSpeed"
+      },
+      {
+        "id": "2",
+        "label": "Synthetic insufficient speed: 10 m/s",
+        "inputs": {
+          "rho": 1.2,
+          "V": 10,
+          "S": 27.25,
+          "c": 4,
+          "dCm": 0.153,
+          "Iy": 5000,
+          "other": -750,
+          "target": 0.12
+        },
+        "readouts": [
+          {
+            "label": "Available elevator capacity",
+            "expression": "0.5*rho*V^2*S*c*dCm",
+            "unit": "N m"
+          },
+          {
+            "label": "Required elevator moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Pitch-authority margin",
+            "expression": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Full-command initial acceleration",
+            "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
+            "unit": "rad/s²"
+          }
+        ],
+        "comparison": {
+          "left": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "predictionField": "veryLowSpeed"
+      },
+      {
+        "id": "3",
+        "label": "Doubled inertia",
+        "inputs": {
+          "rho": 1.2,
+          "V": 20,
+          "S": 27.25,
+          "c": 4,
+          "dCm": 0.153,
+          "Iy": 10000,
+          "other": -750,
+          "target": 0.12
+        },
+        "readouts": [
+          {
+            "label": "Available elevator capacity",
+            "expression": "0.5*rho*V^2*S*c*dCm",
+            "unit": "N m"
+          },
+          {
+            "label": "Required elevator moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Pitch-authority margin",
+            "expression": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Full-command initial acceleration",
+            "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
+            "unit": "rad/s²"
+          }
+        ],
+        "comparison": {
+          "left": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "predictionField": "inertia"
+      },
+      {
+        "id": "4",
+        "label": "Stronger opposing moment",
+        "inputs": {
+          "rho": 1.2,
+          "V": 20,
+          "S": 27.25,
+          "c": 4,
+          "dCm": 0.153,
+          "Iy": 5000,
+          "other": -2000,
+          "target": 0.12
+        },
+        "readouts": [
+          {
+            "label": "Available elevator capacity",
+            "expression": "0.5*rho*V^2*S*c*dCm",
+            "unit": "N m"
+          },
+          {
+            "label": "Required elevator moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Pitch-authority margin",
+            "expression": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Full-command initial acceleration",
+            "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
+            "unit": "rad/s²"
+          }
+        ],
+        "comparison": {
+          "left": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "predictionField": "opposition"
+      },
+      {
+        "id": "5",
+        "label": "Synthetic degraded effector",
+        "inputs": {
+          "rho": 1.2,
+          "V": 20,
+          "S": 27.25,
+          "c": 4,
+          "dCm": 0.04,
+          "Iy": 5000,
+          "other": -750,
+          "target": 0.12
+        },
+        "readouts": [
+          {
+            "label": "Available elevator capacity",
+            "expression": "0.5*rho*V^2*S*c*dCm",
+            "unit": "N m"
+          },
+          {
+            "label": "Required elevator moment",
+            "expression": "Iy*target-other",
+            "unit": "N m"
+          },
+          {
+            "label": "Pitch-authority margin",
+            "expression": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+            "unit": "N m"
+          },
+          {
+            "label": "Full-command initial acceleration",
+            "expression": "(0.5*rho*V^2*S*c*dCm+other)/Iy",
+            "unit": "rad/s²"
+          }
+        ],
+        "comparison": {
+          "left": "0.5*rho*V^2*S*c*dCm-(Iy*target-other)",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Compare your original prediction with this result. Which side of the moment budget changed?",
+        "predictionField": "degraded"
+      }
+    ],
+    "required": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  }
+}

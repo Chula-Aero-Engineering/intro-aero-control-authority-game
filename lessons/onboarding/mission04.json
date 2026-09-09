@@ -1,0 +1,276 @@
+{
+  "id": "mission04",
+  "number": 4,
+  "version": "3.0.0",
+  "title": "Separate trim, stability, and control",
+  "chapter": "§6.5, §6.11 — stable does not mean controllable",
+  "brief": "Build a result display that cannot confuse trimmed, stable, and sufficiently controllable. This deliberately insufficient-authority condition is synthetic.",
+  "missing": [
+    3
+  ],
+  "supplied": [
+    "A synthetic trainer condition is trimmed and statically restoring, but offers only 800 N m control capacity against a 1350 N m demand. Does it have sufficient initial pitch authority?",
+    "Trim indicator: net moment at the reference is zero. Stability indicator: restoring dCm/dalpha<0. Control indicator: margin=available-required.",
+    "Synthetic comparison: reference net moment=0 N m; dCm/dalpha=-0.6 per rad; available=800 N m; required=1350 N m. Indicators refer to their declared reference state.",
+    null,
+    "Trim, stability, and control indicators answer different questions. The separate available-control increment is compared with the required-control increment.",
+    "No dynamic stability or full-envelope control conclusion follows from these three static indicators.",
+    "Trim and restoring tendency can coexist with a negative control margin.",
+    "Control margin=800−1350=−550 N m even though the other two indicators pass.",
+    "At available=1350 N m the inclusive requirement is met exactly. At 800 it fails. A negative restoring slope cannot change that arithmetic.",
+    "Display three separate statuses; use a signed control margin with units and an inclusive zero threshold.",
+    "Sweep available control moment; compute available-required; compare with zero. Keep the trim and stability indicators unchanged.",
+    "Withdraw the sufficient-control claim for this synthetic condition; trim and static stability alone are not proof of control."
+  ],
+  "variables": {
+    "available": 800,
+    "required": 1350
+  },
+  "fields": [
+    {
+      "id": "output",
+      "label": "Quantity deciding control sufficiency",
+      "type": "select",
+      "options": [
+        "Available minus required control moment",
+        "Trim moment alone",
+        "Restoring derivative alone"
+      ],
+      "section": 3,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "unit",
+      "label": "Margin unit",
+      "type": "select",
+      "options": [
+        "N m",
+        "rad/s",
+        "kg"
+      ],
+      "section": 3,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "threshold",
+      "label": "Minimum acceptable margin (N m)",
+      "type": "number",
+      "section": 3,
+      "help": "Enter a number only; use the unit in the label. Accepted absolute error: ±0.0001. Keep the sign; enter ratios as fractions, not percentages."
+    },
+    {
+      "id": "control",
+      "label": "Control conclusion at 800 N m capacity",
+      "type": "select",
+      "options": [
+        "Insufficient authority",
+        "Sufficient because trimmed",
+        "Sufficient because stable"
+      ],
+      "section": 3,
+      "help": "Choose the statement supported by the supplied condition, then justify it in your reasoning."
+    },
+    {
+      "id": "explanation3",
+      "label": "Explain the reasoning for outputs",
+      "type": "text",
+      "section": 3,
+      "help": "Use your own words. Refer to the condition, a quantity with units, and the limit of your claim. Written reasoning awaits instructor review."
+    }
+  ],
+  "checks": [
+    {
+      "field": "output",
+      "expected": "Available minus required control moment",
+      "message": "Use the control comparison, not the trim or stability indicator.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "unit",
+      "expected": "N m",
+      "message": "Compare compatible moments.",
+      "tolerance": 1e-06
+    },
+    {
+      "field": "threshold",
+      "expected": 0,
+      "message": "Equality satisfies the inclusive requirement.",
+      "tolerance": 0.0001
+    },
+    {
+      "field": "control",
+      "expected": "Insufficient authority",
+      "message": "The -550 N m margin remains negative despite trim and restoring tendency.",
+      "tolerance": 1e-06
+    }
+  ],
+  "hints": [
+    "Trim asks about equilibrium; stability asks about disturbance tendency; control asks about commanding a response.",
+    "Subtract 1350 N m from 800 N m.",
+    "Show -550 N m and insufficient authority; retain separate trim and restoring indicators."
+  ],
+  "sweep": {
+    "variable": "available",
+    "values": [
+      400,
+      800,
+      1350,
+      2000
+    ],
+    "expression": "available-required",
+    "reference": "0",
+    "units": "Available control moment and margin in N m."
+  },
+  "codeCases": null,
+  "codeContract": null,
+  "experience": {
+    "scenario": "A synthetic condition is trimmed and statically restoring, yet has only 800 N m control capacity against 1350 N m demand.",
+    "task": "Choose the quantity, unit and threshold for the control status. You are configuring the interpretation of a supplied display; you do not need to build UI code.",
+    "method": "Trim asks whether reference net moment is zero. Static stability asks about restoring tendency after a disturbance. Control asks whether an additional commanded response can be produced. Compare available minus required moment with zero.",
+    "investigate": "Inspect capacity 800, 1350 and 2000 N m. Identify which status changes while trim and restoring tendency remain fixed.",
+    "tools": "Only this app and its calculation pad are needed.",
+    "xLabel": "Available control moment (N m)",
+    "yLabel": "Control margin (N m)",
+    "seriesLabel": "Supplied control margin",
+    "referenceLabel": "Minimum acceptable margin",
+    "variableKey": {
+      "available": "Available control moment capacity (N·m)",
+      "required": "Required additional control moment (N·m)"
+    }
+  },
+  "investigation": {
+    "cases": [
+      {
+        "id": "800",
+        "label": "Available control 800 N m",
+        "inputs": {
+          "available": 800
+        },
+        "readouts": [
+          {
+            "label": "Trim: reference net moment",
+            "expression": "0",
+            "unit": "N m"
+          },
+          {
+            "label": "Static restoring derivative",
+            "expression": "-0.6",
+            "unit": "per rad"
+          },
+          {
+            "label": "Available control moment",
+            "expression": "available",
+            "unit": "N m"
+          },
+          {
+            "label": "Required control moment",
+            "expression": "required",
+            "unit": "N m"
+          },
+          {
+            "label": "Control margin",
+            "expression": "available-required",
+            "unit": "N m"
+          }
+        ],
+        "comparison": {
+          "left": "available-required",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?"
+      },
+      {
+        "id": "1350",
+        "label": "Available control 1350 N m",
+        "inputs": {
+          "available": 1350
+        },
+        "readouts": [
+          {
+            "label": "Trim: reference net moment",
+            "expression": "0",
+            "unit": "N m"
+          },
+          {
+            "label": "Static restoring derivative",
+            "expression": "-0.6",
+            "unit": "per rad"
+          },
+          {
+            "label": "Available control moment",
+            "expression": "available",
+            "unit": "N m"
+          },
+          {
+            "label": "Required control moment",
+            "expression": "required",
+            "unit": "N m"
+          },
+          {
+            "label": "Control margin",
+            "expression": "available-required",
+            "unit": "N m"
+          }
+        ],
+        "comparison": {
+          "left": "available-required",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?"
+      },
+      {
+        "id": "2000",
+        "label": "Available control 2000 N m",
+        "inputs": {
+          "available": 2000
+        },
+        "readouts": [
+          {
+            "label": "Trim: reference net moment",
+            "expression": "0",
+            "unit": "N m"
+          },
+          {
+            "label": "Static restoring derivative",
+            "expression": "-0.6",
+            "unit": "per rad"
+          },
+          {
+            "label": "Available control moment",
+            "expression": "available",
+            "unit": "N m"
+          },
+          {
+            "label": "Required control moment",
+            "expression": "required",
+            "unit": "N m"
+          },
+          {
+            "label": "Control margin",
+            "expression": "available-required",
+            "unit": "N m"
+          }
+        ],
+        "comparison": {
+          "left": "available-required",
+          "right": "0",
+          "op": "gte",
+          "pass": "Requirement met",
+          "fail": "Insufficient authority"
+        },
+        "prompt": "Which of the three statuses changed? Why do trim and restoring tendency not ensure control?"
+      }
+    ],
+    "required": [
+      "800",
+      "1350",
+      "2000"
+    ]
+  }
+}
