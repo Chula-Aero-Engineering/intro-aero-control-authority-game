@@ -19,7 +19,7 @@ Mission 11 and the capstone run student code in a short-lived browser worker ins
 
 Run `npm ci`, then `npm run instructor:demo` and open `http://127.0.0.1:5180`. This is explicitly labeled sample mode, listens only on localhost, and makes no GitHub calls.
 
-Run `npm run instructor` to monitor **real public forks** using the GitHub login already available through `gh`. No GitHub App or student authorization is needed. The dashboard discovers the test repository's public forks, watches the first 40, and reads their submitted files at immutable commits. A manual refresh discovers new forks; automatic discovery runs every five minutes and commit checks every minute. `gh auth status` helps diagnose account access failures.
+Run `npm run instructor` to monitor **real public forks** using the GitHub login already available through `gh`. No GitHub App or student authorization is needed. The dashboard discovers the test repository's public forks (up to 1,000), watches every discovered fork, and reads their submitted files at immutable commits. A manual refresh discovers new forks; automatic discovery runs every five minutes and commit checks every minute. `gh auth status` helps diagnose account access failures.
 
 Locally, the dashboard listens on localhost only. In an instructor Codespace, keep port 5180 private and open the secret dashboard link printed in the terminal. That temporary link establishes an instructor session and changes when the process restarts. It is not a student link. Student answers and code are read as data; student code is never executed by this service.
 
@@ -69,3 +69,5 @@ An instructor release regenerates the protected-file inventory with `node script
 Reusable public material: `src/core/onboarding/**`, `lessons/onboarding/**`, the student workspace integration, instructor service source, tests, and this setup guide. The completed supplied sections are intentionally new onboarding teaching examples. Student responses: only each student's fork under `student-work/onboarding/**`. Private runtime material: `.instructor/private/**`, environment secrets, and Git metadata. No original private instructor answer files, stability exceptions, ownership manifest changes, or classroom mirror changes are included.
 
 No paid AI service or hosted backend is required. Codespaces usage remains subject to each GitHub account's allowance; stop Codespaces after class.
+
+For a large class, each synchronization finishes before another starts; a full refresh may take longer than one minute. The dashboard shows each fork’s last synchronization time. Missing mission files are skipped. No student code is executed.
