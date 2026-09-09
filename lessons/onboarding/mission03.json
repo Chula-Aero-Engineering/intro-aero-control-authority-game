@@ -160,8 +160,8 @@
           "min": 0,
           "directionFailure": "Wrong direction for declared positive travel"
         },
-        "prompt": "Compare the required elevator angle in degrees with the allowed 0° to +18° range. Explain what the sign tells you about direction.",
-        "evidenceIndex": 1,
+        "prompt": "Record the required angle in radians. Use the degree readout to compare it with the allowed 0° to +18° range, and explain what the sign tells you about direction.",
+        "evidenceIndex": 0,
         "interpretationHint": "Check the sign first, then compare the required positive deflection with the usable travel."
       },
       {
@@ -201,8 +201,8 @@
           "min": 0,
           "directionFailure": "Wrong direction for declared positive travel"
         },
-        "prompt": "Compare the required elevator angle in degrees with the allowed 0° to +18° range. Explain what the sign tells you about direction.",
-        "evidenceIndex": 1,
+        "prompt": "Record the required angle in radians. Use the degree readout to compare it with the allowed 0° to +18° range, and explain what the sign tells you about direction.",
+        "evidenceIndex": 0,
         "interpretationHint": "Check the sign first, then compare the required positive deflection with the usable travel."
       }
     ],
